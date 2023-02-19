@@ -19,7 +19,7 @@
 
 欢迎Star
 
-如果觉得我移植的主题还不错可以支持一下呀~
+如果觉得我魔改的主题还不错可以支持一下呀~
 
 
   [1]: https://github.com/probberechts/hexo-theme-cactus
