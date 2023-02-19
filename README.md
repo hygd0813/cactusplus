@@ -16,8 +16,9 @@
 演示地址：https://www.80srz.com/
 
 ----
+![仙人掌 Cactusplus 首页](https://s1.ax1x.com/2023/02/19/pSOSlYn.png)
 
-欢迎Star
+# 欢迎Star
 
 如果觉得我魔改的主题还不错可以支持一下呀~
 
