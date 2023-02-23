@@ -14,7 +14,7 @@ $this->need('header.php');
                 <a href="<?php $this->options->siteUrl();?>">
                      <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
                     <div id="title">
-                        <h1><?php $this->title() ?></h1>
+                        <h1 style="color:#2bbc8a;margin:1rem;font-size:36px;line-height:42px;"><?php $this->title() ?></h1>
                     </div>
                 </a>
                 <div id="nav">
@@ -28,14 +28,6 @@ $this->need('header.php');
                             <b><a href="<?php $this->options->siteUrl();?>">首页</a></b>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><b><a href="{permalink}">{title}</a></b></li>'); ?>
-                        <?php if($this->options->github): ?>
-						<li>
-                         <b><a href="<?php $this->options->github();?>" target="_blank">Github</a></b>
-                        </li><?php endif; ?>
-                    <!--</ul>
-                    <br/>
-                    <ul><li><b>分类：</b></li>-->
-					<li><b><a href="https://www.80srz.com/125.html" target="_blank" title="">关于</a></b></li>
                         <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                         <li><b><a href="<?php $categorys->permalink(); ?>" title="<?php $categorys->name(); ?>"><?php $categorys->name(); ?></a></b></li>
                         <?php endwhile;?>
@@ -46,9 +38,10 @@ $this->need('header.php');
                 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
                     <div class="content" itemprop="articleBody">
                         <?php parseContent($this); ?>
+<!--内容页下方ads -->	 	 
+<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>						
 						<br/><center><?php echo GetHitokoto(); ?></center>
-						<hr style="color:#987cb9 SIZE:3">
-                    </div>				
+                    </div>						
                 </article>
                  <?php $this->need('comments1.php'); ?>
             </section>

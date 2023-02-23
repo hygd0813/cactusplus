@@ -39,8 +39,13 @@
         <?php if($this->options->favicon): ?><link rel="shortcut icon" href="<?php $this->options->favicon();?>"><?php endif; ?>
         <?php if($this->options->appleicon): ?><link rel="apple-touch-icon" sizes="180x180" href="<?php $this->options->appleicon();?>"><?php endif; ?>
         <link rel="manifest" href="<?php cjUrl('manifest.json'); ?>">
-		<link rel="stylesheet" href="<?php cjUrl('css/bootstrap-grid.min.css'); ?>">
+	    <link rel="stylesheet" href="<?php cjUrl('css/bootstrap-grid.min.css'); ?>">
         <link rel="stylesheet" href="<?php cjUrl('css/style.css'); ?>">
+		<style type="text/css">
+            @font-face{font-family:'Meslo LG';font-style:normal;font-size:18px;src:local('Meslo LG S'),url(<?php cjUrl('lib/meslo-LG/fonts/'.$this->options->fontfamily.'.woff2'); ?>) format('woff2');font-display: swap;}
+            *{font-family:Meslo LG;}
+            body{background-image: url("<?php cjUrl('images/webg'.$this->options->bodybgimg.'.jpg'); ?>"); }
+        </style>		
         <script src="<?php cjUrl('js/jquery.min.js'); ?>"></script>
         <script>
             document.addEventListener("error", function(e) {
@@ -50,34 +55,6 @@
                 }
             }, true);
         </script>
-<!-- 搜索引擎主动推送-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?76bfe89d3948e8de81935a6a232b2d8c";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<script>
-!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JejorxMXajxsrti7",ck:"JejorxMXajxsrti7"});
-</script>
-<script>
-(function(){
-var el = document.createElement("script");
-el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?88155cc1fed8b19d59bf870f88f793c983ff71c46064c4456171dc9f519b599a3d72cd14f8a76432df3935ab77ec54f830517b3cb210f7fd334f50ccb772134a";
-el.id = "ttzz";
-var s = document.getElementsByTagName("script")[0];
-s.parentNode.insertBefore(el, s);
-})(window)
-</script>
-<!-- 搜索引擎主动推送END-->
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4962709126690252" crossorigin="anonymous"></script>
-
-<style type="text/css">
-@font-face{font-family:'Meslo LG';font-style:normal;font-size:18px;src:local('Meslo LG S'),url(<?php cjUrl('lib/meslo-LG/fonts/'.$this->options->fontfamily.'.woff2'); ?>) format('woff2');font-display: swap;}
-*{font-family:Meslo LG;}
-</style>
+<!--header 统计、广告代码	 --> 
+<?php if($this->options->headertjcode): ?> <?php $this->options->headertjcode();?> <?php endif; ?>		
     </head>

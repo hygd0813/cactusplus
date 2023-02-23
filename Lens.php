@@ -10,7 +10,7 @@
 <?php
 function usePublicCdn()
 {
-	echo "https://jsdelivr.panbaidu.cn/gh/zzd/photo-page-for-typecho@master";
+	echo "https://cdn.jsdelivr.net/gh/zzd/photo-page-for-typecho@master";
 }
 ?>
 <!-- 公共CDN结束 -->

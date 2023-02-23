@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-define('INITIAL_VERSION_NUMBER', '1.6.3');
+define('INITIAL_VERSION_NUMBER', '1.6.5');
 function themeConfig($form) {
     $logoimg = new Typecho_Widget_Helper_Form_Element_Text('logoimg', NULL, NULL, _t('页头logo地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则使用默认图片'));
     $form->addInput($logoimg->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
@@ -8,8 +8,10 @@ function themeConfig($form) {
     $form->addInput($favicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
     $appleicon = new Typecho_Widget_Helper_Form_Element_Text('appleicon', NULL, NULL, _t('apple touch icon地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则不设置Apple Touch Icon'));
     $form->addInput($appleicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    $fontfamily = new Typecho_Widget_Helper_Form_Element_Text('fontfamily', NULL, '5', _t('字体设置'), _t('usr/themes/cactus/lib/meslo-LG/fonts/文件夹内字体名称，填入<b style="color: red;">数字</b>1 ~ 7！！！默认是鸿蒙字体。'));
-    $form->addInput($fontfamily);		
+    $fontfamily = new Typecho_Widget_Helper_Form_Element_Text('fontfamily', NULL, '5', _t('字体设置'), _t('usr/themes/cactus/lib/meslo-LG/fonts/文件夹内字体名称，填入<b style="color: red;">数字</b>1 ~ 7！！！默认是2.woff2<鸿蒙字体>。'));
+    $form->addInput($fontfamily);
+    $bodybgimg = new Typecho_Widget_Helper_Form_Element_Text('bodybgimg', NULL, '2', _t('背景设置'), _t('usr/themes/cactus/images/文件夹内背景图片名称，填入<b style="color: red;">数字</b>1 ~ 6！！！默认是webg2.jpg。'));
+    $form->addInput($bodybgimg);	
 	$email = new Typecho_Widget_Helper_Form_Element_Text('email', NULL, NULL, _t('Email地址'), _t('邮箱地址 ,留空则不设置Email地址'));
     $form->addInput($email->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$github = new Typecho_Widget_Helper_Form_Element_Text('github', NULL, NULL, _t('Github地址'), _t('一般为https://github.com/Seevil ,留空则不设置Github地址'));
@@ -22,34 +24,38 @@ function themeConfig($form) {
     $form->addInput($Projectsurl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));	
 	$beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案号设置'), _t('直接填写备案号即可如：京ICP备888888号'));
     $form->addInput($beian->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    // 是否开启网站运算时间
-              $zmki_time_no = new Typecho_Widget_Helper_Form_Element_Radio('zmki_time_no', array('0' => _t('禁用'), '1' => _t('启用')), '1', _t('是否开启网站运算时间'), _t("选择开启即会在网站底部栏显示网站已运行时间。如开启请不要忘记设置下边的创建时间"));
+ // 是否开启网站运行时间
+    $zmki_time_no = new Typecho_Widget_Helper_Form_Element_Radio('zmki_time_no', array('0' => _t('禁用'), '1' => _t('启用')), '1', _t('是否开启网站运行时间'), _t("选择开启即会在网站底部栏显示网站已运行时间。如开启请不要忘记设置下边的创建时间"));
     $form->addInput($zmki_time_no);
-    // 网站运行时间
-              $zmki_time = new Typecho_Widget_Helper_Form_Element_Text('zmki_time', NULL, '1/1/2019 11:13:14', _t('网站运行时间'), _t('默认: 1/1/2019 11:13:14  请按照前边的实例按格式填写创建时间，分别是月/日/年 时:分:秒 '));
-    $form->addInput($zmki_time);
-    // 是否开启续费运算时间
-              $docker_time_no = new Typecho_Widget_Helper_Form_Element_Radio('docker_time_no', array('0' => _t('禁用'), '1' => _t('启用')), '1', _t('是否开启主机续费倒计时'), _t("选择开启即会在网站底部栏显示主机续费倒计时。如开启请不要忘记设置下边的创建时间"));
-    $form->addInput($docker_time_no);
-    // 主机续费倒计时
-              $docker_time = new Typecho_Widget_Helper_Form_Element_Text('docker_time', NULL, '1/1/2019 11:13:14', _t('主机续费时间'), _t('默认: 1/1/2019 11:13:14  请按照前边的实例按格式填写创建时间，分别是月/日/年 时:分:秒 '));
-    $form->addInput($docker_time);	
+ // 网站运行时间
+    $zmki_time = new Typecho_Widget_Helper_Form_Element_Text('zmki_time', NULL, '1/1/2019 11:13:14', _t('网站运行时间'), _t('默认: 1/1/2019 11:13:14  请按照前边的实例按格式填写创建时间，分别是月/日/年 时:分:秒 '));
+    $form->addInput($zmki_time);	
     $cjcdnAddress = new Typecho_Widget_Helper_Form_Element_Text('cjcdnAddress', NULL, NULL, _t('CSS文件的链接地址替换'), _t('请输入你的CDN云存储地址，例如：http://cdn.example.com/，支持绝大部分有镜像功能的CDN服务<br><b>被替换的原地址为主题文件位置，即：http://www.example.com/usr/themes/cactus/</b>'));
     $form->addInput($cjcdnAddress);	
     $Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 作品链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>YXJの笔记|http://www.yxjnotes.top/|一枚污水处理安装调试工程师的工作、学习笔记</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>YXJの笔记|http://www.yxjnotes.top/||</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Projects);
 	$Links = new Typecho_Widget_Helper_Form_Element_Textarea('Links', NULL, NULL, _t('友情链接设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述|头像地址</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>YXJの笔记|http://www.yxjnotes.top/|一枚污水处理安装调试工程师的工作、学习笔记|fav.icon</strong><br>多个链接换行即可，一行一个'));
-	$form->addInput($Links);	
-    $indextopnum1 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum1', NULL, NULL, _t('首页置顶某一个特定文章1'), _t('仅用在首页，首页置顶某一个特定id文章，填入<b style="color: red;">id</b>一篇文章！！！'));
-    $form->addInput($indextopnum1);	
-    $indextopnum2 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum2', NULL, NULL, _t('首页置顶某一个特定文章2'), _t('仅用在首页，首页置顶某一个特定id文章，填入<b style="color: red;">id</b>一篇文章！！！'));
-    $form->addInput($indextopnum2);		
-    $nolist = new Typecho_Widget_Helper_Form_Element_Text('nolist', NULL, NULL, _t('首页不显示某一个特定分类'), _t('仅用在首页，首页不显示某分类，填入<b style="color: red;">mid</b>一个数字！！！'));
+	$form->addInput($Links);
+    $indextopnum1 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum1', NULL, NULL, _t('首页置顶某一个特定文章1'), _t('仅用在首页，首页置顶某一个特定id文章，填入<b style="color: red;">id,mid</b>一篇文章及对应分类mid！！！'));
+    $form->addInput($indextopnum1);      
+    $indextopnum2 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum2', NULL, NULL, _t('首页置顶某一个特定文章2'), _t('仅用在首页，首页置顶某一个特定id文章，填入<b style="color: red;">id,mid</b>一篇文章及对应分类mid！！！'));
+    $form->addInput($indextopnum2);	
+    $nolist = new Typecho_Widget_Helper_Form_Element_Text('nolist', NULL, NULL, _t('首页不显示某特定分类'), _t('仅用在首页，首页不显示某分类，填入<b style="color: red;">mid</b>数字，隐藏多个分类用半角逗号分开！！！'));
     $form->addInput($nolist); 	
     $bdtongji = new Typecho_Widget_Helper_Form_Element_Text('bdtongji', NULL, NULL, _t('网站统计跳转链接'), _t('页底 网站统计 跳转链接，到百度统计、cnzz申请。'));
     $form->addInput($bdtongji);	
+ //  header 统计、广告代码	
+    $headertjcode = new Typecho_Widget_Helper_Form_Element_Textarea('headertjcode', NULL, NULL, _t('header 统计、广告代码'), _t('header 统计、广告代码。'));
+    $form->addInput($headertjcode);
+ //  页脚全局ads	
     $footerimgad = new Typecho_Widget_Helper_Form_Element_Textarea('footerimgad', NULL, NULL, _t('页底图片广告代码'), _t('页底页底图片广告代码。'));
-    $form->addInput($footerimgad);		
+    $form->addInput($footerimgad);
+ //  内容页下方ads   
+	$postdownads = new Typecho_Widget_Helper_Form_Element_Textarea('postdownads', NULL, NULL, _t('内容页下方ads'), _t('内容页下方ads,图片建议800*200px，内容随意！'));
+    $form->addInput($postdownads);			  
+ //  内容页左侧ads
+    $postleftads = new Typecho_Widget_Helper_Form_Element_Textarea('postleftads', NULL, NULL, _t('内容页左侧ads'), _t('内容页左侧ads,图片建议600*180px，内容随意！'));
+    $form->addInput($postleftads);		
 	$catalog = new Typecho_Widget_Helper_Form_Element_Radio('catalog',
         array('able' => _t('启用'),
             'disable' => _t('禁止'),
@@ -66,12 +72,19 @@ function themeConfig($form) {
 
 function themeInit($archive) {
     if ($archive->is('index')) {
-        $archive->parameter->pageSize = 8; // 自定义条数
+        $archive->parameter->pageSize = 10; // 自定义条数
     }
 	if ($archive->is('single')) {  
     $archive->content = createCatalog($archive->content);//文章锚点实现
 }
 	@$comment = spam_protection_pre($comment,$post, $result);//数字验证码
+	  //创建一个路由
+
+    if ($archive->request->is("commentLike")) {
+
+//功能处理函数 - 评论点赞
+commentLikes($archive);
+}
 }
 
 function parseContent($obj){
@@ -130,15 +143,16 @@ function Links($sorts = NULL) {
             if ($sorts) {
                 $arr = explode("|", $sorts);
                 if ($sort && in_array($sort, $arr)) {
-                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><a href="'.$url.'" rel="external noreferrer" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
+                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><img src="https://s0.wp.com/mshots/v1/'.$url.'?w=600&amp;h=400" style="margin-bottom:-10px;width:100%;height:auto;"/><a href="'.$url.'" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
                 }
             } else {
-                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><a href="'.$url.'" rel="external noreferrer" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
+                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><img  src="https://s0.wp.com/mshots/v1/'.$url.'?w=400&amp;h=180" style="margin-bottom:-10px;width:100%;height:auto;"/><a href="'.$url.'" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
             }
         }
     }
     echo $Link ? $Link : '世间无限丹青手，一片伤心画不成。';
 }
+
 
 /**阅读浏览次数 
 <?php Postviews($this); ?>
@@ -591,8 +605,8 @@ function userstat($id,$type) {
 	$db = Typecho_Db::get();
 	if ($type == 'comment') {
 		$commentnum=$db->fetchRow($db->select(array('COUNT(authorId)'=>'allcommentnum'))->from ('table.comments')->where ('table.comments.authorId=?',$id)->where('table.comments.type=? AND status=?', 'comment', 'approved'));
-		$commentnum = $commentnum['allcommentnum'];
-		return $commentnum;
+		$commentnum = $commentnum['allcommentnum']-100;
+		return $commentnum-100;
 	} elseif ($type == 'attachment') {
 		$attachmentnum=$db->fetchRow($db->select(array('COUNT(authorId)'=>'allattachmentnum'))->from ('table.contents')->where ('table.contents.authorId=?',$id)->where('table.contents.type=? AND status=?', 'attachment', 'publish'));
 		$attachmentnum = $attachmentnum['allattachmentnum'];
@@ -955,6 +969,21 @@ function convertip($ip){
   $ipaddr = iconv('gbk', 'utf-8//IGNORE', $ipaddr); 
   return $ipaddr;  
 }
+// 获取访客当前ip
+function getIP ()
+{
+global $_SERVER;
+if (getenv('HTTP_CLIENT_IP')) {
+$ip = getenv('HTTP_CLIENT_IP');
+} else if (getenv('HTTP_X_FORWARDED_FOR')) {
+$ip = getenv('HTTP_X_FORWARDED_FOR');
+} else if (getenv('REMOTE_ADDR')) {
+$ip = getenv('REMOTE_ADDR');
+} else {
+$ip = $_SERVER['REMOTE_ADDR'];
+}
+return $ip;
+}
 
 //文章阅读时间统计
 function art_time ($cid){
@@ -964,3 +993,133 @@ function art_time ($cid){
     $text_word = mb_strlen($text,'utf-8');
     echo ceil($text_word / 180);
 }
+
+//访客历史评论
+class Widget_Comments_RecentPlus extends Widget_Abstract_Comments
+{
+    public function __construct($request, $response, $params = NULL)
+    {
+        parent::__construct($request, $response, $params);
+        $this->parameter->setDefault(array('pageSize' => $this->options->commentsListSize, 'parentId' => 0, 'ignoreAuthor' => false));
+    }
+    public function execute()
+    {
+        $select  = $this->select()->limit($this->parameter->pageSize)
+        ->where('table.comments.status = ?', 'approved')
+        ->order('table.comments.coid', Typecho_Db::SORT_DESC);
+        if ($this->parameter->parentId) {
+            $select->where('cid = ?', $this->parameter->parentId);
+        }
+        if ($this->options->commentsShowCommentOnly) {
+            $select->where('type = ?', 'comment');
+        }
+        /** 忽略作者评论 */
+        if ($this->parameter->ignoreAuthor) {
+            $select->where('ownerId <> authorId');
+        }
+        if ($this->parameter->mail) {
+            $select->where('mail = ?', $this->parameter->mail);
+        }
+        $this->db->fetchAll($select, array($this, 'push'));
+    }
+}
+
+
+// 评论点赞
+/* 获取评论点赞数量 */
+function commentLikesNum($coid, &$record = NULL)
+{
+    $db = Typecho_Db::get();
+    $callback = array(
+        'likes' => 0,
+        'recording' => false
+    );
+
+    //  判断点赞数量字段是否存在
+    if (array_key_exists('likes', $data = $db->fetchRow($db->select()->from('table.comments')->where('coid = ?', $coid)))) {
+        //  查询出点赞数量
+        $callback['likes'] = $data['likes'];
+    } else {
+        //  在文章表中创建一个字段用来存储点赞数量
+        $db->query('ALTER TABLE `' . $db->getPrefix() . 'comments` ADD `likes` INT(10) NOT NULL DEFAULT 0;');
+    }
+
+     //获取记录点赞的 Cookie
+     //判断记录点赞的 Cookie 是否存在
+    if (empty($recording = Typecho_Cookie::get('__typecho_comment_likes_record'))) {
+        //  如果不存在就写入 Cookie
+        Typecho_Cookie::set('__typecho_comment_likes_record', '[]');
+    } else {
+        $callback['recording'] = is_array($record = json_decode($recording)) && in_array($coid, $record);
+    }
+
+    //  返回
+    return $callback;
+}
+/* 评论点赞处理 */
+function commentLikes($archive)
+{
+    
+    // 状态
+    $archive->response->setStatus(200); 
+    
+    
+    //评论id
+    $_POST['coid'];
+    
+    /**
+     * 行为
+     * dz  进行点赞
+     * ct  进行踩踏
+    **/
+    $_POST['behavior'];
+    
+    
+    //判断是否为登录 true 为已经登录
+    $loginState = Typecho_Widget::widget('Widget_User')->hasLogin();
+    
+    $res1 = commentLikesNum($_POST['coid'], $record);
+    
+    $num = 0;
+    
+    if(!empty($_POST['coid']) && !empty($_POST['behavior'])){
+    
+        $db = Typecho_Db::get();
+        $prefix = $db->getPrefix();
+        $coid = (int)$_POST['coid'];
+        
+        if (!array_key_exists('likes', $db->fetchRow($db->select()->from('table.comments')))) {
+        $db->query('ALTER TABLE `' . $prefix . 'comments` ADD `likes` INT(30) DEFAULT 0;');
+        }
+        
+        //先获取当前赞
+        $row = $db->fetchRow($db->select('likes')->from('table.comments')->where('coid = ?', $coid));
+        
+        $updateRows = $db->query($db->update('table.comments')->rows(array('likes' => (int) $row['likes'] + 1))->where('coid = ?', $coid));
+
+    
+        if($updateRows){
+            $num = $row['likes'] + 1;
+            $state =  "success";
+            
+            //  添加点赞评论的 coid
+            array_push($record, $coid);
+            //  保存 Cookie
+            Typecho_Cookie::set('__typecho_comment_likes_record', json_encode($record));
+        }else{
+            $num = $row['likes'];
+            $state =  "error";
+        }
+        
+    }else{
+        $state = 'Illegal request';
+    }  
+
+    //返回一个jsonv数据state数据
+    $archive->response->throwJson(array(
+       "state" => $state,
+       "num" => $num
+    ));    
+
+}
+?>

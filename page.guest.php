@@ -13,7 +13,7 @@ $this->need('header.php');
                 <a href="<?php $this->options->siteUrl();?>">
                      <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
                     <div id="title">
-                        <h1><?php $this->title() ?></h1>
+                        <h1 style="color:#2bbc8a;margin:1rem;font-size:36px;line-height:42px;"><?php $this->title() ?></h1>
                     </div>
                 </a>
                 <div id="nav">
@@ -27,14 +27,6 @@ $this->need('header.php');
                             <b><a href="<?php $this->options->siteUrl();?>">首页</a></b>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><b><a href="{permalink}">{title}</a></b></li>'); ?>
-                        <?php if($this->options->github): ?>
-						<li>
-                         <b><a href="<?php $this->options->github();?>" target="_blank">Github</a></b>
-                        </li><?php endif; ?>
-                    <!--</ul>
-                    <br/>
-                    <ul><li><b>分类：</b></li>-->
-					<li><b><a href="https://www.80srz.com/125.html" target="_blank" title="">关于</a></b></li>
                         <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                         <li><b><a href="<?php $categorys->permalink(); ?>" title="<?php $categorys->name(); ?>"><?php $categorys->name(); ?></a></b></li>
                         <?php endwhile;?>
@@ -46,7 +38,7 @@ $this->need('header.php');
 
 <!-- 读者墙 -->
 <section class="FriendWall p05">
-<h3 class="panel" style="color:#2bbc8a;">读者榜</h3>
+<h3 class="panel" style="color:#2bbc8a;">读者墙</h3>
 <div class="row FriendWall-warpper flexbox" style="margin-right: 0;margin-left: 0;">
 <?php
 $period = time() - 999592000; // 時段: 30 天, 單位: 秒
@@ -59,7 +51,7 @@ $counts = Typecho_Db::get()->fetchAll(Typecho_Db::get()
 ->where('authorId = ?', '0')
 ->group('author')
 ->order('cnt', Typecho_Db::SORT_DESC)
-->limit(30)
+->limit(15)
 );
 $mostactive = '';
 $avatar_path = 'https://cravatar.cn/avatar/';
@@ -72,8 +64,8 @@ echo $mostactive; ?>
 </div>
 </section>
 				
-<!-- 全站最新30条留言 -->
-<h3 class="panel" style="color:#2bbc8a;">最新留言</h3>
+<!-- 全站最新10条留言 -->
+<h3 class="panel" style="color:#2bbc8a;">新留言</h3>
 <ol><?php $this->widget('Widget_Comments_Recent','pageSize=10&ignoreAuthor=true')->parse('<li><span style="padding:5px 15px;color:#f8f8f5">{author} ：</span><a href="{permalink}">{text}</a><span style="float:right;"><small>{dateWord}</small></span></li><br/>'); ?></ol><hr/>
 
                 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">                  
@@ -81,7 +73,8 @@ echo $mostactive; ?>
                         <?php parseContent($this); ?>
                     </div>
                 </article>
-				
+<!--内容页下方ads -->	 	 
+<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>				
                  <?php $this->need('comments.php'); ?>
 
              </section>

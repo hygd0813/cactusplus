@@ -1,4 +1,5 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; 
+?>
 <link rel="stylesheet" href="<?php cjUrl('css/comments.css'); ?>">
 <link rel="stylesheet" href="<?php cjUrl('lib/OwO/OwO.min.css'); ?>">
 <?php 
@@ -33,27 +34,25 @@ function threadedComments($comments, $options) {
 			<img class="vimg" src="<?php echo $avatar ?>" alt="" />
 			<div class="vh">
 				<div class="vhead">
-					<span class="vnick"><?php $comments->author(); ?><small ><?php
-$me = md5(strtolower('564375261@qq.com')); //这里填入自己的邮箱
-$boy = md5(strtolower('1058875179@qq.com')); //这里填入好友的邮箱
-$rz = md5(strtolower($comments->mail)); //用于判断邮箱
-//博主样式
-$str =  '<span class="commentapprove" style="color: #FFF;padding: .1rem .25rem;font-size: .6rem;border-radius: .25rem;background-color:#2bbc8a;margin-left:10px;" >博主</span>';
-//好友样式
-$str2 =  '<span class="commentapprove" style="color: #FFF;padding: .1rem .25rem;font-size: .6rem;border-radius: .25rem;background-color:#555555;margin-left:10px;" >好友</span>';
-//开始判断
-if($me==$rz){
-echo $str;            //如果条件成立则输出'博主'样式
-}
-if($boy==$rz){
-echo $str2;            //如果条件成立则输出'好友'样式
-}
-?></small></span>
+					<span class="vnick"><?php $comments->author(); ?></span>
 				</div>
 				<div class="vmeta" >
 					<span class="vtime"><i class="fa fa-clock-o" aria-hidden="true">&nbsp;&nbsp;</i><?php $comments->dateWord(); ?></span>
-					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>
-				</div>				
+					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>	
+                  	<div class="right vat">
+    <!-- 评论点赞次数 -->
+    <?php 
+        $commentLikes =commentLikesNum($comments->coid); 
+        $commentLikesNum = $commentLikes['likes'];
+        $commentLikesRecording= $commentLikes['recording'];
+    ?>
+    <div class="commentLike">
+        <a class="commentLikeOpt" id="commentLikeOpt-<?php $comments->coid(); ?>" href="javascript:;" data-coid="<?php $comments->coid() ?>" data-recording="<?php echo $commentLikesRecording; ?>">
+        <i id="commentLikeI-<?php $comments->coid(); ?>" class="<?php echo $commentLikesRecording?'fa fa-heart':'fa fa-heart-o'; ?>"></i>
+        <span id="commentLikeSpan-<?php $comments->coid(); ?>"><?php echo $commentLikesNum ?></span>
+        </a>
+    </div>
+</div>	
 				<div class="vcontent">
 					 <?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?>
 					 <?php $comments->content(); ?>
@@ -82,8 +81,8 @@ echo $str2;            //如果条件成立则输出'好友'样式
 				<a href="https://imgchr.com/upload" target="_blank" title="本站评论支持图片 html 和 Markdown 格式"><svg width="24" height="14" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" font-size="10" fill="#a2a9b6" fill-opacity="0.9" text-anchor="middle" dominant-baseline="middle">图片</text></svg></a>				
 			</div>
 			<div class="col col-80 text-right">
-			<?php spam_protection_math();?>
-			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">回复</button>
+			<!--<?php spam_protection_math();?>-->
+			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">发表</button>
 			<?php $security = $this->widget('Widget_Security'); ?>			
 			</div>
 		</div>		
@@ -96,7 +95,7 @@ echo $str2;            //如果条件成立则输出'好友'样式
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
-			共发布<span class="vnum">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp;&nbsp;.&. &nbsp;&nbsp;<span class="vnum"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观
+			共发布<span class="vnum" style="color:#2bbc8a;">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp;&nbsp;， &nbsp;共&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观
 		</div>                                                                   
 	</div>
 	<?php else: ?>
@@ -107,7 +106,7 @@ echo $str2;            //如果条件成立则输出'好友'样式
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
 	</div>
-	<?php $comments->pageNav('&#171', '&#187', '5', '……'); ?>			
+	<?php $comments->pageNav('&#171', '&#187', '3', '……'); ?>			
 </div>
 	<script type="text/javascript">
 function showhidediv(id){var sbtitle=document.getElementById(id);if(sbtitle){if(sbtitle.style.display=='flex'){sbtitle.style.display='none';}else{sbtitle.style.display='flex';}}}
@@ -126,3 +125,48 @@ var OwO_winds = new OwO({
     maxHeight: '250px'
 });</script>
 <?php endif; ?>
+
+  <script>
+    $(".vlist").on('click', "a[id^='commentLikeOpt']", function() {
+    //$(".commentLikeOpt").click(function(){
+        
+           var coid = $(this).data("coid");
+           var recording = $(this).attr("data-recording");
+           
+           if(recording){
+               alert("你已经点过赞啦！感谢你的喜爱！");
+               return;
+           }
+           
+
+            $.ajax({
+                url: "?commentLike",
+                type: "POST",
+                data: {
+                    coid:coid,
+                    behavior:'dz'
+                },
+                async: true,
+                dataType: "json",
+                success: function(data) {
+                    if (data == null) {} else {
+                        console.log(data);
+                        
+                        if(data.state == 'success'){
+                            alert("点赞成功");
+                            //修改点赞数量
+                            $('#commentLikeSpan-'+coid).html(data.num);
+                            //变更点赞图标样式
+                            $('#commentLikeI-'+coid).removeAttr("class","fa fa-heart-o")
+                            $('#commentLikeI-'+coid).attr("class","fa fa-heart")
+                            //设置recording的属性值
+                            $('#commentLikeI-'+coid).parent().attr("data-recording","1");
+                        }
+                        
+                    }
+                },
+                error: function(err) {}
+            });
+            
+        })
+</script>        

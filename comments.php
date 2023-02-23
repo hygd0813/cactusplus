@@ -18,21 +18,21 @@ function threadedComments($comments, $options) {
 	$email = strtolower($comments->mail);
 	$address = strtolower(trim($email) );
     $hash    = md5($address );
-	$avatar = 'https://cravatar.cn/avatar/'. $hash . '?s=100' . '&d=retro' . '&r=y';			       
+	$avatar = 'https://cravatar.cn/avatar/'.$hash.'.png?s=100' . '&d=retro' . '&r=y';			       
 ?>
-		<div class="vcard" id="<?php $comments->theId(); ?>">
+		<div class="vcard " id="<?php $comments->theId(); ?>" style="padding-right:.5rem;">
 			<img class="vimg" src="<?php echo $avatar ?>" alt="" />
 			<div class="vh">
 				<div class="vhead">
 					<span class="vnick"><?php CommentAuthor($comments); ?><small ><?php
-$me = md5(strtolower('564375261@qq.com')); //这里填入自己的邮箱
-$boy = md5(strtolower('hygd0813@qq.com')); //这里填入基佬的邮箱
+$me = md5(strtolower('hygd0813@qq.com')); //这里填入自己的邮箱
+$boy = md5(strtolower('564375261@qq.com')); //这里填入基佬的邮箱
 $boy1 = md5(strtolower('3051532614@qq.com')); //这里填入好友的邮箱
 $rz = md5(strtolower($comments->mail)); //用于判断邮箱
 //博主样式
 $str =  '<span class="commentapprove" style="color: #FFF;padding: .05rem .25rem;font-size: .5rem;border-radius: .25rem;background-color:#2bbc8a;margin-left:10px;" >博主</span>';
 //基佬样式
-$str2 =  '<span class="commentapprove" style="color: #FFF;padding: .05rem .25rem;font-size: .5rem;border-radius: .25rem;background-color:#555555;margin-left:10px;" >基佬</span>';
+$str2 =  '<span class="commentapprove" style="color: #FFF;padding: .05rem .25rem;font-size: .5rem;border-radius: .25rem;background-color:#555555;margin-left:10px;" >分身</span>';
 //好友样式
 $str3 =  '<span class="commentapprove" style="color: #FFF;padding: .05rem .25rem;font-size: .5rem;border-radius: .25rem;background-color:#555555;margin-left:10px;" >好友</span>';
 //开始判断
@@ -45,12 +45,12 @@ echo $str2;            //如果条件成立则输出'好友'样式
 if($boy1==$rz){
 echo $str3;            //如果条件成立则输出'基佬'样式	
 }
-?></small></span> <?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?>
+?></small></span> <small><?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?></small>
 				</div>
 				<div class="vmeta" >
 					<span class="vtime"><i class="fa fa-clock-o" aria-hidden="true">&nbsp;&nbsp;</i><?php $comments->dateWord(); ?></span>
-					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>
-					<span class="vat comment-reply cp-<?php $comments->theId(); ?> text-muted comment-reply-link"><?php $comments->reply('回复'); ?></span><span id="vat cancel-comment-reply" class="cancel-comment-reply cl-<?php $comments->theId(); ?> text-muted comment-reply-link" style="display:none" ><?php $comments->cancelReply('取消'); ?></span>
+					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>					
+					<span class="vat comment-reply cp-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;"><?php $comments->reply('回复'); ?></span><span id="vat cancel-comment-reply" class="cancel-comment-reply cl-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;display:none" ><?php $comments->cancelReply('取消'); ?></span>
 				</div>
 				<div class="vcontent">			
 <?php
@@ -84,26 +84,37 @@ echo $str3;            //如果条件成立则输出'基佬'样式
 <form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
 	<?php if($this->user->hasLogin()): ?>
 	<?php _e('登录身份: '); ?><h5><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>. <a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('退出'); ?> &raquo;</a></h5>
-
 		<div class="vwrap">
 		<?php else: ?>
 		<div class="vwrap">
 		<div class="vheader item3">
-			<input name="author" placeholder="昵称" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(http://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
+			<input name="author" placeholder="昵称" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱（请用真实邮箱，及时接收回复！）" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(http://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
 						<input type="hidden" name="receiveMail" id="receiveMail" value="yes" />
 		</div>
 		<?php endif; ?>
 		<div class="vedit">
-			<textarea  name="text" id="veditor" class="OwO-textarea veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="大佬，请赐教！(👀了，就💌)"><?php $this->remember('text'); ?></textarea>
+			<textarea  name="text" id="veditor" class="OwO-textarea veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="大佬，请赐教！文明灌水！(👀了，就💌)"><?php $this->remember('text'); ?></textarea>
 			<div class="vrow"><div class="vcol vcol-60 status-bar"></div><div class="vcol vcol-40 vctrl text-right"><div title="表情" class="OwO"></div></div></div>
 		</div>
 		<div class="vcontrol">
 			<div class="col col-20">
 				<a href="https://80srz.com/175.html" target="_blank" title="Markdown 语法速查表"><svg class="markdown" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a>
-				<a href="https://imgchr.com/upload" target="_blank" title="评论支持图片 html 和 Markdown 格式"><svg width="24" height="14" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" font-size="10" fill="#a2a9b6" fill-opacity="0.9" text-anchor="middle" dominant-baseline="middle">图片</text></svg></a>			
+				<a href="https://imgchr.com/upload" target="_blank" title="评论支持图片 html 和 Markdown 格式"><svg width="24" height="14" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" font-size="10" font-weight="100" font-color="white"fill="#a2a9b6" fill-opacity="0.9" text-anchor="middle" dominant-baseline="middle">图床</text></svg></a>	
 			</div>
 			<div class="col col-80 text-right">	
-<input type="button" class="vnick vsimi" value="悄悄话" onclick="secret()" style="border:1px dashed #ccc;">
+			
+			<span style="color:red" title="验证码，必填项！">验证(*)</span><?php spam_protection_math();?>
+			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">回复</button>
+			<?php $security = $this->widget('Widget_Security'); ?>			
+			</div>
+		</div>
+		<div style="display:none;" class="vmark">
+		</div>
+	</div>
+	</form>   
+	
+ <div class="vcol vcol-40 vctrl right">  
+ <input type="button" title="私密评论，仅评论者及作者可见！" class="vbtn" value="悄悄话" onclick="secret()" style="font-size:10px;">
 <script>
 function secret() {
                      i = document.getElementById("veditor");
@@ -114,27 +125,20 @@ function secret() {
                      i.value = '私密# ' + i.value;
                     };
                  };
- </script>				
-			<?php spam_protection_math();?>
-			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">回复</button>
-			<?php $security = $this->widget('Widget_Security'); ?>			
-			</div>
-		</div>		
-		<div style="display:none;" class="vmark">
-		</div>
-	</div>
-	</form>
+ </script>	
+ </div>  
+ 
 	</div>
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
-			共&nbsp;&nbsp;<span class="vnum"><?php $this->commentsNum('%d'); ?></span>&nbsp;&nbsp;评论：
+			<span style="text-align:middle;">  本文共&nbsp;&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php $this->commentsNum('%d'); ?></span>&nbsp;&nbsp;条评论。您也快来参与吧！</span>
 		</div>
 	</div>
 	<?php else: ?>
-	<div class="vempty" style="display:block;">快来做第一个评论的人吧~</div>
+	<div class="vempty " style="display:block;">快来做第一个评论的人吧~</div>
 	<?php endif; ?>
-	<div class="vlist">
+	<div class="vlist ">
 	<?php if ($comments->have()): ?>
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
