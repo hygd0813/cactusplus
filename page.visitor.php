@@ -13,7 +13,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <div class="content index width mx-auto px3 my4">
             <header id="header">
                 <a href="<?php $this->options->siteUrl();?>">
-                     <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
+                     <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php cjUrl('images/logo.png'); ?><?php endif; ?>);"></div>
                     <div id="title">
                         <h1 style="color:#2bbc8a;margin:1rem;font-size:36px;line-height:42px;"><?php $this->title() ?></h1>
                     </div>
@@ -40,7 +40,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             <div id="Links-mian" class="main_element">
                 <section class="Links-content">
 	                <div class="Total" style="margin:0.1rem;padding:10px;text-align: center;max-width: none;">
-	                    哈喽，<?php if($this->user->hasLogin()): ?><?php echo $this->user->screenName() ; ?><?php else : ?><?php if($this->remember('author',true)): ?><?php echo $this->remember('author',true); ?><?php endif; ?><?php endif; ?>，我们又见面了啦！✌️
+	                    哈喽，<?php if($this->user->hasLogin()): ?><small style="color:orange">「</small><?php echo $this->user->screenName() ; ?><small style="color:orange">」</small><?php else : ?><?php if($this->remember('author',true)): ?><small style="color:orange">「</small><?php echo $this->remember('author',true); ?><small style="color:orange">」</small><?php endif; ?><?php endif; ?>，我们又见面了啦！✌️
                     </div>
                 </section>
             </div>
@@ -48,7 +48,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
         <section id="wrapper" class="home">
             <h3 style="color:#2bbc8a;"><?php _e('您近期的回复：'); ?></h3>
-            <ul class="widget-list">
+            <ol class="widget-list">
                 
                 <?php if($this->user->hasLogin()): ?>
                     <?php $userMail = $this->user->mail; ?>
@@ -58,21 +58,21 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
                 <?php $this->widget('Widget_Comments_RecentPlus', 'mail='.$userMail)->to($comments); ?>
                 <?php while($comments->next()): ?>
-                <li style="margin:1rem 0;">
+                <li style="margin:1rem 0;border-bottom:1px dashed;">
                     <div class="d1">
-                        <i class="fa fa-file-text-o"></i> <?php $comments->title(); ?><span class="qrcodeimg"style="float:right;"><?php $comments->dateWord(); ?></span>
+                        <i class="fa fa-file-text-o">&nbsp;&nbsp;</i> <?php $comments->title(); ?><span class="qrcodeimg"style="float:right;"><?php $comments->dateWord(); ?></span>
                     </div></br>				
-                    <div class="d2" style="border-bottom:1px;">
-                        <i class="fa fa-comments-o"></i> 
-                        <?php $comments->author(false); ?>    : <a href="<?php $comments->permalink(); ?>"><?php $comments->excerpt(64, '...'); ?></a>
+                    <div class="d2">
+                        <i class="fa fa-comments-o">&nbsp;&nbsp;</i> 
+                        <?php $comments->author(false); ?>    : <a href="<?php $comments->permalink(); ?>" style="text-decoration:none;"><?php $comments->excerpt(64, '...'); ?></a>
                     </div>
 
                 </li>
                 <?php endwhile; ?>
-            </ul>
+            </ol>
         </section>
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>		
+<!--列表页、页面ads -->	 	 
+<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>		
     </div>
 </body>
 <?php $this->need('footer.php'); ?>

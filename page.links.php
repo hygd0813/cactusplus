@@ -45,16 +45,16 @@ $this->need('header.php');
                 </div>
                 <div id="Links-mian" class="main_element">
                 <section class="Links-content1">			
-                    <div class="Total1" style="padding-left:10px;"><span class="fa fa-subway 3x"  style="padding-right:10px;"></span> 随机博客</div> 
+                    <div class="Total1" style="padding-left:10px;"><span class="fa fa-subway 3x"  style="padding-right:10px;"></span> 博客组织</div> 
                     <div id="links-content1" class="links-content flexbox"> 
 
                     <div class="links-card1 flex-yl link_a1" name="link_a1"><div class="links-list-item" style=""><a href="https://foreverblog.cn/go.html" title="十年之约—虫洞" target="_blank"><img class="links-avatar lazy" alt="十年之约—虫洞" data-src="https://80srz.com/usr/themes/cactus/images/linkimg/chongdong.gif" src="https://80srz.com/usr/themes/cactus/images/linkimg/chongdong.gif"/><div class="links-item-info"><span class="links-item-name text-ell">十年之约—虫洞</span><span class="links-item-desc text-ell" title="随机跳转到十年之约正式成员的博客">随机跳转到十年之约正式成员的博客</span></div></a></div></div>
-
                     <div class="links-card1 flex-yl link_a" name="link_a1"><div class="links-list-item" style=""><a href="https://www.travellings.cn/go.html" title="BlogFinder" target="_blank"><img class="links-avatar lazy" alt="BlogFinder" data-src="https://travellings.cn/assets/travelling-dark.png" src="https://travellings.cn/assets/travelling-dark.png"/><div class="links-item-info"><span class="links-item-name text-ell">开往-虫洞</span><span class="links-item-desc text-ell" title="一个以跳转功能为主的友链接力项目，其名字“开往”取自“开放的网络”。">一个以跳转功能为主的友链接力项目，其名字“开往”取自“开放的网络”。</span></div></a></div></div>
-					
+					<div class="links-card1 flex-yl link_a" name="link_a1"><div class="links-list-item" style=""><a href="https://storeweb.cn/s/1656" title="个站商店-荒野孤灯-虫洞" target="_blank"><img class="links-avatar lazy" alt="个站商店" data-src="https://storeweb.cn/static/favicon.ico" src="https://storeweb.cn/static/favicon.ico"/><div class="links-item-info"><span class="links-item-name text-ell">个站商店-虫洞</span><span class="links-item-desc text-ell" title="一个精致的，带社交元素的个人网站发布平台，博客收录网站">一个精致的，带社交元素的个人网站发布平台，博客收录网站</span></div></a></div></div>                       
                     <div class="links-card1 flex-yl link_a" name="link_a1"><div class="links-list-item" style=""><a href="https://bf.zzxworld.com" title="BlogFinder" target="_blank"><img class="links-avatar lazy" alt="BlogFinder" data-src="https://bf.zzxworld.com/images/favicon.png" src="https://bf.zzxworld.com/images/favicon.png"/><div class="links-item-info"><span class="links-item-name text-ell">BlogFinder</span><span class="links-item-desc text-ell" title="发现优秀的个人博客">发现优秀的个人博客</span></div></a></div></div>
-					
-					<div class="links-card1 flex-yl link_a" name="link_a1"><div class="links-list-item" style=""><a href="https://storeweb.cn/s/1656" title="个站商店-荒野孤灯-虫洞" target="_blank"><img class="links-avatar lazy" alt="个站商店" data-src="https://storeweb.cn/static/favicon.ico" src="https://storeweb.cn/static/favicon.ico"/><div class="links-item-info"><span class="links-item-name text-ell">个站商店-虫洞</span><span class="links-item-desc text-ell" title="一个精致的，带社交元素的个人网站发布平台，博客收录网站">一个精致的，带社交元素的个人网站发布平台，博客收录网站</span></div></a></div></div>     
+                    <div class="links-card1 flex-yl link_a" name="link_a1"><div class="links-list-item" style=""><a href="https://seekbetter.me/" title="优秀个人独立博客" target="_blank"><img class="links-avatar lazy" alt="寻我" data-src="https://seekbetter.me/img/logo.svg" src="https://seekbetter.me/img/logo.svg"/><div class="links-item-info"><span class="links-item-name text-ell">寻我</span><span class="links-item-desc text-ell" title="优秀个人独立博客">优秀个人独立博客</span></div></a></div></div>                                            
+                    <div class="links-card1 flex-yl link_a" name="link_a1"><div class="links-list-item" style=""><a href="https://boke.lu" title="boke.lu · 博客收录展示平台~" target="_blank"><img class="links-avatar lazy" alt="博客录" data-src="https://boke.lu/logo.png" src="https://boke.lu/logo.png"/><div class="links-item-info"><span class="links-item-name text-ell">博客录（boke.lu）</span><span class="links-item-desc text-ell" title="boke.lu · 博客收录展示平台~">boke.lu · 博客收录展示平台~</span></div></a></div></div>   
+                      
 
                 </div>
                 </section>
@@ -84,8 +84,8 @@ $this->need('header.php');
       span.appendChild(spanArr[k]);
     }    
 </script>	
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>	
+<!--文章列表页、页面ads -->	 	 
+<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>	
                  <?php $this->need('comments.php'); ?>
             </section>
 		</div>

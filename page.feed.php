@@ -36,12 +36,12 @@ $this->need('header.php');
             <section id="wrapper" class="home">			
                 <div id="Links-mian" class="main_element">
                 <section class="Links-content">
-	                <div class="Total" style="padding-left:10px;"><span class="fa fa-rss 3x"  style="padding-right:10px;"></span> 大佬最新文章聚合</div>				
+	                <div class="Total" style="padding-left:10px;"><span class="fa fa-rss 3x"  style="padding-right:10px;"></span> 大佬文章聚合</div>				
                      <?php if ($this->cid == '980') { Typecho_Plugin::factory('Lopwon_Feed')->Lopwon();} ?>						                             
                 </section>
 				</div>							
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>															
+<!--文章列表页、页面ads -->	 	 
+<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>															
                 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">   
                     <div class="content" itemprop="articleBody">
                         <?php parseContent($this); ?>

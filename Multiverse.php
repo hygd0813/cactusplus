@@ -1,4 +1,4 @@
-﻿<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php
 /**
  * Multiverse风格照片集
@@ -64,7 +64,7 @@ var _hmt = _hmt || [];
 	<div id="wrapper">
 		<!-- Header -->
 		<header id="header">
-			<h1><a href="<?php $this->permalink() ?>"><strong><?php $this->title() ?></strong> Powered by ZDSR</a></h1>
+			<h1><a href="<?php $this->permalink() ?>"><strong><?php $this->title() ?></strong> Powerd by 荒野孤灯</a></h1>
 			<nav>
 				<ul>
 					<li><a href="#footer" class="icon solid fa-info-circle">关于</a></li>
@@ -102,7 +102,7 @@ var _hmt = _hmt || [];
 					</section>
 					<p class="copyright">
 						<!-- 虽说本页面制作容易，但也需要一点点时间编辑，请保留版权信息。 -->
-						&copy; <?php echo date("Y")?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a> Powered by <a href="https://github.com/zzd/photo-page-for-typecho">ZDSR</a> Based HTML5UP</a>.
+						&copy; <?php echo date("Y")?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a> Theme by <a href="https://github.com/zzd/photo-page-for-typecho" rel="nofollow">ZDSR</a> Based HTML5UP</a>.
 					</p>
 				</div>
 				<div>

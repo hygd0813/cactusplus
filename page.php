@@ -37,8 +37,8 @@ $this->need('header.php');
                 <?php if ($this->attachment->isImage): ?>
                         <p><h3>图片描述：</h3><br/><span style="padding-left:40px;"><?php $this->attachment->description();?></span></p>
                 <?php endif; ?>
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>				
+<!--文章列表页、页面ads -->	 	 
+<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>				
                     </div>
                 </article>
                  <?php $this->need('comments.php'); ?>

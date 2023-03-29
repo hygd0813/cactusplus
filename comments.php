@@ -1,4 +1,7 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php 
+require_once 'UserAgent.php';
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+?>
 <link rel="stylesheet" href="<?php cjUrl('css/comments.css'); ?>">
 <link rel="stylesheet" href="<?php cjUrl('lib/OwO/OwO.min.css'); ?>">
 <?php 
@@ -11,7 +14,6 @@ function threadedComments($comments, $options) {
             $commentClass .= ' comment-by-user';
         }
     }
-
     $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
 ?>
 <?php
@@ -24,35 +26,28 @@ function threadedComments($comments, $options) {
 			<img class="vimg" src="<?php echo $avatar ?>" alt="" />
 			<div class="vh">
 				<div class="vhead">
-					<span class="vnick"><?php CommentAuthor($comments); ?><small ><?php
-$me = md5(strtolower('hygd0813@qq.com')); //这里填入自己的邮箱
-$boy = md5(strtolower('564375261@qq.com')); //这里填入基佬的邮箱
-$boy1 = md5(strtolower('3051532614@qq.com')); //这里填入好友的邮箱
-$rz = md5(strtolower($comments->mail)); //用于判断邮箱
-//博主样式
-$str =  '<span class="commentapprove" style="color: #FFF;padding: .05rem .25rem;font-size: .5rem;border-radius: .25rem;background-color:#2bbc8a;margin-left:10px;" >博主</span>';
-//基佬样式
-$str2 =  '<span class="commentapprove" style="color: #FFF;padding: .05rem .25rem;font-size: .5rem;border-radius: .25rem;background-color:#555555;margin-left:10px;" >分身</span>';
-//好友样式
-$str3 =  '<span class="commentapprove" style="color: #FFF;padding: .05rem .25rem;font-size: .5rem;border-radius: .25rem;background-color:#555555;margin-left:10px;" >好友</span>';
-//开始判断
-if($me==$rz){
-echo $str;            //如果条件成立则输出'博主'样式
-}
-if($boy==$rz){
-echo $str2;            //如果条件成立则输出'好友'样式
-}
-if($boy1==$rz){
-echo $str3;            //如果条件成立则输出'基佬'样式	
-}
-?></small></span> <small><?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?></small>
-				</div>
+					<?php $commentApprove = commentApprove($comments, $comments->mail); ?>
+<span class="vnick"><a href="<?php $comments->url(); ?>" title="<?php echo $commentApprove['userDesc'] ?>" rel="external nofollow noopener noreferrer" target="_blank"><?php $comments->author(false); ?>
+        <span class="isauthor" title="Author">
+            <span title="<?php echo $commentApprove['userDesc'] ?>" style="background:<?php echo $commentApprove['bgColor'] ?>;padding:1px 5px 1px 5px;font-size:12px;border-radius: 3px;margin-left:5px;"><?php echo $commentApprove['userLevel'] ?><?php if ($commentApprove['isAuthor'] == 1){ ;?>
+                <i title="<?php echo $commentApprove['userDesc'] ?>" class="fa fa-diamond" aria-hidden="true" style="color:orange;"></i>
+            <?php } ?>
+<?php if ($commentApprove['userLevel'] == '基佬'){ ;?>
+                <i title="<?php echo $commentApprove['userDesc'] ?>" class="fa fa-diamond" aria-hidden="true" style="color:orange;"></i>
+            <?php } ?></span>
+</span>
+        </span></a>
+
+	</span><small style="margin-left:5px;"><?php $parentMail = get_comment_at($comments->coid);?><?php $parentMail ;?></small> 
+              </div>
 				<div class="vmeta" >
 					<span class="vtime"><i class="fa fa-clock-o" aria-hidden="true">&nbsp;&nbsp;</i><?php $comments->dateWord(); ?></span>
-					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>					
+					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>	
+                    <?php $ua = new UserAgent($comments->agent);?>
+					<span class="vtime qrcodeimg"><i class="fa fa-send" aria-hidden="true">&nbsp;&nbsp;</i><?php echo "发自" . $ua->returnTimeUa()['title'];?></span>
 					<span class="vat comment-reply cp-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;"><?php $comments->reply('回复'); ?></span><span id="vat cancel-comment-reply" class="cancel-comment-reply cl-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;display:none" ><?php $comments->cancelReply('取消'); ?></span>
 				</div>
-				<div class="vcontent">			
+				<div class="vcontent">
 <?php
      $db = Typecho_Db::get();
      $smyk=$db->fetchRow($db->select('mail')->from('table.comments')->where('coid = ?', $comments->parent)->limit(1));
@@ -66,7 +61,7 @@ echo $str3;            //如果条件成立则输出'基佬'样式
      echo'该评论仅博主及评论双方可见！';
      }
      }else{
-     $comments->content();
+    echo  $comments->content();
 }
 ?>
 				</div>								
@@ -74,8 +69,7 @@ echo $str3;            //如果条件成立则输出'基佬'样式
 		</div>
 		<?php if ($comments->children) { ?>
 		<?php $comments->threadedComments($options); ?>
-		<?php } ?>
-	
+		<?php } ?>	
 <?php } ?>
 <?php $this->comments()->to($comments); ?>
 <?php if($this->allow('comment')): ?>	
@@ -88,22 +82,22 @@ echo $str3;            //如果条件成立则输出'基佬'样式
 		<?php else: ?>
 		<div class="vwrap">
 		<div class="vheader item3">
-			<input name="author" placeholder="昵称" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱（请用真实邮箱，及时接收回复！）" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(http://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
+			<input name="author" placeholder="昵称（*）" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱（*）" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(http://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
 						<input type="hidden" name="receiveMail" id="receiveMail" value="yes" />
 		</div>
 		<?php endif; ?>
 		<div class="vedit">
-			<textarea  name="text" id="veditor" class="OwO-textarea veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="大佬，请赐教！文明灌水！(👀了，就💌)"><?php $this->remember('text'); ?></textarea>
-			<div class="vrow"><div class="vcol vcol-60 status-bar"></div><div class="vcol vcol-40 vctrl text-right"><div title="表情" class="OwO"></div></div></div>
+			<textarea  name="text" id="veditor" class="OwO-textarea veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="大佬，请赐教！(👀了，就💌)"><?php $this->remember('text'); ?></textarea>
+			<div class="vrow"><div class="vcol vcol-60 status-bar"></div><div class="vcol vcol-40 vctrl text-right"><div title="表情" class="OwO"></div></div></div>             				          
 		</div>
 		<div class="vcontrol">
 			<div class="col col-20">
-				<a href="https://80srz.com/175.html" target="_blank" title="Markdown 语法速查表"><svg class="markdown" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a>
-				<a href="https://imgchr.com/upload" target="_blank" title="评论支持图片 html 和 Markdown 格式"><svg width="24" height="14" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" font-size="10" font-weight="100" font-color="white"fill="#a2a9b6" fill-opacity="0.9" text-anchor="middle" dominant-baseline="middle">图床</text></svg></a>	
+				<button type="button" data-chevereto-pup-trigger data-target="#veditor" title="评论支持图片 <img>标签" style="padding:0 2px 0 4px;border:none;border-radius:5px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2zm.008-12c.548 0 .992.445.992.993v9.349A5.99 5.99 0 0 0 20 13V5H4l.001 14 9.292-9.293a.999.999 0 0 1 1.32-.084l.093.085 3.546 3.55a6.003 6.003 0 0 0-3.91 7.743L2.992 21A.993.993 0 0 1 2 20.007V3.993A1 1 0 0 1 2.992 3h18.016zM8 7a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" fill="rgba(102,102,102,1)"/></svg></button>          
+           <button type="button" title="私密评论，仅评论者及作者可见！"onclick="secret()" style="padding:0 2px 0 4px;border:none;border-radius:5px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0L24 0 24 24 0 24z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-1.702 0-3.305-.425-4.708-1.175L2 22l1.176-5.29C2.426 15.306 2 13.703 2 12 2 6.477 6.477 2 12 2zm0 5c-1.598 0-3 1.34-3 3v1H8v5h8v-5h-1v-1c0-1.657-1.343-3-3-3zm2 6v1h-4v-1h4zm-2-4c.476 0 1 .49 1 1v1h-2v-1c0-.51.487-1 1-1z" fill="rgba(102,102,102,1)"/></svg></button>               
 			</div>
 			<div class="col col-80 text-right">	
 			
-			<span style="color:red" title="验证码，必填项！">验证(*)</span><?php spam_protection_math();?>
+			<span style="color:red" title="验证码，必填项！">(*) </span><?php spam_protection_math();?>
 			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">回复</button>
 			<?php $security = $this->widget('Widget_Security'); ?>			
 			</div>
@@ -112,9 +106,6 @@ echo $str3;            //如果条件成立则输出'基佬'样式
 		</div>
 	</div>
 	</form>   
-	
- <div class="vcol vcol-40 vctrl right">  
- <input type="button" title="私密评论，仅评论者及作者可见！" class="vbtn" value="悄悄话" onclick="secret()" style="font-size:10px;">
 <script>
 function secret() {
                      i = document.getElementById("veditor");
@@ -126,8 +117,6 @@ function secret() {
                     };
                  };
  </script>	
- </div>  
- 
 	</div>
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
@@ -143,7 +132,9 @@ function secret() {
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
 	</div>
-	<?php $comments->pageNav('&#171', '&#187', '5', '……'); ?>	
+<!--文章列表页、页面ads -->	 	 
+<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>  
+	<?php $comments->pageNav('&#171', '&#187', '5', '…'); ?>	
 </div>
 	<script type="text/javascript">
 function showhidediv(id){var sbtitle=document.getElementById(id);if(sbtitle){if(sbtitle.style.display=='flex'){sbtitle.style.display='none';}else{sbtitle.style.display='flex';}}}
@@ -156,7 +147,7 @@ var OwO_winds = new OwO({
     logo: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>',
     container: document.getElementsByClassName('OwO')[0],
     target: document.getElementsByClassName('OwO-textarea')[0],
-    api: '<?php if ($this->options->Emoji == 'able'): ?><?php $this->options->themeUrl('lib/OwO/OwO.json'); ?><?php else: ?><?php $this->options->themeUrl('lib/OwO/OwOmini.json'); ?><?php endif; ?>',
+    api: '<?php if ($this->options->Emoji == 'able'): ?><?php cjUrl('lib/OwO/OwO.json'); ?><?php else: ?><?php cjUrl('lib/OwO/OwOmini.json'); ?><?php endif; ?>',
     position: 'down',
     width: '100%',
     maxHeight: '250px'

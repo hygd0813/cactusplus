@@ -1,4 +1,6 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; 
+<?php 
+require_once 'UserAgent.php';
+if (!defined('__TYPECHO_ROOT_DIR__')) exit; 
 ?>
 <link rel="stylesheet" href="<?php cjUrl('css/comments.css'); ?>">
 <link rel="stylesheet" href="<?php cjUrl('lib/OwO/OwO.min.css'); ?>">
@@ -12,7 +14,6 @@ function threadedComments($comments, $options) {
             $commentClass .= ' comment-by-user';
         }
     }
-
     $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
 ?>
 <?php
@@ -28,31 +29,32 @@ function threadedComments($comments, $options) {
 			}else{
 			  $avatar = $host . $url . $hash . '?s=50' . '&r=' . $rating . '&d=mm';
 			}       
-            ?>
-	
+            ?>	
 		<div class="vcard" id="<?php $comments->theId(); ?>">
 			<img class="vimg" src="<?php echo $avatar ?>" alt="" />
 			<div class="vh">
 				<div class="vhead">
-					<span class="vnick"><?php $comments->author(); ?></span>
+					 <span class="vnick"><?php $comments->author(); ?></span><span title="很帅的博主" style="background:#2bbc8a;padding:2px 5px 0 5px;font-size: 12px;border-radius: 3px;margin-left:0;">博主<i title="很帅的博主" class="fa fa-diamond" aria-hidden="true" style="color:orange"></i> </span>
+                  	 <div class="right vat">
+                    <!-- 评论点赞次数 -->
+                         <?php 
+                             $commentLikes =commentLikesNum($comments->coid); 
+                             $commentLikesNum = $commentLikes['likes'];
+                             $commentLikesRecording= $commentLikes['recording'];
+                         ?>
+                         <div class="commentLike">
+                             <a class="commentLikeOpt" id="commentLikeOpt-<?php $comments->coid(); ?>" href="javascript:;" data-coid="<?php $comments->coid() ?>" data-recording="<?php echo $commentLikesRecording; ?>" style="font-size:12px;">
+                                 <i id="commentLikeI-<?php $comments->coid(); ?>" class="<?php echo $commentLikesRecording?'fa fa-heart':'fa fa-heart-o'; ?>"></i>
+                                 <span id="commentLikeSpan-<?php $comments->coid(); ?>"><?php echo $commentLikesNum ?></span>
+                             </a>
+                         </div>
+                     </div>					
 				</div>
 				<div class="vmeta" >
 					<span class="vtime"><i class="fa fa-clock-o" aria-hidden="true">&nbsp;&nbsp;</i><?php $comments->dateWord(); ?></span>
 					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>	
-                  	<div class="right vat">
-    <!-- 评论点赞次数 -->
-    <?php 
-        $commentLikes =commentLikesNum($comments->coid); 
-        $commentLikesNum = $commentLikes['likes'];
-        $commentLikesRecording= $commentLikes['recording'];
-    ?>
-    <div class="commentLike">
-        <a class="commentLikeOpt" id="commentLikeOpt-<?php $comments->coid(); ?>" href="javascript:;" data-coid="<?php $comments->coid() ?>" data-recording="<?php echo $commentLikesRecording; ?>">
-        <i id="commentLikeI-<?php $comments->coid(); ?>" class="<?php echo $commentLikesRecording?'fa fa-heart':'fa fa-heart-o'; ?>"></i>
-        <span id="commentLikeSpan-<?php $comments->coid(); ?>"><?php echo $commentLikesNum ?></span>
-        </a>
-    </div>
-</div>	
+                    <?php $ua = new UserAgent($comments->agent);?>
+					<span class="vtime qrcodeimg"><i class="fa fa-send" aria-hidden="true">&nbsp;&nbsp;</i><?php echo "发自" . $ua->returnTimeUa()['title'];?></span>            
 				<div class="vcontent">
 					 <?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?>
 					 <?php $comments->content(); ?>
@@ -77,8 +79,7 @@ function threadedComments($comments, $options) {
 		</div>
 		<div class="vcontrol">
 			<div class="col col-20" title="Markdown is supported">
-				<a href="https://www.80srz.com/175.html" target="_blank"><svg class="markdown" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a>
-				<a href="https://imgchr.com/upload" target="_blank" title="本站评论支持图片 html 和 Markdown 格式"><svg width="24" height="14" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" font-size="10" fill="#a2a9b6" fill-opacity="0.9" text-anchor="middle" dominant-baseline="middle">图片</text></svg></a>				
+				<button type="button" data-chevereto-pup-trigger data-target="#veditor" title="评论支持图片 <img>标签" style="padding:0 8px 0 8px;border:none;border-radius:5px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2zm.008-12c.548 0 .992.445.992.993v9.349A5.99 5.99 0 0 0 20 13V5H4l.001 14 9.292-9.293a.999.999 0 0 1 1.32-.084l.093.085 3.546 3.55a6.003 6.003 0 0 0-3.91 7.743L2.992 21A.993.993 0 0 1 2 20.007V3.993A1 1 0 0 1 2.992 3h18.016zM8 7a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" fill="rgba(102,102,102,1)"/></svg></button>          				
 			</div>
 			<div class="col col-80 text-right">
 			<!--<?php spam_protection_math();?>-->
@@ -95,7 +96,7 @@ function threadedComments($comments, $options) {
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
-			共发布<span class="vnum" style="color:#2bbc8a;">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp;&nbsp;， &nbsp;共&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观
+			共发布<span class="vnum" style="color:#2bbc8a;">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp;&nbsp;， &nbsp;引来&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观
 		</div>                                                                   
 	</div>
 	<?php else: ?>
@@ -106,13 +107,15 @@ function threadedComments($comments, $options) {
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
 	</div>
-	<?php $comments->pageNav('&#171', '&#187', '3', '……'); ?>			
+<!--文章列表页、页面ads -->	 	 
+<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>	
+	<?php $comments->pageNav('&#171', '&#187', '5', '…'); ?>			
 </div>
 	<script type="text/javascript">
 function showhidediv(id){var sbtitle=document.getElementById(id);if(sbtitle){if(sbtitle.style.display=='flex'){sbtitle.style.display='none';}else{sbtitle.style.display='flex';}}}
 (function(){window.TypechoComment={dom:function(id){return document.getElementById(id)},pom:function(id){return document.getElementsByClassName(id)[0]},iom:function(id,dis){var alist=document.getElementsByClassName(id);if(alist){for(var idx=0;idx<alist.length;idx++){var mya=alist[idx];mya.style.display=dis}}},create:function(tag,attr){var el=document.createElement(tag);for(var key in attr){el.setAttribute(key,attr[key])}return el},reply:function(cid,coid){var comment=this.dom(cid),parent=comment.parentNode,response=this.dom("<?php echo $this->respondId(); ?>"),input=this.dom("comment-parent"),form="form"==response.tagName?response:response.getElementsByTagName("form")[0],textarea=response.getElementsByTagName("textarea")[0];if(null==input){input=this.create("input",{"type":"hidden","name":"parent","id":"comment-parent"});form.appendChild(input)}input.setAttribute("value",coid);if(null==this.dom("comment-form-place-holder")){var holder=this.create("div",{"id":"comment-form-place-holder"});response.parentNode.insertBefore(holder,response)}comment.appendChild(response);this.iom("comment-reply","");this.pom("cp-"+cid).style.display="none";this.iom("cancel-comment-reply","none");this.pom("cl-"+cid).style.display="";if(null!=textarea&&"text"==textarea.name){textarea.focus()}return false},cancelReply:function(){var response=this.dom("<?php echo $this->respondId(); ?>"),holder=this.dom("comment-form-place-holder"),input=this.dom("comment-parent");if(null!=input){input.parentNode.removeChild(input)}if(null==holder){return true}this.iom("comment-reply","");this.iom("cancel-comment-reply","none");holder.parentNode.insertBefore(response,holder);return false}}})();
 </script>
-	<script src="<?php $this->options->themeUrl('lib/OwO/OwO.min.js'); ?>"></script>
+	<script src="<?php cjUrl('lib/OwO/OwO.min.js'); ?>"></script>
 	<script type="text/javascript">
 //OwO
 var OwO_winds = new OwO({
@@ -126,7 +129,7 @@ var OwO_winds = new OwO({
 });</script>
 <?php endif; ?>
 
-  <script>
+  <script type="text/javascript">
     $(".vlist").on('click', "a[id^='commentLikeOpt']", function() {
     //$(".commentLikeOpt").click(function(){
         
@@ -144,7 +147,7 @@ var OwO_winds = new OwO({
                 type: "POST",
                 data: {
                     coid:coid,
-                    behavior:'dz'
+                    behavior:'dz',
                 },
                 async: true,
                 dataType: "json",
@@ -157,8 +160,8 @@ var OwO_winds = new OwO({
                             //修改点赞数量
                             $('#commentLikeSpan-'+coid).html(data.num);
                             //变更点赞图标样式
-                            $('#commentLikeI-'+coid).removeAttr("class","fa fa-heart-o")
-                            $('#commentLikeI-'+coid).attr("class","fa fa-heart")
+                            $('#commentLikeI-'+coid).removeAttr("class","fa fa-heart-o");
+                            $('#commentLikeI-'+coid).attr("class","fa fa-heart");
                             //设置recording的属性值
                             $('#commentLikeI-'+coid).parent().attr("data-recording","1");
                         }
@@ -169,4 +172,4 @@ var OwO_winds = new OwO({
             });
             
         })
-</script>        
+</script>             

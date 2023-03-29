@@ -10,7 +10,7 @@
 <?php
 function usePublicCdn()
 {
-	echo "https://cdn.jsdelivr.net/gh/zzd/photo-page-for-typecho@master";
+	echo "https://fastly.jsdelivr.net/gh/zzd/photo-page-for-typecho@master";
 }
 ?>
 <!-- 公共CDN结束 -->
@@ -41,7 +41,7 @@ function storage($storage)
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="<?php echo $this->fields->about; ?>" />
 	<link rel="stylesheet" href="<?php usePublicCdn(); ?>/Lens/css/main.css" />
-	<link rel="shortcut icon" href="<?php $this->options->siteUrl(); ?>/favicon.ico">
+	<link rel="shortcut icon" href="<?php $this->options->siteUrl(); ?>favicon.ico">
 	<noscript>
 		<link rel="stylesheet" href="<?php usePublicCdn(); ?>/Lens/css/noscript.css" /></noscript>
 	<!-- 百度统计 -->

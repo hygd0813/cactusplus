@@ -34,11 +34,10 @@ $this->need('header.php');
                 </div>
             </header>
         <div class="content index width mx-auto px3 my3">
-            <section id="wrapper" class="home">
-
+            <section id="wrapper" class="home">      
 <!-- 读者墙 -->
 <section class="FriendWall p05">
-<h3 class="panel" style="color:#2bbc8a;">读者墙</h3>
+<h3 class="panel" style="color:#2bbc8a;">读者墙<span style="float:right;padding-top:20px;font-size:10px;color:#666;"><i class="fa fa-bell-o" style="padding-right:5px;color:orange;"></i>你的热情，我铭记于心</span></h3></br>
 <div class="row FriendWall-warpper flexbox" style="margin-right: 0;margin-left: 0;">
 <?php
 $period = time() - 999592000; // 時段: 30 天, 單位: 秒
@@ -62,21 +61,52 @@ foreach ($counts as $count) {
 }
 echo $mostactive; ?>
 </div>
-</section>
-				
-<!-- 全站最新10条留言 -->
-<h3 class="panel" style="color:#2bbc8a;">新留言</h3>
-<ol><?php $this->widget('Widget_Comments_Recent','pageSize=10&ignoreAuthor=true')->parse('<li><span style="padding:5px 15px;color:#f8f8f5">{author} ：</span><a href="{permalink}">{text}</a><span style="float:right;"><small>{dateWord}</small></span></li><br/>'); ?></ol><hr/>
-
+</section><hr/>
+<!-- 走心评论 -->
+<h3 class="panel" style="color:#2bbc8a;">走心留言<span style="float:right;padding-top:20px;font-size:10px;color:#666;"><i class="fa fa-bell-o" style="padding-right:5px;color:orange;"></i>你说过的，我都记得</span></h3>
+     <ol>
+         <?php		 
+            $coid = Helper::options()->commentszx;			
+            $arr = explode(',',$coid);
+            foreach ($arr as $value){
+                $db = Typecho_Db::get();
+                $select = $db->select()->from('table.comments')->where('coid = ?', $value)->limit(1);
+                $result = $db->fetchAll($select);
+                foreach ($result as $res){
+                    $id = $res['cid'];
+                    if($id){
+                        $getid = explode(',',$id);
+                        $resu = $db->fetchAll($db->select()->from('table.contents')
+                            ->where('cid in ?',$getid)
+                            ->order('cid', Typecho_Db::SORT_DESC));
+                        foreach($resu as $val){
+                            $val = Typecho_Widget::widget('Widget_Abstract_Contents')->push($val);
+                            $post_titles = htmlspecialchars($val['title']);
+                            $permalinks = $val['permalink'];
+                            }
+                    }
+                    echo '<li><p>';
+                            echo '<span style="padding:5px 15px;color:#f8f8f5">' . $res['author'] .' ：</span><a href="'.$permalinks .'#'.$res['type'].'-'. $value .'" target="_blank">' . $res['text'] . '</a><span style="float:right;"><small>';
+                            echo date('Y-n-j H:i',  $res['created']);
+                    echo '</small></span></p></li>';
+                }
+            }
+         ?>
+	</ol><hr/>	      
+          
+<!-- 全站最新5条留言 -->
+<h3 class="panel" style="color:#2bbc8a;">最新留言<span style="float:right;padding-top:20px;font-size:10px;color:#666;"><i class="fa fa-bell-o" style="padding-right:5px;color:orange;"></i>最新 5 条留言</h3>
+<ol><?php $this->widget('Widget_Comments_Recent','pageSize=5&ignoreAuthor=true')->parse('<li><p><span style="padding:5px 15px;color:#f8f8f5;"> {author} : </span> <a href="{permalink}" style="text-decoration:none;" title="点击查看“{author}”在《{title}》的留言">{text}</a><span style="float:right;"><small> {dateWord}</small></span></p></li>'); ?></ol><hr/>       
                 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">                  
                     <div class="content" itemprop="articleBody">
                         <?php parseContent($this); ?>
                     </div>
                 </article>
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>				
+  
+<!--文章列表页、页面ads -->	 	 
+<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>		
+  
                  <?php $this->need('comments.php'); ?>
-
              </section>
         </div>
 		</div>

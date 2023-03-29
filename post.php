@@ -25,7 +25,8 @@ $this->need('header.php');
 				 <li><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
                  <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                  <li><b><a href="<?php $categorys->permalink(); ?>" title="<?php $categorys->name(); ?>"><?php $categorys->name(); ?></a></b></li>
-                 <?php endwhile;?>
+                 <?php endwhile;?><br/><br/>
+                 <?php $this->widget('Widget_Contents_Page_List')->parse('<li><b><a href="{permalink}">{title}</a></b></li>'); ?>
              </ul>
          </span><br/>
          <span id="actions">
@@ -34,14 +35,14 @@ $this->need('header.php');
                  <li><?php $this->theNext('%s', '', array('title' => '<i class="fa fa-chevron-left" aria-hidden="true" onmouseover=\'$("#i-prev").toggle();\' onmouseout=\'$("#i-prev").toggle();\'></i>', 'tagClass' => 'icon')); ?></li>
                  <li> <?php $this->thePrev('%s', '', array('title' => '<i class="fa fa-chevron-right" aria-hidden="true" onmouseover=\'$("#i-next").toggle();\' onmouseout=\'$("#i-next").toggle();\'></i>', 'tagClass' => 'icon')); ?></li>			 
                  <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
-                 <li><a class="icon" href="https://www.80srz.com/random.html" target="_blank"><i class="fa fa-location-arrow" aria-hidden="true" onmouseover='$("#i-random").toggle();'' onmouseout='$("#i-random").toggle();' ></i></a></li>					 
+                 <li><a class="icon" href="<?php $this->options->siteUrl();?>random.html" target="_blank"><i class="fa fa-random" aria-hidden="true" onmouseover='$("#i-random").toggle();'' onmouseout='$("#i-random").toggle();' ></i></a></li>					 
                  <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
              </ul>
-				 <span id="i-search" class="info" style="display:none;">Search</span>
+				      <span id="i-search" class="info" style="display:none;">Search</span>
                  <span id="i-prev" class="info" style="display:none;">Previous post</span>
                  <span id="i-next" class="info" style="display:none;">Next post</span>					 
                  <span id="i-top" class="info" style="display:none;">Back to top</span>
-                 <span id="i-random" class="info" style="display:none;">random post</span>				 
+                 <span id="i-random" class="info" style="display:none;">Random post</span>				 
                  <span id="i-share" class="info" style="display:none;">Share post</span>			 
          </span><br/>
          <div id="share" style="display: none;">
@@ -70,24 +71,25 @@ $this->need('header.php');
                          <?php if($this->user->hasLogin()):?>
 							 <a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>" target="_blank" style="width: 48px;height: 24px;float: right;border:1px dotted #ccc;border-radius: 5px;background-color: rgba(65,85,93,0.2);font-size: 13px;text-align: center;line-height: 22px;">编辑</a>
 					     <?php else: ?>
-                             <span style="float:right;"><svg xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>  <small>约 <?php echo art_time($this->cid); ?> 分钟  </small></span>							  
+                             <span style="float:right;"><i class="fa fa-file-word-o"></i><small> <?php echo art_time($this->cid); ?> 分钟  </small></span>							  
                          <?php endif;?>
                      </div>	
                      <div class="meta">
                          <div class="postdate">
-                             <time datetime="<?php $this->date('Y.n.j'); ?>" itemprop="datePublished"><?php $this->date('Y.n.j'); ?></time>
+                             <i class="fa fa-clock-o" aria-hidden="true">&nbsp;&nbsp;</i><time datetime="<?php $this->date('Y.n.j'); ?>" itemprop="datePublished"><?php $this->date('Y.n.j'); ?></time>
                          </div>
                          <div class="article-tag">
-                             <i class="fa fa-eye"></i><span><span><?php Postviews($this); ?></span></span>
+                             <i class="fa fa-eye" aria-hidden="true">&nbsp;&nbsp;</i><span><span><?php Postviews($this); ?></span></span>
                          </div>
                          <div class="article-tag">
-                             <i class="fa fa-tag"></i><?php $this->category(' '); ?>, <?php $this->tags(', ', true, 'none'); ?>
+                             <i class="fa fa-tag" aria-hidden="true" >&nbsp;&nbsp;</i> <?php $this->tags(', ', true, 'none'); ?>
                          </div>													
                          <div class="article-tag-box"></div>
                      </div>
                  </header>
-                 <div class="content " itemprop="articleBody" id="post-content" style="padding:.25rem .5rem .5rem 1rem;">																				
+                 <div class="content " itemprop="articleBody" id="post-content" style="padding:.25rem .5rem .5rem 1rem;">																			
                          <?php parseContent($this); ?>	
+                 <div style="text-align:center;margin-top:2rem;"><span style="color:#2bbc8a;border-bottom:3px double #f1f3fa;">~&nbsp;&nbsp;~&nbsp;&nbsp;The&nbsp;&nbsp;&nbsp;End&nbsp;&nbsp;~&nbsp;&nbsp;~</span></div><br/>
 <!-- 赞赏点赞 -->
                      <section class="j-fabulous"><p><br/></p>
                      <div class="button has-admire">
@@ -107,7 +109,7 @@ $this->need('header.php');
                          <section class="contentzs">
                              <section class="title">感谢您的支持，我会继续努力哒!</section>
                                  <section class="codezs">
-                                     <img src=" <?php cjUrl('images/weixin.jpg'); ?>" alt="微信收款码"/>
+                                     <img src=" <?php cjUrl('images/weixin.jpg'); ?>" alt="支付宝收款码"/>
                                  </section>  
                                  <section class="tips">
                                      <img src="<?php cjUrl('images/tips.png'); ?>" alt="tips"/>                
@@ -116,86 +118,56 @@ $this->need('header.php');
                                  </section>
                              </section>						 
                          <script>/* 初始化赏按钮 */$('#j-admire').on('click', function () {$('.j-admire-modal').addClass('active');$('body').css('overflow', 'hidden');});$('.j-admire-modal .close').on('click', function () {$('.j-admire-modal').removeClass('active');$('body').css('overflow', '');});</script>
-				 </div>							 
+				 </div>	
 <!-- 文章信息 -->
-                 <div class="content " style="border:1px dashed #f1f3fa;border-radius:5px;margin:.875rem 0 1.5rem 0;padding:.5rem;font-size:12px;min-height:120px;vertical-align:middle;">	 
-					 <span style="float:right;background-color:#999;height:100px;" class="qrcodeimg"><img src="<?php $this->options->themeUrl(); ?>qrcode.php?size=240&text=<?php $this->permalink(); ?>" width="100px" height="100px" alt="文章二维码"/></span>
-                     <span>本文标签：</span><?php $this->tags(', ', true, 'none'); ?><br/>
-                     <span>最后编辑：</span><?php echo date('Y 年 n 月 j 日 H:i' , $this->modified); ?>	 By <a href="<?php $this->author->permalink(); ?>" target="_blank"><?php $this->author() ?></a><!-- —（<?php $this->author('intro'); ?>）--><br/>							 
-                     <span>本文链接：</span><a href="<?php $this->permalink() ?>" target="_blank"><?php $this->permalink() ?></a><br/>
-					 <span>作品采用：</span> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow" target="_blank" title="版权协议">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) </a>  许可协议授权。						 
-                 </div>	
+                 <div class="content " style="border-left:8px solid #666;margin:.875rem 0 1.5rem 0;padding:.5rem;font-size:12px;min-height:120px;vertical-align:middle;">
+					 <span style="float:right;background-color:#999;height:100px;" class="qrcodeimg"><img src="<?php $this->options->themeUrl(); ?>qrcode.php?size=240&text=<?php $this->permalink(); ?>" width="100px" height="100px" alt="文章二维码"/></span>           
+                     <span>分类标签：</span><?php $this->category(','); ?>，<?php $this->tags('，', true, 'none'); ?><br/>
+                     <span>文章标题：</span><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a><br/>
+                     <span>文章链接：</span><a href="<?php $this->permalink() ?>"><?php $this->permalink() ?></a><br/>
+                     <span>最后编辑：</span><?php echo date('Y 年 n 月 j 日 H:i' , $this->modified); ?>	  By  <a href="<?php $this->author->permalink(); ?>" target="_blank" title="<?php $this->author('intro'); ?>"><?php $this->author() ?></a><br/>
+					 <span>许可协议：</span> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow" target="_blank" title="版权协议">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a>				 
+                 </div>
 <!--内容页下方ads -->	
- 	             <div class="" >
-                     <?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>
-				 </div>
+                     <?php if($this->options->postdownads): ?> <div class="" ><?php $this->options->postdownads();?></div> <?php endif; ?>
 <!--推荐、热门文章-->
                  <div class="row " >
                      <section id="writing" class="col-lg-6 col-xs-12">
-                         <h3 style="color:#2bbc8a;">相关文章：</h3>
+                         <h3 style="color:#2bbc8a;">相关推荐</h3>
                          <ul class="post-list" id="post-list">
                              <?php $this->related(6)->to($relatedPosts); ?>
 							 <?php while ($relatedPosts->next()): ?>
                              <li class="post-item" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:100%;">
-	                             <div class="meta"><time datetime="<?php $relatedPosts->date(); ?>" itemprop="datePublished"><?php $relatedPosts->date('M . j'); ?></time></div>
+	                             <div class="meta"><time datetime="<?php $relatedPosts->date(); ?>" itemprop="datePublished"><?php $relatedPosts->date('Y.n.j'); ?></time></div>
 	                             <span style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:95%;"><a href="<?php $relatedPosts->permalink(); ?>" title="<?php $relatedPosts->title(); ?>"><?php $relatedPosts->title(30,'…'); ?></a></span>
 		                     </li>
-			                 <?php endwhile;?>
+			                 <?php endwhile;?> 
                          </ul>
+                        <a href="https://my.liluohost.com/aff.php?aff=425" target="_blank" rel="nofollow"><img src="https://www.80srz.com/usr/themes/cactus/images/liluohostad.png" title="站长推荐——篱落主机" width="100%" height="auto"></a> 
                      </section>
                      <section id="writing" class="col-lg-6 col-xs-12">
-                         <h3 style="color:#2bbc8a;">热门文章：</h3>
+                         <h3 style="color:#2bbc8a;">热门推荐</h3>
                          <ul class="post-list" id="post-list">
                              <?php $this->widget('Widget_Post_hotview@hotview', 'pageSize=3')->to($hotview); ?>
                              <?php while($hotview->next()): ?>
                              <li class="post-item"  style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:100%;" >
-	                             <div class="meta"><time datetime="<?php $hotview->date(); ?>" itemprop="datePublished"><?php $hotview->date('M . j'); ?></time></div>
+	                             <div class="meta"><time datetime="<?php $hotview->date(); ?>" itemprop="datePublished"><?php $hotview->date('Y.n.j'); ?></time></div>
 	                             <span style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:95%;"><a href="<?php $hotview->permalink(); ?>" title="<?php $hotview->title(); ?>"><?php $hotview->title(30,'…'); ?></a></span>
 		                     </li>
 			                 <?php endwhile;?>
                              <?php $this->widget('Widget_Post_hotpl@hotpl', 'pageSize=3')->to($hotpl); ?>
                              <?php while($hotpl->next()): ?>
                              <li class="post-item" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:100%;">
-	                             <div class="meta"><time datetime="<?php $hotpl->date(); ?>" itemprop="datePublished"><?php $hotpl->date('M . j'); ?></time></div>
+	                             <div class="meta"><time datetime="<?php $hotpl->date(); ?>" itemprop="datePublished"><?php $hotpl->date('Y.n.j'); ?></time></div>
 	                             <span style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:95%;"><a href="<?php $hotpl->permalink(); ?>" title="<?php $hotpl->title(); ?>"><?php $hotpl->title(30,'…'); ?></a></span>
 		                     </li>
-			                 <?php endwhile;?>			 
+			                 <?php endwhile;?>	
                          </ul>
-                     </section>
-					     <a href="https://my.liluohost.com/aff.php?aff=425" target="_blank" rel="nofollow"><img src="https://www.80srz.com/usr/themes/cactus/images/liluohostad.png" title="站长推荐——篱落主机" width="100%" height="auto"></a>						 
+                         <a href="https://my.liluohost.com/aff.php?aff=425" target="_blank" rel="nofollow"><img src="https://www.80srz.com/usr/themes/cactus/images/liluohostad.png" title="站长推荐——篱落主机" width="100%" height="auto"></a>                       
+                     </section>					 
 					 </div>
                 </article>					
                  <?php $this->need('comments.php'); ?>
             </section>		
         </div>
  <?php $this->need('footer.php'); ?>
- 
-  <script>
-document.body.addEventListener('copy', function (e) {
-    if (window.getSelection().toString() && window.getSelection().toString().length > 10) {
-        setClipboardText(e);
-    }
-}); 
-function setClipboardText(event) {
-    var clipboardData = event.clipboardData || window.clipboardData;
-    if (clipboardData) {
-        event.preventDefault();
-        var htmlData = ''
-            + '著作权归作者所有。<br>'
-            + '商业转载请联系作者获得授权，非商业转载请注明出处。<br>'
-            + '作者：<?php $this->author() ?><br>'
-            + '链接：' + window.location.href + '<br>'
-            + '来源：<?php $this->options->siteUrl(); ?><br><br>'
-            + window.getSelection().toString();
-        var textData = ''
-            + '著作权归作者所有。\n'
-            + '商业转载请联系作者获得授权，非商业转载请注明出处。\n'
-            + '作者：<?php $this->author() ?>\n'
-            + '链接：' + window.location.href + '\n'
-            + '来源：<?php $this->options->siteUrl(); ?>\n\n'
-            + window.getSelection().toString();
-        clipboardData.setData('text/html', htmlData);
-        clipboardData.setData('text/plain',textData);
-    }
-}
-</script> 
