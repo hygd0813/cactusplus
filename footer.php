@@ -2,18 +2,18 @@
 <div class="mx-auto px3 my5">
  <footer id="footer" style="display:block;">
             <div class="footer-left">
-                 © 2021-<?php echo date('Y'); ?> . <a href="<?php $this->options->siteUrl();?>" target="_blank"><?php $this->options->title();?></a> | <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->beian();?></a><?php endif; ?> <?php if($this->options->bdtongji): ?> | <a href="<?php $this->options->bdtongji();?>" rel="nofollow" target="_blank">统计</a><?php endif; ?>
+                 © 2021-<?php echo date('Y'); ?> <a href="#" target="_blank"> ♡ </a> <a href="<?php $this->options->siteUrl();?>" target="_blank"><?php $this->options->title();?></a> | <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->beian();?></a><?php endif; ?> <?php if($this->options->bdtongji): ?> | <a href="<?php $this->options->bdtongji();?>" rel="nofollow" target="_blank">统计</a><?php endif; ?>
             </div>
             <div class="footer-right">
                 <nav>
                     <ul>
-                        <li>
+                        <!-- <li>
                             <a href="<?php $this->options->siteUrl();?>">首页</a>|
-                        </li>                      
+                        </li> -->                     
+                        <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a>|</li>'); ?>
                         <li>
                             <a href="<?php $this->options->siteUrl();?>photos.html" target="_blank">相册</a>|
-                        </li>
-                        <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a>|</li>'); ?>
+                        </li>                     
 						<li>
                             <a href="<?php $this->options->siteUrl();?>feed/">订阅</a>|
                         </li>			
@@ -75,12 +75,12 @@
 $(function () {
   $.get("<?php cjUrl('lib/hygd'.rand(0,4).'.json');?>", function (data) {
     var data = data.data;
-	var str = (data.content || "") + "\n" + (data.translation || "")+"\n---- ";   
+	var str = (data.content || "") + "\n" + (data.translation || "")+"\n--- ";   
     var options = {
       strings: [
-        str + "Welcome to my blog. ^1200",
-        str + "Have a good day. ^1200",
-        str + `${data.author}. ^1200`,		
+        str + "Welcome to my blog ! ^1200",
+       // str + "Have a good day ! ^1200",
+       // str + `${data.author}. ^1200`,
       ],
       typeSpeed: 60,
       startDelay: 300,

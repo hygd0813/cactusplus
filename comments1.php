@@ -16,45 +16,38 @@ function threadedComments($comments, $options) {
     }
     $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
 ?>
-<?php
-            $host = 'https://cravatar.cn'; 
-            $url = '/avatar/'; 
-            $rating = Helper::options()->commentsAvatarRating;
-            $hash = md5(strtolower($comments->mail));
-			$email = strtolower($comments->mail);
-			$qq=str_replace('@qq.com','',$email);
-			if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4)
-			{
-			$avatar = '//q3.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
-			}else{
-			  $avatar = $host . $url . $hash . '?s=50' . '&r=' . $rating . '&d=mm';
-			}       
-            ?>	
+
+    <?php
+	$email = strtolower($comments->mail);
+	$address = strtolower(trim($email) );
+    $hash    = md5($address );
+	$avatar = 'https://cravatar.cn/avatar/'.$hash.'.png?s=100' . '&d=retro' . '&r=y';			       
+    ?>       
 		<div class="vcard" id="<?php $comments->theId(); ?>">
 			<img class="vimg" src="<?php echo $avatar ?>" alt="" />
 			<div class="vh">
 				<div class="vhead">
-					 <span class="vnick"><?php $comments->author(); ?></span><span title="很帅的博主" style="background:#2bbc8a;padding:2px 5px 0 5px;font-size: 12px;border-radius: 3px;margin-left:0;">博主<i title="很帅的博主" class="fa fa-diamond" aria-hidden="true" style="color:orange"></i> </span>
-                  	 <div class="right vat">
+					 <span class="vnick"><?php $comments->author(); ?></span><span title="很帅的博主" style="background:#2bbc8a;padding:2px 5px 0 5px;font-size: 12px;border-radius: 3px;margin-left:0;">博主 </span>
+                  	 <span class="right vat">
                     <!-- 评论点赞次数 -->
                          <?php 
                              $commentLikes =commentLikesNum($comments->coid); 
                              $commentLikesNum = $commentLikes['likes'];
                              $commentLikesRecording= $commentLikes['recording'];
                          ?>
-                         <div class="commentLike">
+                         <span class="commentLike">
                              <a class="commentLikeOpt" id="commentLikeOpt-<?php $comments->coid(); ?>" href="javascript:;" data-coid="<?php $comments->coid() ?>" data-recording="<?php echo $commentLikesRecording; ?>" style="font-size:12px;">
                                  <i id="commentLikeI-<?php $comments->coid(); ?>" class="<?php echo $commentLikesRecording?'fa fa-heart':'fa fa-heart-o'; ?>"></i>
                                  <span id="commentLikeSpan-<?php $comments->coid(); ?>"><?php echo $commentLikesNum ?></span>
                              </a>
-                         </div>
-                     </div>					
+                         </span>
+                     </span>					
 				</div>
 				<div class="vmeta" >
-					<span class="vtime"><i class="fa fa-clock-o" aria-hidden="true">&nbsp;&nbsp;</i><?php $comments->dateWord(); ?></span>
-					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>	
+					<span class="vtime"><i class="fa fa-clock-o" aria-hidden="true">&nbsp;</i><?php $comments->date("Y-n-j,G:i"); ?></span>
+					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;</i><?php echo convertip($comments->ip); ?></span>	
                     <?php $ua = new UserAgent($comments->agent);?>
-					<span class="vtime qrcodeimg"><i class="fa fa-send" aria-hidden="true">&nbsp;&nbsp;</i><?php echo "发自" . $ua->returnTimeUa()['title'];?></span>            
+					<span class="vtime qrcodeimg"><i class="fa fa-send" aria-hidden="true">&nbsp;</i><?php echo "发自" . $ua->returnTimeUa()['title'];?></span>            
 				<div class="vcontent">
 					 <?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?>
 					 <?php $comments->content(); ?>
@@ -83,7 +76,7 @@ function threadedComments($comments, $options) {
 			</div>
 			<div class="col col-80 text-right">
 			<!--<?php spam_protection_math();?>-->
-			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">发表</button>
+			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">发送</button>
 			<?php $security = $this->widget('Widget_Security'); ?>			
 			</div>
 		</div>		
@@ -96,7 +89,7 @@ function threadedComments($comments, $options) {
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
-			共发布<span class="vnum" style="color:#2bbc8a;">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp;&nbsp;， &nbsp;引来&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观
+			共发布<span class="vnum" style="color:#2bbc8a;">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp; , &nbsp;引来&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观
 		</div>                                                                   
 	</div>
 	<?php else: ?>

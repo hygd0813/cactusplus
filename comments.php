@@ -45,7 +45,7 @@ function threadedComments($comments, $options) {
 					<span class="vtime"><i class="fa fa-map-marker" aria-hidden="true">&nbsp;&nbsp;</i><?php echo convertip($comments->ip); ?></span>	
                     <?php $ua = new UserAgent($comments->agent);?>
 					<span class="vtime qrcodeimg"><i class="fa fa-send" aria-hidden="true">&nbsp;&nbsp;</i><?php echo "发自" . $ua->returnTimeUa()['title'];?></span>
-					<span class="vat comment-reply cp-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;"><?php $comments->reply('回复'); ?></span><span id="vat cancel-comment-reply" class="cancel-comment-reply cl-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;display:none" ><?php $comments->cancelReply('取消'); ?></span>
+					<span class="vat comment-reply cp-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;"><?php $comments->reply('回复'); ?></span><span id="vat cancel-comment-reply" class="cancel-comment-reply cl-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;display:none" ><?php $comments->cancelReply('取消回复'); ?></span>
 				</div>
 				<div class="vcontent">
 <?php
@@ -82,7 +82,7 @@ function threadedComments($comments, $options) {
 		<?php else: ?>
 		<div class="vwrap">
 		<div class="vheader item3">
-			<input name="author" placeholder="昵称（*）" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱（*）" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(http://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
+			<input name="author" placeholder="昵称(*)" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱(*)" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(https://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
 						<input type="hidden" name="receiveMail" id="receiveMail" value="yes" />
 		</div>
 		<?php endif; ?>
@@ -98,7 +98,7 @@ function threadedComments($comments, $options) {
 			<div class="col col-80 text-right">	
 			
 			<span style="color:red" title="验证码，必填项！">(*) </span><?php spam_protection_math();?>
-			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">回复</button>
+			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">发送</button>
 			<?php $security = $this->widget('Widget_Security'); ?>			
 			</div>
 		</div>
@@ -121,7 +121,7 @@ function secret() {
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
-			<span style="text-align:middle;">  本文共&nbsp;&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php $this->commentsNum('%d'); ?></span>&nbsp;&nbsp;条评论。您也快来参与吧！</span>
+			<span style="text-align:middle;">  本文共&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php $this->commentsNum('%d'); ?></span>&nbsp;条评论。您也快来参与吧！</span>
 		</div>
 	</div>
 	<?php else: ?>

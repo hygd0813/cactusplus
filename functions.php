@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-define('INITIAL_VERSION_NUMBER', '1.6.6');
+define('INITIAL_VERSION_NUMBER', '1.6.7');
 function themeConfig($form) {
     $logoimg = new Typecho_Widget_Helper_Form_Element_Text('logoimg', NULL, NULL, _t('页头logo地址'), _t('一般为https://www.80srz.com/image.png,支持 https:// 或 //,留空则使用默认图片'));
     $form->addInput($logoimg->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
@@ -14,12 +14,10 @@ function themeConfig($form) {
     $form->addInput($bodybgimg);	
 	$email = new Typecho_Widget_Helper_Form_Element_Text('email', NULL, NULL, _t('Email地址'), _t('邮箱地址 ,留空则不设置Email地址'));
     $form->addInput($email->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-	$github = new Typecho_Widget_Helper_Form_Element_Text('github', NULL, NULL, _t('Github地址'), _t('一般为https://github.com/Seevil ,留空则不设置Github地址'));
+	$github = new Typecho_Widget_Helper_Form_Element_Text('github', NULL, NULL, _t('Github地址'), _t('一般为https://github.com/hygd0813 ,留空则不设置Github地址'));
     $form->addInput($github->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$weibo = new Typecho_Widget_Helper_Form_Element_Text('weibo', NULL, NULL, _t('微博地址'), _t('一般为http://www.weibo.com/xxx ,留空则不设置Weibo地址'));
-    $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));	
-	$douban = new Typecho_Widget_Helper_Form_Element_Text('douban', NULL, NULL, _t('豆瓣地址'), _t('一般为http://site.douban.com/xxx ,留空则不设置douban地址'));
-    $form->addInput($douban->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));	
+    $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));			
 	$Projectsurl = new Typecho_Widget_Helper_Form_Element_Text('Projectsurl', NULL, NULL, _t('首页Projects地址'), _t('一般为https://www.80srz.com ,留空则默认为#地址'));
     $form->addInput($Projectsurl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));	
 	$beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案号设置'), _t('直接填写备案号即可如：京ICP备888888号'));
@@ -63,6 +61,12 @@ function themeConfig($form) {
  //  内容页左侧ads
     $postleftads = new Typecho_Widget_Helper_Form_Element_Textarea('postleftads', NULL, NULL, _t('内容页左侧ads'), _t('内容页左侧ads,图片建议600*180px，内容随意！'));
     $form->addInput($postleftads);
+ //  首页公告
+    $indexmbads = new Typecho_Widget_Helper_Form_Element_Textarea('indexmbads', NULL, NULL, _t('首页公告'), _t('首页蒙版公告！'));
+    $form->addInput($indexmbads);
+ //  首页公告开关
+    $indexmbadskaiguan = new Typecho_Widget_Helper_Form_Element_Select('indexmbadskaiguan',array('0'=>'不开启','1'=>'开启'),'0','首页公告','是否开启首页蒙板公告功能。');
+    $form->addInput($indexmbadskaiguan);    
  //  目录树开关
 	$catalog = new Typecho_Widget_Helper_Form_Element_Radio('catalog',array('able' => _t('启用'),'disable' => _t('禁止'),), 'disable', _t('文章目录设置'), _t('默认显示随机文章，启用则显示文章目录'));
     $form->addInput($catalog);
@@ -158,10 +162,10 @@ function Links($sorts = NULL) {
             if ($sorts) {
                 $arr = explode("|", $sorts);
                 if ($sort && in_array($sort, $arr)) {
-                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><img src="https://s0.wp.com/mshots/v1/'.$url.'?w=600&amp;h=400" style="margin-bottom:-10px;width:100%;height:auto;"/><a href="'.$url.'" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
+                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><a href="'.$url.'" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
                 }
             } else {
-                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><img  src="https://s0.wp.com/mshots/v1/'.$url.'?w=400&amp;h=180" style="margin-bottom:-10px;width:100%;height:auto;"/><a href="'.$url.'" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
+                    $Link .= $url ? '<div class="links-card flex-yl link_a" name="link_a"><div class="links-list-item" style=""><a href="'.$url.'" title="'.$name.'" target="_blank"><img class="links-avatar lazy" alt="'.$name.'" data-src="'.$icon.'" src="'.$icon.'"/><div class="links-item-info"><span class="links-item-name text-ell">'.$name.'</span><span class="links-item-desc text-ell" title="'.$description.'">'.$description.'</span></div></a></div></div>':'<li class="project-item">'.$name.': '.$description.'</li>';
             }
         }
     }
@@ -189,7 +193,7 @@ function Postviews($archive) {
             $cookie = implode(',', $cookie);
             Typecho_Cookie::set('contents_views', $cookie);
         }
-    }
+    } 
     echo $exist == 0 ?  : $exist;
 }
 /**随机文章 
@@ -567,20 +571,45 @@ function theAllViews()
     $db = Typecho_Db::get();
     $prefix = $db->getPrefix();
     $row = $db->fetchAll('SELECT SUM(VIEWS) FROM `' . $prefix . 'contents`');
-    return number_format($row[0]['SUM(VIEWS)']);
+ // return number_format($row[0]['SUM(VIEWS)']);
+    $rows = $row[0]['SUM(VIEWS)'];
+      if($rows < 1000) {
+    return $rows;
+  } else {
+    return round($rows/1000, 1) . ' k';
+  }  
 }
+
+//总评论量
+function get_comments_count() {
+    $db = Typecho_Db::get();
+    $result = $db->fetchAll($db->select()->from('table.comments')->where('status = ?', 'approved'));
+    $count = count($result);
+    if ($count < 1000) {
+        return $count;
+    } else {
+        return round($count/1000, 1) . ' k';
+    }
+}
+
 //标签数量
 function tagCount() {
     $db = Typecho_Db::get();
     $count = $db->fetchRow($db->select('COUNT(*)')->from('table.metas')->where('type = ?', 'tag'));
     return $count['COUNT(*)'];
 }
+
 //总点赞数
 function agreeCount() {
     $db = Typecho_Db::get();
     $count = $db->fetchRow($db->select('SUM(agree) AS agreeCount')->from('table.contents'));
     $count1 = $db->fetchRow($db->select('SUM(likes) AS agreeCount')->from('table.comments'));  
-    return $count['agreeCount']+$count1['agreeCount'];
+    $allagreecount = $count['agreeCount']+$count1['agreeCount'];
+    if($allagreecount < 1000) {
+    return $allagreecount;
+  } else {
+    return round($allagreecount/1000, 1) . ' k';
+  }  
 }
 
 //各分类的文章数
@@ -596,13 +625,14 @@ $shul=$pom[$x]['count']+$shul;
 $shu=$db->fetchAll($db->select('table.metas.count')->from ('table.metas')->where ('mid = ?', $id))[0]['count']+$shul;
 echo $shu;
 }
+
 //输出作者文章总数、评论总数、上传附件总数可以指定
 function userstat($id,$type) {
 	$db = Typecho_Db::get();
 	if ($type == 'comment') {
 		$commentnum=$db->fetchRow($db->select(array('COUNT(authorId)'=>'allcommentnum'))->from ('table.comments')->where ('table.comments.authorId=?',$id)->where('table.comments.type=? AND status=?', 'comment', 'approved'));
-		$commentnum = $commentnum['allcommentnum']-100;
-		return $commentnum-100;
+		$commentnum = $commentnum['allcommentnum'];
+		return $commentnum;
 	} elseif ($type == 'attachment') {
 		$attachmentnum=$db->fetchRow($db->select(array('COUNT(authorId)'=>'allattachmentnum'))->from ('table.contents')->where ('table.contents.authorId=?',$id)->where('table.contents.type=? AND status=?', 'attachment', 'publish'));
 		$attachmentnum = $attachmentnum['allattachmentnum'];
@@ -613,6 +643,7 @@ function userstat($id,$type) {
 		return $postnum;
 	}
 }
+
 /* 获取最后更新时间 */
 function get_last_update()
 {
@@ -628,6 +659,7 @@ function get_last_update()
         echo Typecho_I18n::dateWord($update['modified'], $now);
     }
 }
+
 //统计多少天内发布的文章数量
 function getNumPosts($days){
     $db = Typecho_Db::get();
@@ -641,6 +673,7 @@ function getNumPosts($days){
     $total_posts = count($result);
     return $total_posts;
 }
+
 //加载时间
 function timer_start() {
     global $timestart;
@@ -692,6 +725,7 @@ function timer_stop( $display = 0, $precision = 3 ) {
         }
     }
     }
+
 //评论链接新窗口打开	
 function CommentAuthor($obj, $autoLink = NULL, $noFollow = NULL) {    //后两个参数是原生函数自带的，为了保持原生属性，我并没有删除，原版保留
     $options = Helper::options();
@@ -702,7 +736,8 @@ function CommentAuthor($obj, $autoLink = NULL, $noFollow = NULL) {    //后两�
     } else {
         echo $obj->author;
     }
-}		
+}	
+
 //在线人数
 function online_users() {
     $filename='./online.txt'; //数据文件
@@ -743,6 +778,7 @@ function online_users() {
     } 
     echo "$total_online"; 
 }
+
 //一言
 function GetHitokoto(){
     $url = 'https://v1.hitokoto.cn/?encode=json';
@@ -763,6 +799,7 @@ function GetHitokoto(){
     $Emu_content = '<p><span class="left" style="color:#f2f2f2;padding-left:.2rem;">'.$array_data['hitokoto'].'</span></p></br><p><span class="right" style="color:#2bbc8a;padding-right:.2rem;"> From . '.$array_data['from'].'</span></p>';
     return $Emu_content;
 }
+
 /*
  * 全站字数
  */
@@ -827,6 +864,7 @@ function allwords() {
     elseif ($chars>1000000){
     echo '全站共 '.$chars.' 字，咳咳，还没想好写啥~';}
 }
+
 /** 获取评论者物理地址 */
 function convertip($ip){  
   $ip1num = 0; 
@@ -957,6 +995,7 @@ function convertip($ip){
   $ipaddr = iconv('gbk', 'utf-8//IGNORE', $ipaddr); 
   return $ipaddr;  
 }
+
 // 获取访客当前ip
 function getIP ()
 {
@@ -972,6 +1011,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 }
 return $ip;
 }
+
 //文章阅读时间统计
 function art_time ($cid){
     $db=Typecho_Db::get ();
@@ -980,6 +1020,7 @@ function art_time ($cid){
     $text_word = mb_strlen($text,'utf-8');
     echo ceil($text_word / 180);
 }
+  
 //访客历史评论
 class Widget_Comments_RecentPlus extends Widget_Abstract_Comments
 {
@@ -1009,6 +1050,7 @@ class Widget_Comments_RecentPlus extends Widget_Abstract_Comments
         $this->db->fetchAll($select, array($this, 'push'));
     }
 }
+
 // 评论点赞
 /* 获取评论点赞数量 */
 function commentLikesNum($coid, &$record = NULL)
@@ -1172,6 +1214,4 @@ function commentApprove($widget, $email = NULL)
     } 
     return $result;
 }
-
-
 ?>

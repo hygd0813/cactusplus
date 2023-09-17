@@ -7,7 +7,7 @@
  *邮箱：hygd0813@qq.com
  * @package Cactusplus Theme
  * @author 荒野孤灯
- * @version 1.6.6
+ * @version 1.6.7
  * @link https://www.80srz.com
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -32,6 +32,12 @@ $this->need('header.php');
                      <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                      <li><b><a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a></b></li>
                      <?php endwhile;?>
+                        <li>
+                            <b><a href="https://foreverblog.cn/go.html" rel="nofollow">虫洞</a></b>
+                        </li>
+                        <li>
+                            <b><a href="https://www.travellings.cn/go.html" rel="nofollow">开往</a></b>
+                        </li>                        
                  </ul>
              </div>
         </header>		
@@ -43,7 +49,7 @@ $this->need('header.php');
                 </div>
     <section class="">
     <?php if($this->user->hasLogin()): ?>
-        <script type="text/javascript"> var now=(new Date()).getHours(); if(now>0&&now<=6){ document.write("夜猫子！"); }else if(now>6&&now<=11){ document.write("上午好！"); }else if(now>11&&now<=14){ document.write("中午好！"); }else if(now>14&&now<=18){ document.write("下午好！"); }else{ document.write("晚上好！"); } </script> <span style="color:orange">「</span><a href="<?php $this->options ->siteUrl(); ?>visitor.html" target="_blank" style="background: none;"><?php echo $this->user->screenName(); ?></a><span style="color:orange">」</span> 站长大人！
+        <script type="text/javascript"> var now=(new Date()).getHours(); if(now>0&&now<=5){ document.write("夜猫子！"); }else if(now>5&&now<=11){ document.write("上午好！"); }else if(now>11&&now<=14){ document.write("中午好！"); }else if(now>14&&now<=18){ document.write("下午好！"); }else{ document.write("晚上好！"); } </script> <span style="color:orange">「</span><a href="<?php $this->options ->siteUrl(); ?>visitor.html" target="_blank" style="background: none;"><?php echo $this->user->screenName(); ?></a><span style="color:orange">」</span> 站长大人！
     <?php else : ?>
         <?php if($this->remember('author',true)): ?>
             <script type="text/javascript"> var now=(new Date()).getHours(); if(now>0&&now<=6){ document.write("夜猫子！"); }else if(now>6&&now<=11){ document.write("上午好！"); }else if(now>11&&now<=14){ document.write("中午好！"); }else if(now>14&&now<=18){ document.write("下午好！"); }else{ document.write("晚上好！"); } </script> <span style="color:orange">「</span><a href="<?php $this->options ->siteUrl(); ?>visitor.html" target="_blank" style="background: none;"><?php echo $this->remember('author',true); ?></a><span style="color:orange">」</span> 老朋友！
@@ -57,19 +63,18 @@ $this->need('header.php');
                         <span>
                             <i class="fa fa-eye"></i>&nbsp;<span style="margin-right:8px;"><span><?php echo theAllViews();?></span></span>
 							<i class="fa fa-thumbs-o-up"></i>&nbsp;<span style="margin-right:8px;"><span><?php echo agreeCount();?></span></span>
-							<i class="fa fa-comments-o"></i>&nbsp;<span style="margin-right:8px;"><span><?php $stat->publishedCommentsNum();?></span></span>
+							<i class="fa fa-comments-o"></i>&nbsp;<span style="margin-right:8px;"><span><!--<?php $stat->publishedCommentsNum();?>--><?php echo get_comments_count();?></span></span>
                       </span>
                     </p>
                     <ul id="sociallinks"style="style-type:none;">|&nbsp;&nbsp;<span class="qrcodeimg">Find me on &nbsp;</span>
 			             <li>
 						     <?php if($this->options->github): ?><a class="icon" href="<?php $this->options->github();?>" target="_blank" title="github" rel="nofollow"><i class="fa fa-github" style="margin-right:5px;"></i></a>&nbsp;<?php endif; ?>
 							 <?php if($this->options->weibo): ?> <a class="icon" href="<?php $this->options->weibo();?>" target="_blank" title="weibo" rel="nofollow"><i class="fa fa-weibo" style="margin-right:5px;"></i></a>&nbsp;<?php endif; ?>
-							 <?php if($this->options->douban): ?> <a class="icon" href="<?php $this->options->douban();?>" target="_blank" title="douban" rel="nofollow" style="margin-right:5px;"> 豆 </a>&nbsp;<?php endif; ?>
 							 <?php if($this->options->email): ?> <a class="icon" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=<?php $this->options->email();?>" target="_blank" title="email" rel="nofollow"><i class="fa fa-envelope"></i></a> &nbsp;<?php endif; ?>
 							 |&nbsp;<a id="search" class="search icon" href="javascript:;" title="站内搜索"> &nbsp;<span class="qrcodeimg">Search &nbsp;</span><i class="fa fa-search"></i></a>
                         </li>						
 					</ul>                           
-					<p class="prompt ad-text output new-output">公告：主题更新至1.6.5版(2023/2/23)</p>	
+					<p class="prompt ad-text output new-output">公告：本站主题更新至1.6.7版(2023/9/16)</p>	
               
             </section>
           
@@ -136,11 +141,14 @@ $this->need('header.php');
                         <a href="<?php if($this->options->Projectsurl): ?><?php $this->options->Projectsurl();?><?php else : ?>#<?php endif; ?>"  target="_blank">便签</a>
                     </span>
                     <ul class="project-list">
-                       <li class="project-item"><a href="https://www.runoob.com/" target="_blank" title="学的不仅是技术，更是梦想！" rel="external nofollow noopener noreferrer">菜鸟教程</a></li>
                       <?php Projects(); ?>
                     </ul>
                 </section>				
             </div>
         </section>				
     </div>	
+      
+<!--首页蒙版公告 -->	
+<?php if ($this->options->indexmbadskaiguan == '1'):?><?php $this->options->indexmbads();?><?php endif; ?>    
+    
  <?php $this->need('footer.php'); ?>

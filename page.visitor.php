@@ -32,6 +32,12 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                         <li><b><a href="<?php $categorys->permalink(); ?>" title="<?php $categorys->name(); ?>"><?php $categorys->name(); ?></a></b></li>
                         <?php endwhile;?>
+                        <li>
+                            <b><a href="https://foreverblog.cn/go.html" rel="nofollow">虫洞</a></b>
+                        </li>
+                        <li>
+                            <b><a href="https://www.travellings.cn/go.html" rel="nofollow">开往</a></b>
+                        </li>                           
                     </ul>
                 </div>
             </header>		

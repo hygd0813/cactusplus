@@ -42,7 +42,7 @@
             'tag'       =>  _t('标签 %s 下的文章'),
             'author'    =>  _t('%s 发布的文章')
         ), '', ' - '); ?><?php if($this->_currentPage>1) echo ' 第 '.$this->_currentPage.' 页 - '; ?><?php $this->options->title(); ?></title>
-        <?php if($this->options->favicon): ?><link rel="shortcut icon" href="<?php $this->options->favicon();?>"><?php endif; ?>
+        <link rel="shortcut icon" href="<?php if($this->options->favicon): ?><?php $this->options->favicon();?><?php else : ?><?php cjUrl('images/favicon.ico'); ?><?php endif; ?>" type="image/x-icon">
         <?php if($this->options->appleicon): ?><link rel="apple-touch-icon" sizes="180x180" href="<?php $this->options->appleicon();?>"><?php endif; ?>
         <link rel="manifest" href="<?php cjUrl('manifest.json'); ?>">
 	    <link rel="stylesheet" href="<?php cjUrl('css/bootstrap-grid.min.css'); ?>">

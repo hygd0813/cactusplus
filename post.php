@@ -20,22 +20,13 @@ $this->need('header.php');
          <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
          <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
          <span id="menu">
-         <span id="nav">
-             <ul>
-				 <li><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
-                 <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
-                 <li><b><a href="<?php $categorys->permalink(); ?>" title="<?php $categorys->name(); ?>"><?php $categorys->name(); ?></a></b></li>
-                 <?php endwhile;?><br/><br/>
-                 <?php $this->widget('Widget_Contents_Page_List')->parse('<li><b><a href="{permalink}">{title}</a></b></li>'); ?>
-             </ul>
-         </span><br/>
          <span id="actions">
              <ul>
 				 <li><a id="search" class="search-form-input icon"href="javascript:;" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-search" aria-hidden="true" onmouseover='$("#i-search").toggle();' onmouseout='$("#i-search").toggle();'></i></a></li>
                  <li><?php $this->theNext('%s', '', array('title' => '<i class="fa fa-chevron-left" aria-hidden="true" onmouseover=\'$("#i-prev").toggle();\' onmouseout=\'$("#i-prev").toggle();\'></i>', 'tagClass' => 'icon')); ?></li>
                  <li> <?php $this->thePrev('%s', '', array('title' => '<i class="fa fa-chevron-right" aria-hidden="true" onmouseover=\'$("#i-next").toggle();\' onmouseout=\'$("#i-next").toggle();\'></i>', 'tagClass' => 'icon')); ?></li>			 
                  <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
-                 <li><a class="icon" href="<?php $this->options->siteUrl();?>random.html" target="_blank"><i class="fa fa-random" aria-hidden="true" onmouseover='$("#i-random").toggle();'' onmouseout='$("#i-random").toggle();' ></i></a></li>					 
+                 <li><a class="icon" href="<?php $this->options->siteUrl();?>random.html" target="_blank"><i class="fa fa-random" aria-hidden="true" onmouseover='$("#i-random").toggle();' onmouseout='$("#i-random").toggle();' ></i></a></li>
                  <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
              </ul>
 				      <span id="i-search" class="info" style="display:none;">Search</span>
@@ -63,10 +54,42 @@ $this->need('header.php');
      </div>
 <!--内容页 -->	 
      <div class="content index width mx-auto px3 my3">
+                 
+               <header id="header">
+                <a href="<?php $this->options->siteUrl();?>">
+                    <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
+                </a>
+				<div id="title">
+                        <h1 style="color:#2bbc8a;margin:1rem;font-size:36px;line-height:42px;"><?php $this->options->title(); ?></h1>
+                    </div>
+                <div id="nav">
+                    <ul>
+                        <li class="icon">
+                            <a href="#">
+                                <i class="fa fa-bars fa-2x"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <b><a href="<?php $this->options->siteUrl();?>">首页</a></b>
+                        </li>
+                        <?php $this->widget('Widget_Contents_Page_List')->parse('<li><b><a href="{permalink}">{title}</a></b></li>'); ?>
+                        <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
+                        <li><b><a href="<?php $categorys->permalink(); ?>" title="<?php $categorys->name(); ?>"><?php $categorys->name(); ?></a></b></li>
+                        <?php endwhile;?>
+                        <li>
+                            <b><a href="https://foreverblog.cn/go.html" rel="nofollow">虫洞</a></b>
+                        </li>
+                        <li>
+                            <b><a href="https://www.travellings.cn/go.html" rel="nofollow">开往</a></b>
+                        </li>                                                
+                    </ul>
+                </div>
+            </header>	                  
+         
          <section id="wrapper" class="home">
              <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-                 <header style="margin-bottom:2rem;">
-                     <h1 class="posttitle" itemprop="name headline"><a href="<?php $this->permalink(); ?>"><?php $this->title() ?></a></h1>
+                 <header style="margin-bottom:1rem;border-bottom:1px dotted #fff;">
+                      <h2 class="posttitle" itemprop="name headline" style="margin-top:3rem;margin-bottom:1rem;text-align: center;"><a href="<?php $this->permalink(); ?>"><?php $this->title() ?></a></h2>
 					 <div class="edit">
                          <?php if($this->user->hasLogin()):?>
 							 <a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>" target="_blank" style="width: 48px;height: 24px;float: right;border:1px dotted #ccc;border-radius: 5px;background-color: rgba(65,85,93,0.2);font-size: 13px;text-align: center;line-height: 22px;">编辑</a>
