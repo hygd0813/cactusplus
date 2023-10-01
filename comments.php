@@ -132,8 +132,6 @@ function secret() {
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
 	</div>
-<!--文章列表页、页面ads -->	 	 
-<?php if($this->options->listpageads): ?> <?php $this->options->listpageads();?> <?php endif; ?>  
 	<?php $comments->pageNav('&#171', '&#187', '5', '…'); ?>	
 </div>
 	<script type="text/javascript">

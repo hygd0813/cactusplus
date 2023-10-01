@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-define('INITIAL_VERSION_NUMBER', '1.6.7');
+define('INITIAL_VERSION_NUMBER', '1.6.8');
 function themeConfig($form) {
     $logoimg = new Typecho_Widget_Helper_Form_Element_Text('logoimg', NULL, NULL, _t('页头logo地址'), _t('一般为https://www.80srz.com/image.png,支持 https:// 或 //,留空则使用默认图片'));
     $form->addInput($logoimg->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
@@ -46,18 +46,27 @@ function themeConfig($form) {
  //   页底统计跳转 
     $bdtongji = new Typecho_Widget_Helper_Form_Element_Text('bdtongji', NULL, NULL, _t('网站统计跳转链接'), _t('页底 网站统计 跳转链接，到百度统计、cnzz申请。'));
     $form->addInput($bdtongji);	
- //  header 统计、广告代码	
-    $headertjcode = new Typecho_Widget_Helper_Form_Element_Textarea('headertjcode', NULL, NULL, _t('header 统计、广告代码'), _t('header 统计、广告代码。'));
+ //  header 搜索引擎主动推送代码	
+    $headertjcode = new Typecho_Widget_Helper_Form_Element_Textarea('headertjcode', NULL, NULL, _t('header 搜索引擎主动推送代码'), _t('header 搜索引擎主动推送代码。'));
     $form->addInput($headertjcode);
+ //  footer 第三方统计代码	
+    $footertjcode = new Typecho_Widget_Helper_Form_Element_Textarea('footertjcode', NULL, NULL, _t('footer 第三方统计代码'), _t('footer 第三方统计代码。'));
+    $form->addInput($footertjcode);    
  //  页脚全局ads	
-    $footerimgad = new Typecho_Widget_Helper_Form_Element_Textarea('footerimgad', NULL, NULL, _t('页底图片广告代码'), _t('页底页底图片广告代码。'));
+    $footerimgad = new Typecho_Widget_Helper_Form_Element_Textarea('footerimgad', NULL, NULL, _t('页底图片广告代码'), _t('页底图片广告代码。'));
     $form->addInput($footerimgad);
   //  文章列表页、页面ads
 	$listpageads = new Typecho_Widget_Helper_Form_Element_Textarea('listpageads', NULL, NULL, _t('文章列表页、页面ads'), _t('文章列表页、页面ads,图片建议800*200px，内容随意！'));
     $form->addInput($listpageads); 
  //  内容页下方ads   
 	$postdownads = new Typecho_Widget_Helper_Form_Element_Textarea('postdownads', NULL, NULL, _t('内容页下方ads'), _t('内容页下方ads,图片建议800*200px，内容随意！'));
-    $form->addInput($postdownads);			  
+    $form->addInput($postdownads);	
+ //  内容页推荐列表左侧ads   
+	$postlistleftads = new Typecho_Widget_Helper_Form_Element_Textarea('postlistleftads', NULL, NULL, _t('内容页推荐列表左侧ads '), _t('内容页推荐列表左侧ads ,图片建议400*200px，内容随意！'));
+    $form->addInput($postlistleftads);	  
+ //  内容页推荐列表右侧ads   
+	$postlistrightads = new Typecho_Widget_Helper_Form_Element_Textarea('postlistrightads', NULL, NULL, _t('内容页推荐列表右侧ads '), _t('内容页推荐列表右侧ads ,图片建议400*200px，内容随意！'));
+    $form->addInput($postlistrightads);	    
  //  内容页左侧ads
     $postleftads = new Typecho_Widget_Helper_Form_Element_Textarea('postleftads', NULL, NULL, _t('内容页左侧ads'), _t('内容页左侧ads,图片建议600*180px，内容随意！'));
     $form->addInput($postleftads);
@@ -82,7 +91,7 @@ function themeConfig($form) {
  //  pjax开关
     $themepjax = new Typecho_Widget_Helper_Form_Element_Select('themepjax',array('0'=>'不开启','1'=>'开启'),'0','pjax功能','是否开启pjax功能,加快页面加载速度');
     $form->addInput($themepjax);
- //  鼠标右键美化
+    //  鼠标右键美化
     $thememouseright = new Typecho_Widget_Helper_Form_Element_Select('thememouseright',array('0'=>'不开启','1'=>'开启'),'0','鼠标右键美化功能','是否鼠标右键美化功能');
     $form->addInput($thememouseright);
 }

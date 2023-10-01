@@ -3329,3 +3329,4 @@
         echo '<p><b>示例</b>：<a href="http'. (isset($_SERVER['HTTPS']) ? 's://' : '://').$_SERVER['SERVER_NAME']. $_SERVER['REQUEST_URI'].'?text=https://blog.alttt.com/&size=100" target="_blank">http'. (isset($_SERVER['HTTPS']) ? 's://' : '://').$_SERVER['SERVER_NAME']. $_SERVER['REQUEST_URI'].'?text=https://blog.alttt.com/&size=100</a></p>';
         echo '<p><b>html中调用</b>：&lt;img src="http'. (isset($_SERVER['HTTPS']) ? 's://' : '://').$_SERVER['SERVER_NAME']. $_SERVER['REQUEST_URI'].'?text=https://blog.alttt.com/&size=100"&gt;</p>';
     }
+?>

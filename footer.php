@@ -25,7 +25,8 @@
             </div>
             <p style="text-align:center;"></p>            <p style="text-align:center;"></br></p>
     <div  style="text-align:center;">
-	     <?php if($this->options->footerimgad): ?> <?php $this->options->footerimgad();?> <?php endif; ?>
+ 	     <?php if($this->options->footerimgad): ?> <?php $this->options->footerimgad();?> <?php endif; ?>       
+	     <?php if($this->options->footertjcode): ?> <?php $this->options->footertjcode();?> <?php endif; ?>
 	</div>
 	<div  style="text-align:center;">
          加载:<?php echo timer_stop();?>&nbsp;｜&nbsp;更新:<?php get_last_update() ?>&nbsp;｜&nbsp;在线:<?php echo online_users() ?>人

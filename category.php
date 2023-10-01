@@ -9,33 +9,24 @@ $this->need('header.php');
                     <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
                 </a>
 				<div id="title">
-                        <h1 style="color:#2bbc8a;margin:1rem;font-size:36px;line-height:42px;"><?php $this->category() ?></h1>
-                    </div>
+                    <h1 style="color:#2bbc8a;margin:1rem;font-size:36px;line-height:42px;"><?php $this->category() ?></h1>
+                </div>
                 <div id="nav">
-                    <ul>
-                        <li class="icon">
-                            <a href="#">
-                                <i class="fa fa-bars fa-2x"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <b><a href="<?php $this->options->siteUrl();?>">首页</a></b>
-                        </li>
-                        <?php $this->widget('Widget_Contents_Page_List')->parse('<li><b><a href="{permalink}">{title}</a></b></li>'); ?>
-                        <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
-                        <li><b><a href="<?php $categorys->permalink(); ?>" title="<?php $categorys->name(); ?>"><?php $categorys->name(); ?></a></b></li>
-                        <?php endwhile;?>
-                        <li>
-                            <b><a href="https://foreverblog.cn/go.html" rel="nofollow">虫洞</a></b>
-                        </li>
-                        <li>
-                            <b><a href="https://www.travellings.cn/go.html" rel="nofollow">开往</a></b>
-                        </li>                           
-                    </ul>
+                 <ul style ="padding-inline-start:0px;">
+                    <li class="icon"><a href="#"><i class="fa fa-bars fa-2x"></i></a></li>
+                    <li style ="padding:0px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
+                    <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>music/" target="_blank" title="网易云音乐">音乐</a></b></li>
+                    <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
+                    <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a></b></li>
+                    <?php endwhile;?>                    				
+                    <?php $this->widget('Widget_Contents_Page_List')->parse('<li  style ="padding:0 0 0 5px;margin:0px;"><b><a href="{permalink}">{title}</a></b></li>'); ?>
+                    <li class="tooltip" data-msg="随机访问一位“十年之约”博友！" style ="padding:0 0 0 5px;margin:0px;"><b><a href="https://foreverblog.cn/go.html" rel="nofollow" target="_blank">虫洞</a></b></li>
+                    <li class="tooltip" data-msg="随机访问一位“开往”博友！" style ="padding:0 0 0 5px;margin:0px;"><b><a href="https://www.travellings.cn/go.html" rel="nofollow" target="_blank">开往</a></b></li>                       
+                 </ul>
                 </div>
             </header>			
             <div class="content" style="border:1px dotted #ccc;border-radius: 8px;background-color: rgba(65,85,93,0.1);margin:1.5rem 0 1.5rem 0;padding:1rem;">	
-            栏目“<?php echo $this->getArchiveTitle(); ?>”描述:<br/>
+            分类“<?php echo $this->getArchiveTitle(); ?>”描述:<br/>
             <?php echo $this->getDescription(); ?>
             </div>	
             <div id="theme-tagcloud" class="tagcloud-wrap">
@@ -46,9 +37,9 @@ $this->need('header.php');
 			<?php endwhile; ?>         
             </div>
             <section id="wrapper" class="home">
-                <h2>栏目“<?php echo $this->getArchiveTitle(); ?>”下文章：</h2>
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?><?php $this->options->postdownads();?><?php endif; ?>               
+                <h2>分类“<?php echo $this->getArchiveTitle(); ?>”下文章：</h2>
+<!--文章列表ads -->	 	 
+<?php if($this->options->listpageads): ?><?php $this->options->listpageads();?><?php endif; ?>                
                 <div class="archive">
                     <ul class="post-list" id="post-list">
 				 <?php while($this->next()): ?>
@@ -67,8 +58,6 @@ $this->need('header.php');
 						</div>						
 					 <?php endwhile; ?>					 
                     </ul>
-<!--文章列表页、页面ads -->	 	 
-<?php if($this->options->listpageads): ?><?php $this->options->listpageads();?><?php endif; ?>	 
                 </div>
                 <?php $this->pageNav('&#171', '&#187', '5', '…'); ?>			
             </section>
