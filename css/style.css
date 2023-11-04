@@ -2743,29 +2743,36 @@ screen and (max-height:479px) {
 
 /* tooltip提示框 */
 .tooltip {
-    position:relative;
+	position: relative;
 }
+
 .tooltip:hover::before {
-    white-space:nowrap;
-    line-height:20px;
-    content:attr(data-msg);
-    position:absolute;
-    padding:5px 10px;
-    display:block;
-    color:#ffffff;
-    background:#656565;
-    border-radius:6px;
-    font-size:14px;
-    top:-37px;
-    left:50%;
-    transform:translateX(-50%);
+	white-space: nowrap;
+	line-height: 20px;
+	content: attr(data-msg);
+	position: absolute;
+	padding: 5px 10px;
+	display: block;
+	color: #ffffff;
+	background: #656565;
+	border-radius: 6px;
+	font-size: 14px;
+	top: -37px;
+	left: 50%;
+	transform: translateX(-50%);
 }
+
 .tooltip:hover::after {
-    content:"";
-    position:absolute;
-    top:-8px;
-    left:50%;
-    transform:translateX(-50%);
-    border:6px solid transparent;
-    border-top:6px solid #656565;
+	content: "";
+	position: absolute;
+	top: -8px;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 6px solid transparent;
+	border-top: 6px solid #656565;
+}
+
+//关键词内链
+.hygdkeywords {
+	margin: 0 10px;
 }
