@@ -1,31 +1,23 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <div class="mx-auto px3 my5">
  <footer id="footer" style="display:block;">
+ 	     <?php if($this->options->footerimgad): ?> <div  style="text-align:center;margin-top: .5rem;margin-bottom: 2rem;"><?php $this->options->footerimgad();?></div> <?php endif; ?>       
             <div class="footer-left">
-                 © 2021-<?php echo date('Y'); ?> <a href="#" target="_blank"> ♡ </a> <a href="<?php $this->options->siteUrl();?>" target="_blank"><?php $this->options->title();?></a> | <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->beian();?></a><?php endif; ?> <?php if($this->options->bdtongji): ?> | <a href="<?php $this->options->bdtongji();?>" rel="nofollow" target="_blank">统计</a><?php endif; ?>
+                 © 2021-<?php echo date('Y'); ?> ♡ <a href="<?php $this->options->siteUrl();?>" target="_blank"><?php $this->options->title();?></a> | <a href="https://wiki.80srz.com" target="_blank">八零后百科网</a> | <a href="https://www.80srz.com/link/" target="_blank">站长导航</a> <?php if($this->options->bdtongji): ?> | <a href="<?php $this->options->bdtongji();?>" rel="nofollow" target="_blank">统计</a><?php endif; ?>
             </div>
             <div class="footer-right">
                 <nav>
                     <ul>
-                        <!-- <li>
-                            <a href="<?php $this->options->siteUrl();?>">首页</a>|
-                        </li> -->                     
+                        <!-- <li><a href="<?php $this->options->siteUrl();?>">首页</a>|</li> -->                     
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a>|</li>'); ?>
-                        <li>
-                            <a href="<?php $this->options->siteUrl();?>photos.html" target="_blank">相册</a>|
-                        </li>                     
-						<li>
-                            <a href="<?php $this->options->siteUrl();?>feed/">订阅</a>|
-                        </li>			
-                        <li>
-                            <a href="<?php $this->options->siteUrl();?>sitemap.xml">地图</a>
-                        </li>
+                        <li><a href="<?php $this->options->siteUrl();?>photos.html" target="_blank">相册</a>|</li>                     
+						<li><a href="<?php $this->options->siteUrl();?>feed/">订阅</a>|</li>			
+                        <li><a href="<?php $this->options->siteUrl();?>sitemap.xml">地图</a></li>
                     </ul>
                 </nav>
             </div>
-            <p style="text-align:center;"></p>            <p style="text-align:center;"></br></p>
-    <div  style="text-align:center;">
- 	     <?php if($this->options->footerimgad): ?> <?php $this->options->footerimgad();?> <?php endif; ?>       
+            <p style="text-align:center;margin:2rem 0;"></p>
+    <div  style="text-align:center;">    
 	     <?php if($this->options->footertjcode): ?> <?php $this->options->footertjcode();?> <?php endif; ?>
 	</div>
 	<div  style="text-align:center;">
@@ -42,7 +34,7 @@
     <div  style="text-align:center;">
 <!-- 站点运行时间 -->
 <?php if($this->options->zmki_time_no == '1'): ?> 		
-		稳定运行：<SPAN id=span_dt_dt style="color: #2F889A;"></SPAN> 
+		十年之约：<SPAN id=span_dt_dt style="color: #2F889A;"></SPAN> 
 		<script language=javascript>function show_date_time(){
 			window.setTimeout("show_date_time()", 1000);
 			BirthDay=new Date("<?php $this->options->zmki_time(); ?> ");
@@ -51,22 +43,39 @@
 			sectimeold=timeold/1000;
 			secondsold=Math.floor(sectimeold);
 			msPerDay=24*60*60*1000;
+			msPerYear=365*24*60*60*1000;			
+
+			e_yearsold=timeold/msPerYear;
+			yearsold=Math.floor(e_yearsold);	
+			
 			e_daysold=timeold/msPerDay;
-			daysold=Math.floor(e_daysold);
-			e_hrsold=(e_daysold-daysold)*24;
+			daysold=Math.floor(e_daysold-yearsold*365);
+			
+			daysolds=Math.floor(e_daysold);			
+			e_hrsold=(e_daysold-daysolds)*24;
 			hrsold=Math.floor(e_hrsold);
+			
 			e_minsold=(e_hrsold-hrsold)*60;
 			minsold=Math.floor((e_hrsold-hrsold)*60);
+			
 			seconds=Math.floor((e_minsold-minsold)*60);
-			span_dt_dt.innerHTML='<font style=color:#C40000>'+daysold+'</font> 天 <font style=color:#C40000>'+hrsold+'</font> 时 <font style=color:#C40000>'+minsold+'</font> 分 <font style=color:#C40000>'+seconds+'</font> 秒';
-			}show_date_time();</script> 
+			
+			span_dt_dt.innerHTML='<font style=color:#C40000>'+yearsold+'</font> 年 <font style=color:#C40000>'+daysold+'</font> 天 <font style=color:#C40000>'+hrsold+'</font> 时 <font style=color:#C40000>'+minsold+'</font> 分 <font style=color:#C40000>'+seconds+'</font> 秒';
+			}
+			show_date_time();
+			</script> 
 <?php endif; ?> 
 </div>
 <!--站点运行时间结束-->
+<!--站点备案开始--> 
+    <div  style="text-align:center;">
+         <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->beian();?></a><?php endif; ?>
+    </div>
+<!--站点备案结束--> 
 </footer>
 </div>					
 		<link rel="stylesheet" href="<?php cjUrl('lib/font-awesome/css/font-awesome.min.css'); ?>">
-		 <script src="<?php cjUrl('js/main.js'); ?>"></script>
+		<script src="<?php cjUrl('js/main.js'); ?>"></script>
         <?php if ($this->is('index')) : ?>
 		<script src="<?php cjUrl('lib/typed.js'); ?>"></script>
 		<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

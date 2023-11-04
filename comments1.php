@@ -77,7 +77,7 @@ function threadedComments($comments, $options) {
 			<div class="col col-80 text-right">
 			<!--<?php spam_protection_math();?>-->
 			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">发送</button>
-			<?php $security = $this->widget('Widget_Security'); ?>			
+			<?php $security = $this->widget('Widget_Security'); ?>	
 			</div>
 		</div>		
 		<div style="display:none;" class="vmark">
@@ -89,7 +89,7 @@ function threadedComments($comments, $options) {
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
-			共发布<span class="vnum" style="color:#2bbc8a;">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp; , &nbsp;引来&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观
+			共发布<span class="vnum" style="color:#2bbc8a;">  <?php $this->commentsNum('%d'); ?></span>  条微语&nbsp; ； &nbsp;引来&nbsp;<span class="vnum" style="color:#2bbc8a;"><?php Postviews($this); ?></span>&nbsp;&nbsp;次围观，<span class="vnum" style="color:#2bbc8a;"><?php echo wyagreeCount();?></span>&nbsp;&nbsp;次点赞
 		</div>                                                                   
 	</div>
 	<?php else: ?>
