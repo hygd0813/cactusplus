@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-define('INITIAL_VERSION_NUMBER', '1.6.8');
+define('INITIAL_VERSION_NUMBER', '1.6.9');
 function themeConfig($form) {
     $logoimg = new Typecho_Widget_Helper_Form_Element_Text('logoimg', NULL, NULL, _t('页头logo地址'), _t('一般为https://www.80srz.com/image.png,支持 https:// 或 //,留空则使用默认图片'));
     $form->addInput($logoimg->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
@@ -17,9 +17,7 @@ function themeConfig($form) {
 	$github = new Typecho_Widget_Helper_Form_Element_Text('github', NULL, NULL, _t('Github地址'), _t('一般为https://github.com/hygd0813 ,留空则不设置Github地址'));
     $form->addInput($github->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$weibo = new Typecho_Widget_Helper_Form_Element_Text('weibo', NULL, NULL, _t('微博地址'), _t('一般为http://www.weibo.com/xxx ,留空则不设置Weibo地址'));
-    $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));			
-	$Projectsurl = new Typecho_Widget_Helper_Form_Element_Text('Projectsurl', NULL, NULL, _t('首页Projects地址'), _t('一般为https://www.80srz.com ,留空则默认为#地址'));
-    $form->addInput($Projectsurl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));	
+    $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));				
 	$beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案号设置'), _t('直接填写备案号即可如：京ICP备888888号'));
     $form->addInput($beian->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
  // 是否开启网站运行时间
@@ -27,19 +25,24 @@ function themeConfig($form) {
     $form->addInput($zmki_time_no);
  // 网站运行时间
     $zmki_time = new Typecho_Widget_Helper_Form_Element_Text('zmki_time', NULL, '10/1/2022 20:13:14', _t('网站运行时间'), _t('默认: 10/1/2022 20:13:14  请按照前边的实例按格式填写创建时间，分别是月/日/年 时:分:秒 '));
-    $form->addInput($zmki_time);	
+    $form->addInput($zmki_time);
+//  静态资源CDN加速网址设置 	
     $cjcdnAddress = new Typecho_Widget_Helper_Form_Element_Text('cjcdnAddress', NULL, NULL, _t('CSS文件的链接地址替换'), _t('请输入你的CDN云存储地址，例如：https://cdn.jsdelivr.net/gh/hygd0813/cactusplus@main/，支持绝大部分有镜像功能的CDN服务<br><b>被替换的原地址为主题文件位置，即：https://www.80srz.com/usr/themes/cactus/</b>'));
     $form->addInput($cjcdnAddress);	
-    $commentszx = new Typecho_Widget_Helper_Form_Element_Text('commentszx', NULL, NULL, _t('走心评论'), _t('输入走心评论的coid'));
-    $form->addInput($commentszx);		
+//走心评论列表设置    
+    $commentszx = new Typecho_Widget_Helper_Form_Element_Text('commentszx', NULL, NULL, _t('走心评论'), _t('输入走心评论的coid')); 
+    $form->addInput($commentszx);
+//首页聚焦图设置    
+    $Focuss = new Typecho_Widget_Helper_Form_Element_Textarea('Focuss', NULL, NULL, _t('首页 Focus 链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接标题（必须）|链接地址（必须）|链接图片地址（必须）</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>荒野孤灯|https://www.80srz.com/|https://www.80srz.com/logo.png</strong>多个链接换行即可，至少三个，一行一个'));
+	$form->addInput($Focuss);  
+//首页项目示例     		
+	$Projectsurl = new Typecho_Widget_Helper_Form_Element_Text('Projectsurl', NULL, NULL, _t('首页Projects跳转地址'), _t('一般为https://www.80srz.com ,留空则默认为#地址'));
+    $form->addInput($Projectsurl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));       
     $Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 作品链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>荒野孤灯|https://www.80srz.com/|荒野中的一盏孤灯，照亮夜里依然前行的人们！</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>荒野孤灯|https://www.80srz.com/||</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Projects);
+//友情链接设置   
 	$Links = new Typecho_Widget_Helper_Form_Element_Textarea('Links', NULL, NULL, _t('友情链接设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述|头像地址</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>荒野孤灯|https://www.80srz.com/|荒野中的一盏孤灯，照亮夜里依然前行的人们！|fav.icon</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Links);
-    $indextopnum1 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum1', NULL, NULL, _t('首页置顶某一个特定文章1'), _t('仅用在首页，首页置顶某一个特定cid文章，填入<b style="color: red;">cid,mid</b>一篇文章及<b style="color: red;">对应分类mid</b> ！！！'));
-    $form->addInput($indextopnum1);      
-    $indextopnum2 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum2', NULL, NULL, _t('首页置顶某一个特定文章2'), _t('仅用在首页，首页置顶某一个特定cid文章，填入<b style="color: red;">cid,mid</b>一篇文章及<b style="color: red;">对应分类mid</b> ！！！'));
-    $form->addInput($indextopnum2);	
  //  首页不显示分类设置  
     $nolist = new Typecho_Widget_Helper_Form_Element_Text('nolist', NULL, NULL, _t('首页不显示某特定分类'), _t('仅用在首页，首页不显示某分类，填入<b style="color: red;">mid</b>数字，隐藏多个分类用半角逗号分开！！！'));
     $form->addInput($nolist); 
@@ -136,6 +139,29 @@ function cjUrl($path) {
         $options->themeUrl($path.$ver);
     }
 }
+/**首页聚焦图片轮播
+<?php Focuss(); ?>
+*/
+function Focuss($sorts = NULL) {
+    $options = Typecho_Widget::widget('Widget_Options');
+    $Focus = NULL;
+    if ($options->Focuss) {
+        $list = explode("\r\n", $options->Focuss);
+        foreach ($list as $val) {
+            list($name, $url, $imgurl, $sort) = explode("|", $val);
+            if ($sorts) {
+                $arr = explode("|", $sorts);
+                if ($sort && in_array($sort, $arr)) {
+                    $Focus .= $url ? '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="120px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>' : '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="120px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>';
+                }
+            } else {
+                    $Focus .= $url ? '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="120px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>' : '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="120px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>';
+            }
+        }
+    }
+    echo $Focus ? $Focus : '荒野中的一盏孤灯，照亮夜里依然前行的人们';
+}
+
 /**项目展示
 <?php Projects(); ?>
 */
@@ -582,10 +608,10 @@ function theAllViews()
     $row = $db->fetchAll('SELECT SUM(VIEWS) FROM `' . $prefix . 'contents`');
  // return number_format($row[0]['SUM(VIEWS)']);
     $rows = $row[0]['SUM(VIEWS)'];
-      if($rows < 1000) {
+      if($rows < 10000) {
     return $rows;
   } else {
-    return round($rows/1000, 1) . ' k';
+    return round($rows/10000, 1) . 'w';
   }  
 }
 
@@ -597,7 +623,7 @@ function get_comments_count() {
     if ($count < 1000) {
         return $count;
     } else {
-        return round($count/1000, 1) . ' k';
+        return round($count/1000, 1) . 'k';
     }
 }
 
@@ -614,6 +640,18 @@ function agreeCount() {
     $count = $db->fetchRow($db->select('SUM(agree) AS agreeCount')->from('table.contents'));
     $count1 = $db->fetchRow($db->select('SUM(likes) AS agreeCount')->from('table.comments'));  
     $allagreecount = $count['agreeCount']+$count1['agreeCount'];
+    if($allagreecount < 1000) {
+    return $allagreecount;
+  } else {
+    return round($allagreecount/1000, 1) . 'k';
+  }  
+}
+
+//微语总点赞数
+function wyagreeCount() {
+    $db = Typecho_Db::get();
+    $count2 = $db->fetchRow($db->select('SUM(likes) AS wyagreeCount')->from('table.comments'));  
+    $allagreecount = $count2['wyagreeCount'];
     if($allagreecount < 1000) {
     return $allagreecount;
   } else {
@@ -1223,4 +1261,5 @@ function commentApprove($widget, $email = NULL)
     } 
     return $result;
 }
+
 ?>

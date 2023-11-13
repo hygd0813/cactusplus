@@ -27,28 +27,18 @@ $this->need('header.php');
                  <li> <?php $this->thePrev('%s', '', array('title' => '<i class="fa fa-chevron-right" aria-hidden="true" onmouseover=\'$("#i-next").toggle();\' onmouseout=\'$("#i-next").toggle();\'></i>', 'tagClass' => 'icon')); ?></li>			 
                  <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
                  <li><a class="icon" href="<?php $this->options->siteUrl();?>random.html" target="_blank"><i class="fa fa-random" aria-hidden="true" onmouseover='$("#i-random").toggle();' onmouseout='$("#i-random").toggle();' ></i></a></li>
-                 <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
              </ul>
 				 <span id="i-search" class="info" style="display:none;">Search</span>
                  <span id="i-prev" class="info" style="display:none;">Previous post</span>
                  <span id="i-next" class="info" style="display:none;">Next post</span>					 
                  <span id="i-top" class="info" style="display:none;">Back to top</span>
-                 <span id="i-random" class="info" style="display:none;">Random post</span>				 
-                 <span id="i-share" class="info" style="display:none;">Share post</span>			 
+                 <span id="i-random" class="info" style="display:none;">Random post</span>				 			 
          </span><br/>
-         <div id="share" style="display: none;">
-             <ul style="list-style: none;">
-                 <li><a class="icon" href="http://v.t.sina.com.cn/share/share.php?u=<?php $this->permalink() ?>&text=<?php $this->title() ?>"><i class="fa fa-weibo" aria-hidden="true"></i></a></li>
-                 <li><a class="icon" href="mailto:?subject=<?php $this->title() ?>&body=Check out this article: <?php $this->permalink() ?>"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>						
-                 <li><a class="icon" href="http://www.facebook.com/sharer.php?u=<?php $this->permalink() ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                 <li><a class="icon" href="https://twitter.com/share?url=<?php $this->permalink() ?>&text=<?php $this->title() ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-             </ul>
-         </div>
+
          <div id="toc">
              <nav id="TableOfContents">
                  <ul class="tree"><?php if ($this->options->catalog == 'able'): ?><li><b>文章目录</b></li><?php getCatalog(); ?><?php else: ?><li><b>随机文章</b></li><?php theme_random_posts();?><?php endif; ?></ul>
              </nav>
-
          </div>
          </span>
      </div>
@@ -81,29 +71,45 @@ $this->need('header.php');
              <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
                  <header style="margin-bottom:1rem;border-bottom:1px dotted #fff;">
                       <h2 class="posttitle" itemprop="name headline" style="margin-top:3rem;margin-bottom:1rem;text-align: center;"><a href="<?php $this->permalink(); ?>"><?php $this->title() ?></a></h2>
-					 <div class="edit">
-                         <?php if($this->user->hasLogin()):?>
-							 <a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>" target="_blank" style="width: 48px;height: 24px;float: right;border:1px dotted #ccc;border-radius: 5px;background-color: rgba(65,85,93,0.2);font-size: 13px;text-align: center;line-height: 22px;">编辑</a>
-					     <?php else: ?>
-                             <span style="float:right;"><i class="fa fa-file-word-o"></i><small> <?php echo art_time($this->cid); ?> 分钟  </small></span>							  
-                         <?php endif;?>
+					 <div class="edit qrcodeimg share" style="float:right;">
+                             <a id="wx"class="icon tooltip" style="margin:0 5px;" data-msg="分享至微信"><i class="fa fa-wechat" aria-hidden="true" /></i><span>用微信扫描分享给好友</br><img src="<?php $this->options->themeUrl(); ?>qrcode.php?size=240&text=<?php $this->permalink(); ?>" width="160px" height="160px" alt="文章网址二维码"/></span></a>                     
+                             <a class="icon tooltip" style="margin:0 5px;" href="https://service.weibo.com/share/share.php?url=<?php $this->permalink() ?>&title=<?php $this->title() ?>&appkey=#_loginLayer_1698383598156" data-msg="分享至微博"><i class="fa fa-weibo" aria-hidden="true"></i></a>
+                             <a class="icon tooltip" style="margin:0 5px;" href="mailto:?subject=<?php $this->title() ?>&body=Check out this article: <?php $this->permalink() ?>" data-msg="分享至邮箱"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                             <a class="icon tooltip" style="margin:0 5px;" href="https://www.facebook.com/sharer.php?u=<?php $this->permalink() ?>" data-msg="分享至Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                             <a class="icon tooltip" style="margin:0 5px;" href="https://twitter.com/share?url=<?php $this->permalink() ?>&text=<?php $this->title() ?>" data-msg="分享至Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
+                             <style>.share a span {display: none;}.share a:hover span {display: block;position: absolute;background-color: #fff;border: 5px solid #666;width:180px;height:200px;text-align:center;}</style>
                      </div>	
                      <div class="meta">
                          <div class="postdate">
                              <i class="fa fa-clock-o" aria-hidden="true">&nbsp;&nbsp;</i><time datetime="<?php $this->date('Y.n.j'); ?>" itemprop="datePublished"><?php $this->date('Y.n.j'); ?></time>
                          </div>
                          <div class="article-tag">
-                             <i class="fa fa-eye" aria-hidden="true">&nbsp;&nbsp;</i><span><span><?php Postviews($this); ?></span></span>
+                             <i class="fa fa-eye" aria-hidden="true">&nbsp;&nbsp;</i><span><?php Postviews($this); ?></span>
                          </div>
                          <div class="article-tag">
                              <i class="fa fa-tag" aria-hidden="true" >&nbsp;&nbsp;</i> <?php $this->tags(', ', true, 'none'); ?>
-                         </div>													
+                         </div>	
+                         <div class="article-tag">
+                          <?php if($this->user->hasLogin()):?>
+							 <a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>" target="_blank">编辑</a>
+					      <?php else: ?>
+                             <i class="fa fa-file-word-o"></i><span> <?php echo art_time($this->cid); ?> 分钟</span>					  
+                          <?php endif;?>                         
+                         </div>	                        
                          <div class="article-tag-box"></div>
                      </div>
-                 </header>                
-                 <div class="content " itemprop="articleBody" id="post-content" style="padding:.25rem .5rem .5rem 1rem;">																			
-                         <?php parseContent($this); ?>	
-                 <div style="text-align:center;margin-top:2rem;"><span style="color:#2bbc8a;border-bottom:3px double #f1f3fa;">~&nbsp;&nbsp;~&nbsp;&nbsp;The&nbsp;&nbsp;&nbsp;End&nbsp;&nbsp;~&nbsp;&nbsp;~</span></div><br/>
+                 </header> 
+                 <div class="content " itemprop="articleBody" id="post-content" style="padding:.25rem .5rem .5rem 1rem;">
+                     <div class="main_element Links-content" rel="nofollow"> 
+                         <p style="font-size:12px;text-align:center;">
+                            本文最后由<a href="<?php $this->author->permalink(); ?>" target="_blank" title="<?php $this->author('intro'); ?>"><?php $this->author() ?></a>更新于<?php echo date('Y 年 n 月 j 日' , $this->modified);?>，已超过<?php echo floor((time()-($this->modified))/86400);?>天没有更新。如果文章内容或图片资源失效，请留言反馈，将会及时处理，谢谢！
+                         </p>
+                     </div>																			
+                     <?php parseContent($this); ?>	                     
+				 </div>	  
+
+                 <div style="text-align:center;margin-top:2rem;"><span style="color:#2bbc8a;border-bottom:3px double #f1f3fa;">~&nbsp;&nbsp;~&nbsp;&nbsp;The&nbsp;&nbsp;&nbsp;End&nbsp;&nbsp;~&nbsp;&nbsp;~</span></div>
+                 
 <!-- 赞赏点赞 -->
                      <section class="j-fabulous"><p><br/></p>
                      <div class="button has-admire">
@@ -132,7 +138,7 @@ $this->need('header.php');
                             </section>
                         </section>						 
                          <script>/* 初始化赏按钮 */$('#j-admire').on('click', function () {$('.j-admire-modal').addClass('active');$('body').css('overflow', 'hidden');});$('.j-admire-modal .close').on('click', function () {$('.j-admire-modal').removeClass('active');$('body').css('overflow', '');});</script>
-				 </div>	
+
 <!-- 文章信息 -->
                  <div class="content " style="border-left:8px solid #666;margin:.875rem 0 1.5rem 0;padding:.5rem;font-size:12px;min-height:120px;vertical-align:middle;">
 					 <span style="float:right;background-color:#999;height:100px;" class="qrcodeimg tooltip" data-msg="扫描二维码，手机浏览！"><img src="<?php $this->options->themeUrl(); ?>qrcode.php?size=240&text=<?php $this->permalink(); ?>" width="100px" height="100px" alt="文章二维码"/></span>           
@@ -187,3 +193,4 @@ $this->need('header.php');
             </section>		
         </div>
  <?php $this->need('footer.php'); ?>
+    

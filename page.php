@@ -28,15 +28,15 @@ $this->need('header.php');
         <div class="content index width mx-auto px3 my3">
             <section id="wrapper" class="home">
                 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-                   
-                    <div class="content" itemprop="articleBody">
+                  <script src="//cdn.staticfile.org/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script> <script>setTimeout(function() {$("img").lazyload({effect: "fadeIn", threshold: 100, failurelimit: 2});},100);</script>	                  
+                    <div id="post-content" class="content" itemprop="articleBody">
                         <?php parseContent($this); ?>
                 <?php if ($this->attachment->isImage): ?>
                         <p><h3>图片描述：</h3><br/><span style="padding-left:40px;"><?php $this->attachment->description();?></span></p>
-                <?php endif; ?>
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?><?php $this->options->postdownads();?><?php endif; ?>  			
+                <?php endif; ?>		
                     </div>
+ <!--内容页下方ads -->	 	 
+<?php if($this->options->postdownads): ?><?php $this->options->postdownads();?><?php endif; ?>  	                   
                 </article>
                  <?php $this->need('comments.php'); ?>
             </section>

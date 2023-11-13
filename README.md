@@ -5,13 +5,13 @@
 
 ## 主题预览
 
-![仙人掌 CactusPlus 主题预览](https://www.80srz.com/usr/uploads/Cactus%E4%BB%99%E4%BA%BA%E6%8E%8Cv1.6.jpg)
+![仙人掌 CactusPlus 主题预览](https://www.80srz.com/usr/themes/cactus/screenshot.png)
 
 主题详情：https://www.80srz.com/306.html
 
 演示地址：https://www.80srz.com/
 
-版本更新至：V-1.6.8 。2023年9月30日。
+版本更新至：V-1.6.9 。2023年11月3日。
 
 ----
 欢迎Star
