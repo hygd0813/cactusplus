@@ -15,7 +15,6 @@ $this->need('header.php');
                  <ul style ="padding-inline-start:0px;">
                     <li class="icon"><a href="#"><i class="fa fa-bars fa-2x"></i></a></li>
                     <li style ="padding:0px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
-                    <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>music/" target="_blank" title="网易云音乐">音乐</a></b></li>
                     <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                     <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a></b></li>
                     <?php endwhile;?>                    				
@@ -25,16 +24,18 @@ $this->need('header.php');
                  </ul>
                 </div>
             </header>			
-            <div class="content" style="border:1px dotted #ccc;border-radius: 8px;background-color: rgba(65,85,93,0.1);margin:1.5rem 0 1.5rem 0;padding:1rem;">	
-            分类“<?php echo $this->getArchiveTitle(); ?>”描述:<br/>
-            <?php echo $this->getDescription(); ?>
-            </div>	
+            <!--<div class="content" style="border:1px dotted #ccc;border-radius: 8px;background-color: rgba(65,85,93,0.1);margin:1.5rem 0 1.5rem 0;padding:1rem;">	
+             分类“<?php echo $this->getArchiveTitle(); ?>”描述:<br/>
+            <?php echo $this->getDescription(); ?> 
+            </div>	-->
             <div id="theme-tagcloud" class="tagcloud-wrap">
                  <h2> 热门标签 </h2>	
                  <?php $this->widget('Widget_Metas_Tag_Cloud', 'ignoreZeroCount=1&limit=20')->to($tags); ?>
+                <ul>
 			     <?php while($tags->next()): ?>
-			<a style="font-size:<?php echo(rand(12, 24)); ?>px; text-transform:capitalize;" href="<?php $tags->permalink(); ?>" title="标签：“<?php $tags->name(); ?>”共<?php $tags->count(); ?> 篇文章"><?php $tags->name(); ?></a>
-			<?php endwhile; ?>         
+			<li><a style="font-size:<?php echo(rand(12, 24)); ?>px; text-transform:capitalize;" href="<?php $tags->permalink(); ?>" title="标签：“<?php $tags->name(); ?>”共<?php $tags->count(); ?> 篇文章"><?php $tags->name(); ?></a><sup style="color:orange;font-size:10px;"><?php $tags->count(); ?></sup></li>
+			<?php endwhile; ?>
+                    </ul>
             </div>
             <section id="wrapper" class="home">
                 <h2>分类“<?php echo $this->getArchiveTitle(); ?>”下文章：</h2>
@@ -44,7 +45,7 @@ $this->need('header.php');
                     <ul class="post-list" id="post-list">
 				 <?php while($this->next()): ?>
                         <li class="post-item"  style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:100%;">						
-                            <div class="meta" style="border-radius: 5px;background-color: rgba(65,85,93,0.1);padding:1rem;">							
+                            <div class="meta" style="border-radius: 5px;background-color: rgba(65,85,93,0.1);padding:1.1rem .5rem .5rem .1rem;">							
                                 <time datetime="<?php $this->date(); ?>" itemprop="datePublished"><?php $this->date('Y.n.j'); ?></time>
                             </div>							
                             <span  style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;width:780px;max-width:90%;border-radius: 5px;background-color: rgba(65,85,93,0.1);padding:.5rem;">
@@ -53,8 +54,8 @@ $this->need('header.php');
 						    <span class="metatj" style="border-radius: 5px;background-color: rgba(65,85,93,0.1);padding:.5rem;"><a href="<?php $this->permalink() ?>#comments" target="_blank" title="">(<?php $this->commentsNum() ?>)</a></span>
                         </li>	
 						<div style="color:#666;margin:10px 0 18px 0;padding:10px 0 18px 0;border-bottom:1px dotted #ccc;">
-						     <span ><?php $this->description(); ?></span>
-						     <span style="float:right;"><small><a href="<?php $this->permalink() ?>" title="">阅读全文...</a></small></span>
+						     <span ><?php $this->description(32, '...'); ?>
+						     <span style="float:right;"><small><a href="<?php $this->permalink() ?>" title="">阅读全文...</a></small></span></span>
 						</div>						
 					 <?php endwhile; ?>					 
                     </ul>

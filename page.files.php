@@ -20,7 +20,6 @@ $this->need('header.php');
                  <ul style ="padding-inline-start:0px;">
                     <li class="icon"><a href="#"><i class="fa fa-bars fa-2x"></i></a></li>
                     <li style ="padding:0px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
-                    <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>music/" target="_blank" title="网易云音乐">音乐</a></b></li>
                     <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                     <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a></b></li>
                     <?php endwhile;?>                    				
@@ -84,10 +83,11 @@ $this->need('header.php');
 <div id="theme-tagcloud" class="tagcloud-wrap">
     <h3 class="panel" style="color:#2bbc8a;">标签云集</h3>
 	<?php $this->widget('Widget_Metas_Tag_Cloud', 'ignoreZeroCount=1')->to($tags); ?>
+    <ul>
 	<?php while($tags->next()): ?>
-		<a style="font-size:<?php echo(rand(12, 20)); ?>px; text-transform:capitalize;" href="<?php $tags->permalink(); ?>" title="#<?php $tags->name(); ?>#标签共<?php $tags->count(); ?> 篇文章"> <?php $tags->name(); ?> </a>
+		<li><a style="font-size:<?php echo(rand(14, 22)); ?>px; text-transform:capitalize;" href="<?php $tags->permalink(); ?>" title="#<?php $tags->name(); ?>#标签共<?php $tags->count(); ?> 篇文章"><?php $tags->name(); ?></a><sup style="color:orange;font-size:10px;"><?php $tags->count(); ?></sup><li>
 	<?php endwhile; ?>
-</div>	
+</ul></div><br>	
 <!--内容页下方ads -->	 	 
 <?php if($this->options->postdownads): ?><?php $this->options->postdownads();?><?php endif; ?>            
 <section id="wrapper" class="home">

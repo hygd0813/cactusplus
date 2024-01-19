@@ -102,7 +102,7 @@ var _hmt = _hmt || [];
 					</section>
 					<p class="copyright">
 						<!-- 虽说本页面制作容易，但也需要一点点时间编辑，请保留版权信息。 -->
-						&copy; <?php echo date("Y")?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a> Theme by <a href="https://github.com/zzd/photo-page-for-typecho" rel="nofollow">ZDSR</a> Based HTML5UP</a>.
+						&copy; <?php echo date("Y")?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a> Theme by <a href="https://github.com/zzd/photo-page-for-typecho" rel="nofollow" target="_blank">ZDSR</a> Based HTML5UP</a>.
 					</p>
 				</div>
 				<div>

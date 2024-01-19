@@ -22,7 +22,6 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                  <ul style ="padding-inline-start:0px;">
                     <li class="icon"><a href="#"><i class="fa fa-bars fa-2x"></i></a></li>
                     <li style ="padding:0px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
-                    <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>music/" target="_blank" title="网易云音乐">音乐</a></b></li>
                     <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                     <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a></b></li>
                     <?php endwhile;?>                    				

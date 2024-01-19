@@ -71,7 +71,7 @@ self.__precacheManifest = [
     "revision": "e6cf7c6ec7c2d6f670ae9d762604cb0b"
   },
   {
-    "url": "lib/highlight.min.js",
+    "url": "js/highlight.min.js",
     "revision": "bdbf53ccebb5d5daac05c2b6db7a69dc"
   },
     {
@@ -92,7 +92,7 @@ self.__precacheManifest = [
     "revision": "711087aaff7624e62edd074044ec1dd9"
   },
   {
-    "url": "lib/typed.js",
+    "url": "js/typed.js",
     "revision": "c4d749bea1bf41b435328c6171c37c6d"
   }
 ].concat(self.__precacheManifest || []);
@@ -104,7 +104,7 @@ workbox.routing.registerRoute(/.*\.css/, workbox.strategies.staleWhileRevalidate
 workbox.routing.registerRoute(/.*\.(?:png|jpg|jpeg|svg|gif|webp)/, workbox.strategies.cacheFirst({ plugins: [{ expiration: { maxEntries: 50 } }] }), 'GET');
 workbox.routing.registerRoute(/.*\.html/, workbox.strategies.networkFirst(), 'GET');
 onmessage = (event) => {
-  importScripts('lib/highlight.min.js');
+  importScripts('js/highlight.min.js');
   const result = self.hljs.highlightAuto(event.data);
   postMessage(result.value);
 };

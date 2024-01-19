@@ -1,48 +1,36 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <div class="mx-auto px3 my5">
  <footer id="footer" style="display:block;">
+ 	     <?php if($this->options->footerimgad): ?> <div  style="text-align:center;margin-top: .5rem;margin-bottom: 2rem;"><?php $this->options->footerimgad();?></div> <?php endif; ?>       
             <div class="footer-left">
-                 © 2021-<?php echo date('Y'); ?> <a href="#" target="_blank"> ♡ </a> <a href="<?php $this->options->siteUrl();?>" target="_blank"><?php $this->options->title();?></a> | <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->beian();?></a><?php endif; ?> <?php if($this->options->bdtongji): ?> | <a href="<?php $this->options->bdtongji();?>" rel="nofollow" target="_blank">统计</a><?php endif; ?>
+                 © 2021-<?php echo date('Y'); ?> <a href="https://www.80srz.com/album/" rel="nofollow">♡</a> <a href="<?php $this->options->siteUrl();?>" target="_blank"><?php $this->options->title();?></a> | <a href="https://wiki.80srz.com" target="_blank">百科网</a> | <a href="https://www.noobzz.net/" target="_blank">菜鸟站长</a> | <a href="https://www.80srz.com/link/" target="_blank">站长导航</a>
             </div>
             <div class="footer-right">
                 <nav>
-                    <ul>
-                        <!-- <li>
-                            <a href="<?php $this->options->siteUrl();?>">首页</a>|
-                        </li> -->                     
+                    <ul>                    
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a>|</li>'); ?>
-                        <li>
-                            <a href="<?php $this->options->siteUrl();?>photos.html" target="_blank">相册</a>|
-                        </li>                     
-						<li>
-                            <a href="<?php $this->options->siteUrl();?>feed/">订阅</a>|
-                        </li>			
-                        <li>
-                            <a href="<?php $this->options->siteUrl();?>sitemap.xml">地图</a>
-                        </li>
+                        <li><a href="<?php $this->options->siteUrl();?>photos.html" target="_blank">相册</a>|</li>                     
+						<li><a href="<?php $this->options->siteUrl();?>feed/">订阅</a>|</li>			
+                        <li><a href="<?php $this->options->siteUrl();?>sitemap.xml">地图</a></li>
                     </ul>
                 </nav>
             </div>
-            <p style="text-align:center;"></p>            <p style="text-align:center;"></br></p>
-    <div  style="text-align:center;">
- 	     <?php if($this->options->footerimgad): ?> <?php $this->options->footerimgad();?> <?php endif; ?>       
+            <p style="text-align:center;margin:1rem 0;"><br/></p>
+<!--统计信息开始-->             
+    <div style="text-align:center;">    
 	     <?php if($this->options->footertjcode): ?> <?php $this->options->footertjcode();?> <?php endif; ?>
 	</div>
-	<div  style="text-align:center;">
-         加载:<?php echo timer_stop();?>&nbsp;｜&nbsp;更新:<?php get_last_update() ?>&nbsp;｜&nbsp;在线:<?php echo online_users() ?>人
+<!--统计信息结束-->     
+<!--站点信息开始-->    
+	<div style="text-align:center;">
+         <?php if($this->options->bdtongji): ?><a href="<?php $this->options->bdtongji();?>" rel="nofollow" target="_blank">统计</a>&nbsp; | &nbsp;<?php endif; ?>加载:<?php echo timer_stop();?>&nbsp;｜&nbsp;更新:<?php get_last_update() ?>&nbsp;｜&nbsp;在线:<?php echo online_users() ?>人
 	</div>
-    <div class="go-Login">
-        <a href="<?php $this->options->siteUrl();?>admin/" rel="login" title="Login" style="font-size:.8rem;" target="_blank"><i class="fa fa-cog fa-2x"></i></a>		
-    </div>
-    <div class="go-up">
-        <a href="#" rel="go-top" title="Top" style="font-size:.8rem;"><i class="fa fa-chevron-up fa-2x"></i></a>                        
-    </div> 	
-
+<!--站点信息结束-->    
 <!--站点运行时间开始--> 
     <div  style="text-align:center;">
 <!-- 站点运行时间 -->
 <?php if($this->options->zmki_time_no == '1'): ?> 		
-		稳定运行：<SPAN id=span_dt_dt style="color: #2F889A;"></SPAN> 
+		十年之约：<SPAN id="span_dt_dt"></SPAN> 
 		<script language=javascript>function show_date_time(){
 			window.setTimeout("show_date_time()", 1000);
 			BirthDay=new Date("<?php $this->options->zmki_time(); ?> ");
@@ -51,27 +39,57 @@
 			sectimeold=timeold/1000;
 			secondsold=Math.floor(sectimeold);
 			msPerDay=24*60*60*1000;
+			msPerYear=365*24*60*60*1000;			
+
+			e_yearsold=timeold/msPerYear;
+			yearsold=Math.floor(e_yearsold);	
+			
 			e_daysold=timeold/msPerDay;
-			daysold=Math.floor(e_daysold);
-			e_hrsold=(e_daysold-daysold)*24;
+			daysold=Math.floor(e_daysold-yearsold*365);
+			
+			daysolds=Math.floor(e_daysold);			
+			e_hrsold=(e_daysold-daysolds)*24;
 			hrsold=Math.floor(e_hrsold);
+			
 			e_minsold=(e_hrsold-hrsold)*60;
 			minsold=Math.floor((e_hrsold-hrsold)*60);
+			
 			seconds=Math.floor((e_minsold-minsold)*60);
-			span_dt_dt.innerHTML='<font style=color:#C40000>'+daysold+'</font> 天 <font style=color:#C40000>'+hrsold+'</font> 时 <font style=color:#C40000>'+minsold+'</font> 分 <font style=color:#C40000>'+seconds+'</font> 秒';
-			}show_date_time();</script> 
+			
+			span_dt_dt.innerHTML='<font style=color:#666>'+yearsold+'</font> 年 <font style=color:#666>'+daysold+'</font> 天 <font style=color:#666>'+hrsold+'</font> 时 <font style=color:#666>'+minsold+'</font> 分 <font style=color:#666>'+seconds+'</font> 秒';
+			}
+			show_date_time();
+			</script> 
 <?php endif; ?> 
 </div>
-<!--站点运行时间结束-->
+<!--站点运行时间结束-->    	
+<!--站点备案开始--> 
+    <div style="text-align:center;">
+         <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->beian();?></a><?php endif; ?>
+    </div>
+<!--站点备案结束--> 
+<!--后台登陆开始-->
+    <div class="go-Login">
+        <a href="<?php $this->options->siteUrl();?>admin/" rel="login" title="Login" style="font-size:.8rem;" target="_blank"><i class="fa fa-cog fa-spin fa-2x"></i></a>		
+    </div>
+<!--后台登陆结束-->
+<!--返回顶部开始-->    
+    <div class="go-up"> 
+        <a onclick="goToTop()" style="background:none;font-size:.8rem;" rel="go-top" title="Top"><i class="fa fa-chevron-up fa-2x"></i></a>
+        <script>function goToTop(){window.scrollTo({top: 0,behavior:"smooth",duration:3000});}</script>      
+    </div>
+<!--返回顶部结束--> 
+<!--站点字数统计开始--> 
+    <div style="text-align:center;">  
+        码字：<font style="color:#666"><?php echo allwordss(); ?></font>
+    </div>
+<!--站点字数统计结束-->          
 </footer>
 </div>					
 		<link rel="stylesheet" href="<?php cjUrl('lib/font-awesome/css/font-awesome.min.css'); ?>">
-		 <script src="<?php cjUrl('js/main.js'); ?>"></script>
+		<script src="<?php cjUrl('js/main.js'); ?>"></script>
         <?php if ($this->is('index')) : ?>
-		<script src="<?php cjUrl('lib/typed.js'); ?>"></script>
-		<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--<?php echo date('Ymd').'.json';?> 代替下面/hygd.json-->
+		<script src="<?php cjUrl('js/typed.js'); ?>"></script>
 		<script type="text/javascript">	
 $(function () {
   $.get("<?php cjUrl('lib/hygd'.rand(0,4).'.json');?>", function (data) {
@@ -79,11 +97,11 @@ $(function () {
 	var str = (data.content || "") + "\n" + (data.translation || "")+"\n--- ";   
     var options = {
       strings: [
-        str + "Welcome to my blog ! ^1200",
+        str + "Welcome to my blog , Dear Friend ! ^1200",
        // str + "Have a good day ! ^1200",
        // str + `${data.author}. ^1200`,
       ],
-      typeSpeed: 60,
+      typeSpeed: 30,
       startDelay: 300,
       //  loop: true,
     };
@@ -94,7 +112,7 @@ $(function () {
 		<?php if ($this->is('post') || $this->is('page'))  : ?>
 		<link rel="stylesheet" href="<?php cjUrl('css/lightbox.min.css'); ?>">
 		<script src="<?php cjUrl('js/lightbox.min.js'); ?>"></script>
-		<script src="<?php cjUrl('lib/highlight.min.js'); ?>"></script>
+		<script src="<?php cjUrl('js/highlight.min.js'); ?>"></script>
 		<script>
 		$('#post-content img').wrap(function () {
 		return '<a href="' + this.src + '" title="' + this.alt + '" data-lightbox="roadtrip"></a>';
@@ -112,6 +130,12 @@ $(function () {
                 <span class="searchbox-close searchbox-selectable"><i class="fa fa-times-circle"></i></span>
             </form>
         </div>
+        <?php $this->widget('Widget_Metas_Tag_Cloud', 'ignoreZeroCount=1&limit=15')->to($tags); ?>
+            <ul style="list-style-type: none; padding: 0; background: #f2f2f5;border-radius: 5px;">
+			<?php while($tags->next()): ?>
+			<li style="display: inline-block; padding: 5px; margin-right: 10px;"><a style="font-size:14px; text-transform:capitalize;" href="<?php $tags->permalink(); ?>" title="<?php $tags->count(); ?> 篇文章"><?php $tags->name(); ?></a></li>
+			<?php endwhile; ?>
+            </ul>
     </div>
 </div>		
 <script type="text/javascript">
@@ -132,37 +156,6 @@ document.addEventListener('DOMContentLoaded',function(){(function($){$('#search'
 	<script src="<?php cjUrl('js/imgpup.js'); ?>" type="text/javascript"></script>
 		<?php $this->footer(); ?>
             <p style="text-align:center;"></p>	
-<?php if ($this->options->themefooternav == '1'):?>
-	<div class="footer-tabbar">
-		<ul>
-			<li class="footer-tabbar__item">
-				<a class="" href="<?php $this->options->siteUrl();?>">
-					<i class="fa fa-home fa-2x" aria-hidden="true"></i>首页
-				</a>
-			</li>
-<li class="footer-tabbar__item">
-				<a class="active" href="<?php $this->options->siteUrl();?>guests.html">
-					<i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>微语
-				</a>
-			</li>
-			<li class="footer-tabbar__item">
-				<a class="" href="<?php $this->options->siteUrl();?>archives.html">
-					<i class="fa fa-history fa-2x" aria-hidden="true"></i>归档
-				</a>
-			</li>			
-			<li class="footer-tabbar__item">
-				<a class="" href="<?php $this->options->siteUrl();?>link.html">
-					<i class="fa fa-chain fa-2x" aria-hidden="true"></i>友链
-				</a>
-			</li>		
-			<li class="footer-tabbar__item">
-				<a class="" href="<?php $this->options->siteUrl();?>comment.html">
-					<i class="fa fa-twitch fa-2x" aria-hidden="true"></i>留言
-				</a>
-			</li>		
-		</ul>
-	</div>
-<?php endif; ?>
 <?php if ($this->options->themepjax == '1'):?>
 <!-- pjax jquery --> 
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js" type="text/javascript"></script>
@@ -207,9 +200,24 @@ function setClipboardText(event) {
         clipboardData.setData('text/plain',textData);
     }
 }
-</script> 
+</script>
     </body>
 </html>
+<!---自动网页弹字--->
+<?php if ($this->options->webtz): ?>
+    <script>
+      $(function() { 
+        var a_idx = 0, b_idx = 0; c_idx = 0; 
+        jQuery(document).ready(function($) { 
+          $("body").click(function(e) {
+          var <?php if ($this->options->webtzCustom): ?>aCustom = "<?php $this->options->webtzCustom(); ?>",a = aCustom.split('|'),<?php else: ?>a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善"),<?php endif; ?>
+          b = new Array("#09ebfc", "#ff6f6f", "#ffc61b", "#51ff65", "#5197ff", "#a551ff", "#ff51f7", "#ff518e", "#9f0010", "#666666"),
+          c = new Array("18");
+          var $i = $("<span/>").text(a[a_idx]); a_idx = (a_idx + 1) % a.length; b_idx = (b_idx + 1) % b.length; c_idx = (c_idx + 1) % c.length; var x = e.pageX, y = e.pageY; $i.css({ "z-index": 999999, "top": y - 20, "left": x, "position": "absolute", "font-weight": "bold", "font-size": c[c_idx] + "px", "color": b[b_idx] }); $("body").append($i); $i.animate({ "top": y - 120, "opacity": 0 }, 1200, function() { $i.remove(); }); }); }); var _hmt = _hmt || []; 
+      })
+    </script>
+<?php endif; ?>
+<!---自动网页弹字end--->
 <?php if ($this->options->thememouseright == '1'):?>
 <!-- 鼠标右键美化 -->
 <script src="https://lib.baomitu.com/layer/3.1.1/layer.js"></script>
@@ -228,16 +236,16 @@ function setClipboardText(event) {
     </style>
 <div class="usercm" style="left: 199px; top: 5px; display: none;">
     <ul>
-        <li><a href="https://www.80srz.com"><i class="fa fa-home fa-fw"></i><span>首页</span></a></li>
+        <li><a href="<?php $this->options->siteUrl();?>"><i class="fa fa-home fa-fw"></i><span>首页</span></a></li>
         <li><a href="javascript:void(0);" onclick="getSelect();"><i class="fa fa-copy fa-fw"></i><span>复制</span></a></li>
         <li><a href="javascript:void(0);" onclick="baiduSearch();"><i class="fa fa-search fa-fw"></i><span>百度搜索</span></a></li>
         <li><a href="javascript:history.go(1);"><i class="fa fa-arrow-right fa-fw"></i><span>前进</span></a></li>
         <li><a href="javascript:history.go(-1);"><i class="fa fa-arrow-left fa-fw"></i><span>后退</span></a></li>
         <li style="border-bottom:1px solid gray"><a href="javascript:window.location.reload();"><i class="fa fa-refresh fa-fw"></i><span>重载网页</span></a></li>
-		<li><a href="https://www.80srz.com/guests.html"><i class="fa fa-solid fa-paper-plane"></i><span>我的动态</span></a></li>
-		<li><a href="https://www.80srz.com/random.html"><i class="fa fa-solid fa-random"></i><span>随机文章</span></a></li>      
-        <li><a href="https://www.80srz.com/link.html"><i class="fa fa-solid fa-link"></i><span>申请友链</span></a></li>  
-        <li><a href="https://www.80srz.com/comment.html"><i class="fa fa-commenting-o"></i><span>给我留言</span></a></li>
+		<li><a href="<?php $this->options->siteUrl();?>guests.html"><i class="fa fa-solid fa-paper-plane"></i><span>我的动态</span></a></li>
+		<li><a href="<?php $this->options->siteUrl();?>random.html"><i class="fa fa-solid fa-random"></i><span>随机文章</span></a></li>      
+        <li><a href="<?php $this->options->siteUrl();?>link.html"><i class="fa fa-solid fa-link"></i><span>申请友链</span></a></li>  
+        <li><a href="<?php $this->options->siteUrl();?>comment.html"><i class="fa fa-commenting-o"></i><span>给我留言</span></a></li>
     </ul>
 </div>
 <script type="text/javascript">

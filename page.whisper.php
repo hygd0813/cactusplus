@@ -21,7 +21,6 @@ $this->need('header.php');
                  <ul style ="padding-inline-start:0px;">
                     <li class="icon"><a href="#"><i class="fa fa-bars fa-2x"></i></a></li>
                     <li style ="padding:0px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
-                    <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>music/" target="_blank" title="网易云音乐">音乐</a></b></li>
                     <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                     <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a></b></li>
                     <?php endwhile;?>                    				
@@ -32,20 +31,35 @@ $this->need('header.php');
                 </div>
             </header>									
             <section id="wrapper" class="home">
-                <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+                <article class="post" id="content" itemscope itemtype="http://schema.org/BlogPosting">
                     <div class="content" itemprop="articleBody">
                         <?php parseContent($this); ?>											           
                     </div>
-              <!-- 计时器插入点 -->
+              <!-- 爱情计时器插入点 -->
                 </article>                   
-        <section class="home">
+        <!-- 一言 section class="home" id="GetHitokoto">
             <div class="main_element">
                 <section class="Links-content">
 	                <div  style="margin: 0;padding:0 .5em 3rem .5em;max-width: none;"><?php echo GetHitokoto(); ?></div>
                 </section>
             </div>
-        </section>          
-                 <?php $this->need('comments1.php'); ?>
+        </section --> 
+
+        <!--添加古诗词-->
+        <script>
+          $("#content").after('<div class="poem-wrap"><div class="poem-border poem-left"></div><div class="poem-border poem-right"></div><h2>念两句诗</h2><div id="poem_sentence"></div><div id="poem_info"></div></div>')
+        </script>
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            jinrishici.load(function(result) {
+              var sentence = document.querySelector("#poem_sentence");
+              var info = document.querySelector("#poem_info");
+              sentence.innerHTML = result.data.content;
+              info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+            });
+        </script>
+
+                 <?php $this->need('comments.whisper.php'); ?>
             </section>
 		</div>
  <?php $this->need('footer.php'); ?>

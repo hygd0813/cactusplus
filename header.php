@@ -48,9 +48,10 @@
 	    <link rel="stylesheet" href="<?php cjUrl('css/bootstrap-grid.min.css'); ?>">
         <link rel="stylesheet" href="<?php cjUrl('css/style.css'); ?>">
 		<style type="text/css">
-            @font-face{font-family:'Meslo LG';font-style:normal;font-size:18px;src:local('Meslo LG S'),url("<?php cjUrl('lib/meslo-LG/fonts/'.$this->options->fontfamily.''); ?>") format('woff2');font-display: swap;}
+            @font-face{font-family:'Meslo LG';font-style:normal;font-size:18px;font-weight: 100;letter-spacing: 1px;src:local('Meslo LG S'),url("<?php cjUrl('lib/meslo-LG/fonts/'.$this->options->fontfamily.''); ?>") format('woff2');font-display: swap;}
             *{font-family:Meslo LG;}
-            body{background-image: url("<?php cjUrl('images/'.$this->options->bodybgimg.''); ?>"); }
+            body{background-image: url("<?php cjUrl('images/'.$this->options->bodybgimg.''); ?>");-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;  
+    background-size: cover; opacity: 0.95;}
         </style>		
         <script src="<?php cjUrl('js/jquery.min.js'); ?>"  type="text/javascript"></script>
         <script type="text/javascript">

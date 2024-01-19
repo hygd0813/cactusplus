@@ -1,25 +1,30 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-define('INITIAL_VERSION_NUMBER', '1.6.8');
+define('INITIAL_VERSION_NUMBER', '1.7.0');
 function themeConfig($form) {
+ // 站点图标设置
     $logoimg = new Typecho_Widget_Helper_Form_Element_Text('logoimg', NULL, NULL, _t('页头logo地址'), _t('一般为https://www.80srz.com/image.png,支持 https:// 或 //,留空则使用默认图片'));
     $form->addInput($logoimg->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
     $favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('favicon地址'), _t('一般为https://www.80srz.com/image.ico,支持 https:// 或 //,留空则不设置favicon'));
     $form->addInput($favicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
     $appleicon = new Typecho_Widget_Helper_Form_Element_Text('appleicon', NULL, NULL, _t('apple touch icon地址'), _t('一般为https://www.80srz.com/image.png,支持 https:// 或 //,留空则不设置Apple Touch Icon'));
     $form->addInput($appleicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    $fontfamily = new Typecho_Widget_Helper_Form_Element_Text('fontfamily', NULL, '2.woff2', _t('字体设置'), _t('usr/themes/cactus/lib/meslo-LG/fonts/文件夹内字体名称！！！默认是2.woff2<鸿蒙字体>。'));
+ // 字体设置
+    $fontfamily = new Typecho_Widget_Helper_Form_Element_Text('fontfamily', NULL, '2.woff2', _t('字体设置'), _t('usr/themes/cactus/lib/meslo-LG/fonts/文件夹内字体名称！！！默认是2.woff2<鸿蒙字体>。主题自带1~8.woff2'));
     $form->addInput($fontfamily);
-    $bodybgimg = new Typecho_Widget_Helper_Form_Element_Text('bodybgimg', NULL, 'webg2.jpg', _t('背景设置'), _t('usr/themes/cactus/images/文件夹内背景图片名称！！！默认是webg2.jpg。'));
-    $form->addInput($bodybgimg);	
+ // 背景图片设置
+    $bodybgimg = new Typecho_Widget_Helper_Form_Element_Text('bodybgimg', NULL, '1.webp', _t('背景设置'), _t('usr/themes/cactus/images/文件夹内背景图片名称！！！默认是1.webp。(主题自带1~4.webp)'));
+    $form->addInput($bodybgimg);
+ // 社交信息设置	
 	$email = new Typecho_Widget_Helper_Form_Element_Text('email', NULL, NULL, _t('Email地址'), _t('邮箱地址 ,留空则不设置Email地址'));
     $form->addInput($email->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$github = new Typecho_Widget_Helper_Form_Element_Text('github', NULL, NULL, _t('Github地址'), _t('一般为https://github.com/hygd0813 ,留空则不设置Github地址'));
     $form->addInput($github->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$weibo = new Typecho_Widget_Helper_Form_Element_Text('weibo', NULL, NULL, _t('微博地址'), _t('一般为http://www.weibo.com/xxx ,留空则不设置Weibo地址'));
-    $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));			
-	$Projectsurl = new Typecho_Widget_Helper_Form_Element_Text('Projectsurl', NULL, NULL, _t('首页Projects地址'), _t('一般为https://www.80srz.com ,留空则默认为#地址'));
-    $form->addInput($Projectsurl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));	
+    $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	 $follow = new Typecho_Widget_Helper_Form_Element_Text('follow', NULL, NULL, _t('邮箱订阅'), _t('请到https://follow.it/s/BwK1注册申请！feed订阅跳转链接，填写到此处。'));
+    $form->addInput($follow->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));    
+ // 备案号设置   			
 	$beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案号设置'), _t('直接填写备案号即可如：京ICP备888888号'));
     $form->addInput($beian->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
  // 是否开启网站运行时间
@@ -27,19 +32,32 @@ function themeConfig($form) {
     $form->addInput($zmki_time_no);
  // 网站运行时间
     $zmki_time = new Typecho_Widget_Helper_Form_Element_Text('zmki_time', NULL, '10/1/2022 20:13:14', _t('网站运行时间'), _t('默认: 10/1/2022 20:13:14  请按照前边的实例按格式填写创建时间，分别是月/日/年 时:分:秒 '));
-    $form->addInput($zmki_time);	
+    $form->addInput($zmki_time);
+ // 自动网页弹字
+    $webtz = new Typecho_Widget_Helper_Form_Element_Radio('webtz', 
+    array(1 => _t('启用'),
+    0 => _t('关闭')),
+    0, _t('网站弹字'), _t('默认关闭，启用后点击网页任何空白位置自动弹字，也可使用“自定义网站弹字”，对弹字进行自定义'));
+    $form->addInput($webtz);
+    $webtzCustom = new Typecho_Widget_Helper_Form_Element_Text('webtzCustom', NULL, NULL, _t('自定义网站弹字'), _t('启用网站弹字时生效，在这里填入自定义弹字内容，用“|”隔开。如“富强|民主|文明|和谐|自由”，留空则使用默认文字'));
+    $form->addInput($webtzCustom);   
+//  静态资源CDN加速网址设置 	
     $cjcdnAddress = new Typecho_Widget_Helper_Form_Element_Text('cjcdnAddress', NULL, NULL, _t('CSS文件的链接地址替换'), _t('请输入你的CDN云存储地址，例如：https://cdn.jsdelivr.net/gh/hygd0813/cactusplus@main/，支持绝大部分有镜像功能的CDN服务<br><b>被替换的原地址为主题文件位置，即：https://www.80srz.com/usr/themes/cactus/</b>'));
     $form->addInput($cjcdnAddress);	
-    $commentszx = new Typecho_Widget_Helper_Form_Element_Text('commentszx', NULL, NULL, _t('走心评论'), _t('输入走心评论的coid'));
-    $form->addInput($commentszx);		
+//走心评论列表设置    
+    $commentszx = new Typecho_Widget_Helper_Form_Element_Text('commentszx', NULL, NULL, _t('走心评论'), _t('输入走心评论的coid')); 
+    $form->addInput($commentszx);
+//首页聚焦图设置    
+    $Focuss = new Typecho_Widget_Helper_Form_Element_Textarea('Focuss', NULL, NULL, _t('首页 Focus 链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接标题（必须）|链接地址（必须）|链接图片地址（必须）</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>荒野孤灯|https://www.80srz.com/|https://www.80srz.com/logo.png</strong>多个链接换行即可，至少三个，一行一个'));
+	$form->addInput($Focuss);  
+ //首页项目示例     		
+	$Projectsurl = new Typecho_Widget_Helper_Form_Element_Text('Projectsurl', NULL, NULL, _t('首页Projects跳转地址'), _t('一般为https://www.80srz.com ,留空则默认为#地址'));
+    $form->addInput($Projectsurl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));       
     $Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 作品链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>荒野孤灯|https://www.80srz.com/|荒野中的一盏孤灯，照亮夜里依然前行的人们！</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>荒野孤灯|https://www.80srz.com/||</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Projects);
+ //友情链接设置   
 	$Links = new Typecho_Widget_Helper_Form_Element_Textarea('Links', NULL, NULL, _t('友情链接设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述|头像地址</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>荒野孤灯|https://www.80srz.com/|荒野中的一盏孤灯，照亮夜里依然前行的人们！|fav.icon</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Links);
-    $indextopnum1 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum1', NULL, NULL, _t('首页置顶某一个特定文章1'), _t('仅用在首页，首页置顶某一个特定cid文章，填入<b style="color: red;">cid,mid</b>一篇文章及<b style="color: red;">对应分类mid</b> ！！！'));
-    $form->addInput($indextopnum1);      
-    $indextopnum2 = new Typecho_Widget_Helper_Form_Element_Text('indextopnum2', NULL, NULL, _t('首页置顶某一个特定文章2'), _t('仅用在首页，首页置顶某一个特定cid文章，填入<b style="color: red;">cid,mid</b>一篇文章及<b style="color: red;">对应分类mid</b> ！！！'));
-    $form->addInput($indextopnum2);	
  //  首页不显示分类设置  
     $nolist = new Typecho_Widget_Helper_Form_Element_Text('nolist', NULL, NULL, _t('首页不显示某特定分类'), _t('仅用在首页，首页不显示某分类，填入<b style="color: red;">mid</b>数字，隐藏多个分类用半角逗号分开！！！'));
     $form->addInput($nolist); 
@@ -60,7 +78,10 @@ function themeConfig($form) {
     $form->addInput($listpageads); 
  //  内容页下方ads   
 	$postdownads = new Typecho_Widget_Helper_Form_Element_Textarea('postdownads', NULL, NULL, _t('内容页下方ads'), _t('内容页下方ads,图片建议800*200px，内容随意！'));
-    $form->addInput($postdownads);	
+    $form->addInput($postdownads);
+ //  首页列表下侧ads   
+	$indexlistdownads = new Typecho_Widget_Helper_Form_Element_Textarea('indexlistdownads', NULL, NULL, _t('首页列表下侧ads '), _t('首页列表下侧ads ,图片建议400*90px，内容随意！'));
+    $form->addInput($indexlistdownads);	    	
  //  内容页推荐列表左侧ads   
 	$postlistleftads = new Typecho_Widget_Helper_Form_Element_Textarea('postlistleftads', NULL, NULL, _t('内容页推荐列表左侧ads '), _t('内容页推荐列表左侧ads ,图片建议400*200px，内容随意！'));
     $form->addInput($postlistleftads);	  
@@ -70,11 +91,14 @@ function themeConfig($form) {
  //  内容页左侧ads
     $postleftads = new Typecho_Widget_Helper_Form_Element_Textarea('postleftads', NULL, NULL, _t('内容页左侧ads'), _t('内容页左侧ads,图片建议600*180px，内容随意！'));
     $form->addInput($postleftads);
+ //  内容页右侧ads
+    $postrightads = new Typecho_Widget_Helper_Form_Element_Textarea('postrightads', NULL, NULL, _t('内容页右侧ads'), _t('内容页右侧ads,图片建议500*220px，内容随意！'));
+    $form->addInput($postrightads);    
  //  首页公告
     $indexmbads = new Typecho_Widget_Helper_Form_Element_Textarea('indexmbads', NULL, NULL, _t('首页公告'), _t('首页蒙版公告！'));
     $form->addInput($indexmbads);
- //  首页公告开关
-    $indexmbadskaiguan = new Typecho_Widget_Helper_Form_Element_Select('indexmbadskaiguan',array('0'=>'不开启','1'=>'开启'),'0','首页公告','是否开启首页蒙板公告功能。');
+ //  首页蒙版节日公告开关
+    $indexmbadskaiguan = new Typecho_Widget_Helper_Form_Element_Select('indexmbadskaiguan',array('0'=>'不开启','1'=>'开启'),'0','首页蒙版节日公告','是否开启首页蒙版节日公告功能。');
     $form->addInput($indexmbadskaiguan);    
  //  目录树开关
 	$catalog = new Typecho_Widget_Helper_Form_Element_Radio('catalog',array('able' => _t('启用'),'disable' => _t('禁止'),), 'disable', _t('文章目录设置'), _t('默认显示随机文章，启用则显示文章目录'));
@@ -85,9 +109,6 @@ function themeConfig($form) {
  //  html压缩
     $themecompress = new Typecho_Widget_Helper_Form_Element_Select('themecompress',array('0'=>'不开启','1'=>'开启'),'0','HTML压缩功能','是否开启HTML压缩功能,缩减页面代码');
     $form->addInput($themecompress);
- // 手机底部导航
-    $themefooternav = new Typecho_Widget_Helper_Form_Element_Select('themefooternav',array('0'=>'不开启','1'=>'开启'),'0','手机底部导航功能','是否开启手机底部导航功能');
-    $form->addInput($themefooternav);
  //  pjax开关
     $themepjax = new Typecho_Widget_Helper_Form_Element_Select('themepjax',array('0'=>'不开启','1'=>'开启'),'0','pjax功能','是否开启pjax功能,加快页面加载速度');
     $form->addInput($themepjax);
@@ -95,14 +116,16 @@ function themeConfig($form) {
     $thememouseright = new Typecho_Widget_Helper_Form_Element_Select('thememouseright',array('0'=>'不开启','1'=>'开启'),'0','鼠标右键美化功能','是否鼠标右键美化功能');
     $form->addInput($thememouseright);
 }
-
+ // 文章自定义字段设置
 function themeFields ($layout) {
+    $Toctype= new Typecho_Widget_Helper_Form_Element_Radio('Toctype',array('0' => _t(' 无目录，显示随机文章 '),'1' => _t(' 有目录，显示目录 ')),'1',_t(' 文章目录 Or 随机文章 '),_t(" 选择文章是否存在目录，无目录则在文章页显示随机文章,有目录则在文章页显示文章目录。<br/>默认有目录，无目录时手动选择！！！"));
     $keyword = new Typecho_Widget_Helper_Form_Element_Textarea('keyword', NULL, NULL, _t('keywords关键词'), _t('多个关键词用英文下逗号隔开'));
     $description = new Typecho_Widget_Helper_Form_Element_Textarea('description', NULL, NULL, _t('description描述'), _t('简单一句话描述'));
+    $layout->addItem($Toctype);    
     $layout->addItem($keyword);
     $layout->addItem($description);
 }
-
+// 列表文章数量、目录树、数字验证挂载
 function themeInit($archive) {
     if ($archive->is('index')) {
         $archive->parameter->pageSize = 10; // 自定义条数
@@ -136,6 +159,29 @@ function cjUrl($path) {
         $options->themeUrl($path.$ver);
     }
 }
+/**首页聚焦图片轮播
+<?php Focuss(); ?>
+*/
+function Focuss($sorts = NULL) {
+    $options = Typecho_Widget::widget('Widget_Options');
+    $Focus = NULL;
+    if ($options->Focuss) {
+        $list = explode("\r\n", $options->Focuss);
+        foreach ($list as $val) {
+            list($name, $url, $imgurl, $sort) = explode("|", $val);
+            if ($sorts) {
+                $arr = explode("|", $sorts);
+                if ($sort && in_array($sort, $arr)) {
+                    $Focus .= $url ? '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="150px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>' : '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="150px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>';
+                }
+            } else {
+                    $Focus .= $url ? '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="150px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>' : '<section class="swiper-slide col-md-4"><div class="swiper-slide"><div class="thslidelist gundongimg "><a href="'.$url.'" target="_blank" style="background: none;"><img src="'.$imgurl.'" alt="'.$name.'" width="100%" height="150px" style="border-radius: 5px;"><p style="text-align: center;"><small>'.$name.'</small></p></a></div></div></section>';
+            }
+        }
+    }
+    echo $Focus ? $Focus : '荒野中的一盏孤灯，照亮夜里依然前行的人们';
+}
+
 /**项目展示
 <?php Projects(); ?>
 */
@@ -210,8 +256,8 @@ function Postviews($archive) {
 **/
 function theme_random_posts(){
 $defaults = array(
-'number' => 6,
-'xformat' => '<li><a href="{permalink}">{title}</a></li>'
+'number' => 5,
+'xformat' => '<li style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:300px;"><a href="{permalink}">{title}</a></li>'
 );
 $db = Typecho_Db::get();
 $adapterName = $db->getAdapterName();//兼容非MySQL数据库
@@ -582,10 +628,10 @@ function theAllViews()
     $row = $db->fetchAll('SELECT SUM(VIEWS) FROM `' . $prefix . 'contents`');
  // return number_format($row[0]['SUM(VIEWS)']);
     $rows = $row[0]['SUM(VIEWS)'];
-      if($rows < 1000) {
+      if($rows < 10000) {
     return $rows;
   } else {
-    return round($rows/1000, 1) . ' k';
+    return round($rows/10000, 1) . '&nbsp;w';
   }  
 }
 
@@ -597,7 +643,7 @@ function get_comments_count() {
     if ($count < 1000) {
         return $count;
     } else {
-        return round($count/1000, 1) . ' k';
+        return round($count/1000, 1) . '&nbsp;k';
     }
 }
 
@@ -608,16 +654,27 @@ function tagCount() {
     return $count['COUNT(*)'];
 }
 
-//总点赞数
+//文章总点赞数
 function agreeCount() {
     $db = Typecho_Db::get();
     $count = $db->fetchRow($db->select('SUM(agree) AS agreeCount')->from('table.contents'));
-    $count1 = $db->fetchRow($db->select('SUM(likes) AS agreeCount')->from('table.comments'));  
-    $allagreecount = $count['agreeCount']+$count1['agreeCount'];
+    $allagreecount = $count['agreeCount'];
     if($allagreecount < 1000) {
     return $allagreecount;
   } else {
-    return round($allagreecount/1000, 1) . ' k';
+    return round($allagreecount/1000, 1) . '&nbsp;k';
+  }  
+}
+
+//评论总点赞数
+function plagreeCount() {
+    $db = Typecho_Db::get();
+    $count2 = $db->fetchRow($db->select('SUM(likes) AS plagreeCount')->from('table.comments'));  
+    $allagreecount = $count2['plagreeCount'];
+    if($allagreecount < 1000) {
+    return $allagreecount;
+  } else {
+    return round($allagreecount/1000, 1) . '&nbsp;k';
   }  
 }
 
@@ -702,6 +759,7 @@ function timer_stop( $display = 0, $precision = 3 ) {
     }
     return $r;
 }
+
 //评论回复加@
     function get_comment_at($coid){
     $db   = Typecho_Db::get();
@@ -872,6 +930,21 @@ function allwords() {
     echo '全站共 '.$chars.' 字，写完一本我国著名的四大名著了！';}
     elseif ($chars>1000000){
     echo '全站共 '.$chars.' 字，咳咳，还没想好写啥~';}
+}
+
+/*
+ * 全站字数2
+ */
+function allwordss() {
+    $charss = 0;
+    $db = Typecho_Db::get();
+    $select = $db ->select('text')->from('table.contents')->where('type = ?','post');//如果只要统计文章总字数不要统计单页的话可在后面加入->where('type = ?','post')
+    $rows = $db->fetchAll($select);
+    foreach ($rows as $row) { $charss += mb_strlen(trim($row['text']), 'UTF-8'); }
+    if($charss<10000){
+    return $charss;}
+    else {
+    return round($charss/10000, 1) . '&nbsp;w';}     
 }
 
 /** 获取评论者物理地址 */
@@ -1191,22 +1264,22 @@ function commentApprove($widget, $email = NULL)
             $result['bgColor'] = '#999999';
             $userDesc = '我们的友谊成功迈出了第一步！';
         } else {
-            if ($commentNum<3 && $commentNum>1) {
+            if ($commentNum<5 && $commentNum>1) {
                 $result['userLevel'] = '初次见面';
                 $result['bgColor'] = '#999999';
-            }elseif ($commentNum<9 && $commentNum>=3) {
+            }elseif ($commentNum<10 && $commentNum>=5) {
                 $result['userLevel'] = '点头之交';
                 $result['bgColor'] = '#999999';
-            }elseif ($commentNum<27 && $commentNum>=9) {
+            }elseif ($commentNum<50 && $commentNum>=10) {
                 $result['userLevel'] = '酒肉朋友';
                 $result['bgColor'] = '#669999';
-            }elseif ($commentNum<81 && $commentNum>=27) {
+            }elseif ($commentNum<100 && $commentNum>=50) {
                 $result['userLevel'] = '互相认同';
                 $result['bgColor'] = '#3399CC';
-            }elseif ($commentNum<100 && $commentNum>=81) {
+            }elseif ($commentNum<150 && $commentNum>=100) {
                 $result['userLevel'] = '交情莫逆';
                 $result['bgColor'] = '#003366';
-            }elseif ($commentNum>=100) {
+            }elseif ($commentNum>=150) {
                 $result['userLevel'] = '生死之交';
                 $result['bgColor'] = '#2bbc8a';
             }
@@ -1223,4 +1296,5 @@ function commentApprove($widget, $email = NULL)
     } 
     return $result;
 }
+
 ?>

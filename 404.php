@@ -16,7 +16,6 @@ $this->need('header.php');
                  <ul style ="padding-inline-start:0px;">
                     <li class="icon"><a href="#"><i class="fa fa-bars fa-2x"></i></a></li>
                     <li style ="padding:0px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>">首页</a></b></li>
-                    <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $this->options->siteUrl();?>music/" target="_blank" title="网易云音乐">音乐</a></b></li>
                     <?php $this->widget('Widget_Metas_Category_List')->to($categorys);while($categorys->next()):?>
                     <li style ="padding:0 0 0 5px;margin:0px;"><b><a href="<?php $categorys->permalink(); ?>"><?php $categorys->name(); ?></a></b></li>
                     <?php endwhile;?>                    				
@@ -36,24 +35,40 @@ $this->need('header.php');
                 <span class="searchbox-close searchbox-selectable"><i class="fa fa-times-circle"></i></span>
             </form>						
                     </center>
-<!--内容页下方ads -->	 	 
-<?php if($this->options->postdownads): ?> <?php $this->options->postdownads();?> <?php endif; ?>
 
-<div class="row" >
-<!--热门文章-->
-<section id="writing" class="col-xs-12">
-    <h3 style="color:#2bbc8a;">热评文章：</h3>
-         <ul class="post-list" id="post-list">
-             <?php $this->widget('Widget_Post_hotpl@hotpl', 'pageSize=10')->to($hotpl); ?>
-             <?php while($hotpl->next()): ?>
-             <li class="post-item" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:100%;">
-	             <div class="meta"><time datetime="<?php $hotpl->date(); ?>" itemprop="datePublished"><?php $hotpl->date('M . j'); ?></time></div>
-	             <span style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:95%;"><a href="<?php $hotpl->permalink(); ?>" title="<?php $hotpl->title(); ?>"><?php $hotpl->title(60,'…'); ?></a></span>
-		     </li>
-			 <?php endwhile;?>			 
-         </ul>
-</section>
-</div>							
+<!--内容页下方ads -->	
+<?php if($this->options->postdownads): ?> <div class="" ><?php $this->options->postdownads();?></div> <?php endif; ?>
+<!--推荐、热门文章-->
+                 <div class="row " >
+                     <section id="writing" class="col-lg-6 col-xs-12">
+                         <h3 style="color:#2bbc8a;">热评文章</h3>
+                         <ul class="post-list" id="post-list">
+                             <?php $this->widget('Widget_Post_hotpl@hotpl', 'pageSize=10')->to($hotpl); ?>
+                             <?php while($hotpl->next()): ?>
+                             <li class="post-item" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:100%;">
+	                             <div class="meta"><time datetime="<?php $hotpl->date(); ?>" itemprop="datePublished"><?php $hotpl->date('Y.n.j'); ?></time></div>
+	                             <span style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:95%;"><a href="<?php $hotpl->permalink(); ?>" title="<?php $hotpl->title(); ?>"><?php $hotpl->title(30,'…'); ?></a></span>
+		                     </li>
+			                 <?php endwhile;?> 
+                         </ul>
+<!-- 内容页推荐列表左侧ads -->	 	 
+<?php if($this->options->postlistleftads): ?><?php $this->options->postlistleftads();?><?php endif; ?>  
+                     </section>
+                     <section id="writing" class="col-lg-6 col-xs-12">
+                         <h3 style="color:#2bbc8a;">热门推荐</h3>
+                         <ul class="post-list" id="post-list">
+                             <?php $this->widget('Widget_Post_hotview@hotview', 'pageSize=10')->to($hotview); ?>
+                             <?php while($hotview->next()): ?>
+                             <li class="post-item"  style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:100%;" >
+	                             <div class="meta"><time datetime="<?php $hotview->date(); ?>" itemprop="datePublished"><?php $hotview->date('Y.n.j'); ?></time></div>
+	                             <span style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;max-width:95%;"><a href="<?php $hotview->permalink(); ?>" title="<?php $hotview->title(); ?>"><?php $hotview->title(30,'…'); ?></a></span>
+		                     </li>
+			                 <?php endwhile;?>
+                         </ul>
+<!--内容页推荐列表右侧ads -->	 	 
+<?php if($this->options->postlistrightads): ?><?php $this->options->postlistrightads();?><?php endif; ?>                        
+                     </section>					 
+					 </div>						
 					</div>
                 </section>       
             </section>

@@ -62,6 +62,16 @@ function threadedComments($comments, $options) {
               </span>
               <span id="vat cancel-comment-reply" class="cancel-comment-reply cl-<?php $comments->theId(); ?> text-muted comment-reply-link" style="padding-right:.5rem;display:none" ><?php $comments->cancelReply('取消回复'); ?>         
               </span>
+
+              <script>  
+                 document.getElementById('comment-reply').addEventListener('click', function() {  
+                 document.getElementById('comment-form').style.display = 'block';  
+                 });  
+                 document.getElementById('cancel-comment-reply').addEventListener('click', function() {  
+                 document.getElementById('comment-form').style.display = 'none';  
+                 });  
+              </script>    
+
 				</div>
 				<div class="vcontent">
 <?php
@@ -88,20 +98,20 @@ function threadedComments($comments, $options) {
 		<?php } ?>	
 <?php } ?>
 <?php $this->comments()->to($comments); ?>
-<?php if($this->allow('comment')): ?>	
+<?php if($this->allow('comment')): ?>
 <div class="blog-post-comments v" id="comments">
 <div class="blog-post-comments v" id="<?php $this->respondId(); ?>">
 <form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
 	<?php if($this->user->hasLogin()): ?>
 	<?php _e('登录身份: '); ?><h5><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>. <a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('退出'); ?> &raquo;</a></h5>
 		<div class="vwrap">
-		<?php else: ?>
+	<?php else: ?>
 		<div class="vwrap">
 		<div class="vheader item3">
 			<input name="author" placeholder="昵称(*)" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱(*)" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(https://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
 						<input type="hidden" name="receiveMail" id="receiveMail" value="yes" />
 		</div>
-		<?php endif; ?>
+	<?php endif; ?>
 		<div class="vedit">
 			<textarea  name="text" id="veditor" class="OwO-textarea veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="大佬，请赐教！(👀了，就💌)"><?php $this->remember('text'); ?></textarea>
 			<div class="vrow"><div class="vcol vcol-60 status-bar"></div><div class="vcol vcol-40 vctrl text-right"><div title="表情" class="OwO"></div></div></div>             				          
@@ -121,19 +131,20 @@ function threadedComments($comments, $options) {
 		<div style="display:none;" class="vmark">
 		</div>
 	</div>
-	</form>   
-<script>
-function secret() {
-                     i = document.getElementById("veditor");
-                     if (i.value.indexOf("私密# ") != -1) {
-                     reg = new RegExp('私密# ');
-                     i.value = i.value.replace(reg, '');
-                     } else {
-                     i.value = '私密# ' + i.value;
-                    };
-                 };
- </script>	
+  <script>
+    function secret() {
+        i = document.getElementById("veditor");
+        if (i.value.indexOf("私密# ") != -1) {
+          reg = new RegExp('私密# ');
+          i.value = i.value.replace(reg, '');
+        } else {
+          i.value = '私密# ' + i.value;
+          };
+        };
+  </script>
+</form>   	
 	</div>
+
 	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
