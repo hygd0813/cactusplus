@@ -1,0 +1,522 @@
+{
+  "颜文": {
+    "type": "emoticon",
+    "container": [
+      {
+        "icon": "OωO",
+        "text": "目瞪口呆"
+      },
+      {
+        "icon": "|´・ω・ノ",
+        "text": "Hi"
+      },
+      {
+        "icon": "ヾ(≧∇≦*ゝ",
+        "text": "开心"
+      },
+      {
+        "icon": "(☆ω☆",
+        "text": "星星眼"
+      },
+      {
+        "icon": "（╯‵□′）╯︵┴─┴",
+        "text": "掀桌"
+      },
+      {
+        "icon": "￣﹃￣",
+        "text": "流口水"
+      },
+      {
+        "icon": "(/ω＼",
+        "text": "捂脸"
+      },
+      {
+        "icon": "∠( ᐛ 」∠＿",
+        "text": "给跪"
+      },
+      {
+        "icon": "(๑•̀ㅁ•́ฅ",
+        "text": "Hi"
+      },
+      {
+        "icon": "→_→",
+        "text": "斜眼"
+      },
+      {
+        "icon": "୧(๑•̀⌄•́๑૭",
+        "text": "加油"
+      },
+      {
+        "icon": "٩(ˊᗜˋ*و",
+        "text": "有木有WiFi"
+      },
+      {
+        "icon": "(ノ°ο°ノ",
+        "text": "前方高能预警"
+      },
+      {
+        "icon": "(´இ皿இ｀",
+        "text": "我从未见过如此厚颜无耻之人"
+      },
+      {
+        "icon": "⌇●﹏●⌇",
+        "text": "吓死宝宝惹"
+      },
+      {
+        "icon": "(ฅ´ω`ฅ",
+        "text": "已阅留爪"
+      },
+      {
+        "icon": "(╯°A°╯︵○○○",
+        "text": "去吧大师球"
+      },
+      {
+        "icon": "φ(￣∇￣o",
+        "text": "太萌惹"
+      },
+      {
+        "icon": "ヾ(´･ ･｀｡ノ\"",
+        "text": "咦咦咦"
+      },
+      {
+        "icon": "( ง ᵒ̌皿ᵒ̌ง⁼³₌₃",
+        "text": "气呼呼"
+      },
+      {
+        "icon": "(ó﹏ò｡",
+        "text": "我受到了惊吓"
+      },
+      {
+        "icon": "Σ(っ °Д °;っ",
+        "text": "什么鬼"
+      },
+      {
+        "icon": "( ,,´･ω･ﾉ\"(´っω･｀｡",
+        "text": "摸摸头"
+      },
+      {
+        "icon": "╮(╯▽╰╭ ",
+        "text": "无奈"
+      },
+      {
+        "icon": "o(*////▽////*q ",
+        "text": "脸红"
+      },
+      {
+        "icon": "＞﹏＜",
+        "text": ""
+      },
+      {
+        "icon": "( ๑´•ω• \"(ㆆᴗㆆ",
+        "text": ""
+      },
+      {
+        "icon": "(｡•ˇ‸ˇ•｡",
+        "text": ""
+      }
+    ]
+  },
+   "虎牙": {
+    "name": "huya",
+    "type": "image",
+    "container": [
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/danshengou.png\" alt="smile picture">",
+        "text": "单身狗"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/chaojidalao.png\" alt="smile picture">",
+        "text": "超级大佬"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/dahu.png\" alt=\"smile picture\">",
+        "text": "打呼"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/huaji.png\" alt=\"smile picture\">",
+        "text": "滑稽"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/nanshou.png\" alt=\"smile picture\">",
+        "text": "难受"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/qinqin.png\" alt=\"smile picture\">",
+        "text": "亲亲"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/wugu.png\" alt=\"smile picture\">",
+        "text": "无辜"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/zhenjing.png\" alt=\"smile picture\">",
+        "text": "震惊"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/daxiao.png\" alt=\"smile picture\">",
+        "text": "大笑"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/songhua.png\" alt=\"smile picture\">",
+        "text": "送花"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/touxiao.png\" alt=\"smile picture\">",
+        "text": "偷笑"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/daku.png\" alt=\"smile picture\">",
+        "text": "大哭"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/heiha.png\" alt=\"smile picture\">",
+        "text": "嘿哈"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/666.png\" alt=\"smile picture\">",
+        "text": "666"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/gandong.png\" alt=\"smile picture\">",
+        "text": "感动"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/yiwen.png\" alt=\"smile picture\">",
+        "text": "疑问"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/xihuan.png\" alt=\"smile picture\">",
+        "text": "喜欢"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/jianxiao.png\" alt=\"smile picture\">",
+        "text": "奸笑"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/zan.png\" alt=\"smile picture\">",
+        "text": "赞"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/keai.png\" alt=\"smile picture\">",
+        "text": "可爱"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/aoman.png\" alt=\"smile picture\">",
+        "text": "傲慢"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/kaixin.png\" alt=\"smile picture\">",
+        "text": "开心"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/baibai.png\" alt=\"smile picture\">",
+        "text": "拜拜"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/haixiu.png\" alt=\"smile picture\">",
+        "text": "害羞"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/shuai.png\" alt=\"smile picture\">",
+        "text": "衰"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/tuxue.png\" alt=\"smile picture\">",
+        "text": "吐血"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/zuichan.png\" alt=\"smile picture\">",
+        "text": "嘴馋"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/shengqi.png\" alt=\"smile picture\">",
+        "text": "生气"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/fue.png\" alt=\"smile picture\">",
+        "text": "扶额"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/bizui.png\" alt=\"smile picture\">",
+        "text": "闭嘴"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/kuwei.png\" alt=\"smile picture\">",
+        "text": "枯萎"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/xu.png\" alt=\"smile picture\">",
+        "text": "嘘"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/xiaoku.png\" alt=\"smile picture\">",
+        "text": "笑哭"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/liuhan.png\" alt=\"smile picture\">",
+        "text": "流汗"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/bukan.png\" alt=\"smile picture\">",
+        "text": "不看"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/haqian.png\" alt=\"smile picture\">",
+        "text": "哈欠"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/tiaopi.png\" alt=\"smile picture\">",
+        "text": "调皮"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/guilian.png\" alt=\"smile picture\">",
+        "text": "鬼脸"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/chuolian.png\" alt=\"smile picture\">",
+        "text": "戳脸"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/dage.png\" alt=\"smile picture\">",
+        "text": "大哥"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/kun.png\" alt=\"smile picture\">",
+        "text": "困"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/yongbao.png\" alt=\"smile picture\">",
+        "text": "拥抱"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/zhutou.png\" alt=\"smile picture\">",
+        "text": "猪头"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/kulou.png\" alt=\"smile picture\">",
+        "text": "骷髅"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/chouchou.png\">",
+        "text": "臭臭"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/xindong.png\" alt=\"smile picture\">",
+        "text": "心动"
+      },
+      {
+        "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/huya/dao.png\" alt=\"smile picture\">",
+        "text": "刀"
+      }
+    ]
+  },
+"阿鲁": {
+    "name": "alu",
+    "type": "image",
+    "container": [{
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/gaoxing.png\" alt=\"smile picture\">", 
+            "text": "高兴"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/bugaoxing.png\" alt=\"smile picture\">",
+            "text": "不高兴"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/zhoumei.png\" alt=\"smile picture\">",
+            "text": "皱眉"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/dajiong.png\" alt=\"smile picture\">",
+            "text": "大囧"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/jingxi.png\" alt=\"smile picture\">",
+            "text": "惊喜"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/wuyu.png\" alt=\"smile picture\">",
+            "text": "无语"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/shaxiao.png\" alt=\"smile picture\">",
+            "text": "傻笑"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/qidai.png\" alt=\"smile picture\">",
+            "text": "期待"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/xijierqi.png\" alt=\"smile picture\">",
+            "text": "喜极而泣"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/lianhong.png\" alt=\"smile picture\">",
+            "text": "脸红"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/laiqinqin.png\" alt=\"smile picture\">",
+            "text": "来亲亲"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/hanruyuxia.png\" alt=\"smile picture\">",
+            "text": "汗如雨下"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/kuzhatian.png\" alt=\"smile picture\">",
+            "text": "酷炸天"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/koubi.png\" alt=\"smile picture\">",
+            "text": "抠鼻"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/diaoyan.png\" alt=\"smile picture\">",
+            "text": "叼烟"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/tuxie.png\" alt=\"smile picture\">",
+            "text": "吐血"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/liukoushui.png\" alt=\"smile picture\">",
+            "text": "流口水"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/outubuzhi.png\" alt=\"smile picture\">",
+            "text": "呕吐不止"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/tushe.png\" alt=\"smile picture\">",
+            "text": "吐舌"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/bizui.png\" alt=\"smile picture\">',
+            "text": "闭嘴"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/diulian.png\" alt=\"smile picture\">",
+            "text": "丢脸"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/hanxiu.png\" alt=\"smile picture\">",
+            "text": "含羞"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/buchusuoliao.png\" alt=\"smile picture\">",
+            "text": "不出所料"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/zhuangbi.png\" alt=\"smile picture\">",
+            "text": "装逼"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/ganga.png\" alt=\"smile picture\">",
+            "text": "尴尬"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/penshui.png\" alt=\"smile picture\">",
+            "text": "喷水"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/chaojifennu.png\" alt=\"smile picture\">",
+            "text": "炒鸡愤怒"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/gandehao.png\" alt=\"smile picture\">",
+            "text": "干得好"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/bishi.png\" alt=\"smile picture\">",
+            "text": "鄙视"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/wuyan.png\" alt=\"smile picture\">",
+            "text": "捂眼"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/wusuowei.png\" alt=\"smile picture\">",
+            "text": "无所谓"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/xijidaben.png\" alt=\"smile picture\">",
+            "text": "喜大普奔"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/sikao.png\" alt=\"smile picture\">",
+            "text": "思考"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/guzhang.png\" alt=\"smile picture\">",
+            "text": "鼓掌"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/fxcsbbjd.png\" alt=\"smile picture\">",
+            "text": "发现此事并不简单"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/han.png\" alt=\"smile picture\">",
+            "text": "汗"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/llch.png\" alt=\"smile picture\">",
+            "text": "泪流成河"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/yinan.png\" alt=\"smile picture\">",
+            "text": "阴暗"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/lazhu.png\" alt=\"smile picture\">",
+            "text": "蜡烛"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/touxiang.png\" alt=\"smile picture\">",
+            "text": "投降"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/tuxiedaodi.png\" alt=\"smile picture\">",
+            "text": "吐血倒地"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/bianbian.png\" alt=\"smile picture\">",
+            "text": "便便"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/zhangcao.png\" alt=\"smile picture\">",
+            "text": "长草"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/zhongbao.png\" alt=\"smile picture\">",
+            "text": "肿包"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/xrss.png\" alt=\"smile picture\">",
+            "text": "陷入深思"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/xianhua.png\" alt=\"smile picture\">",
+            "text": "献花"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/lvlv.png\" alt=\"smile picture\">",
+            "text": "绿绿"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/zhongqiang.png\" alt=\"smile picture\">",
+            "text": "中枪"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/jizhang.png\" alt=\"smile picture\">",
+            "text": "击掌"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/shanerguang.png\" alt=\"smile picture\">",
+            "text": "扇耳光"
+        },
+        {
+            "icon": "<img src=\"https://www.80srz.com/usr/themes/cactus/lib/OwO/alu/zhongdao.png\" alt=\"smile picture\">",
+            "text": "中刀"
+       }
+    ]
+  }
+}
