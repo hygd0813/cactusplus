@@ -5,7 +5,7 @@
 
 ## 主题预览
 
-![仙人掌 CactusPlus 主题预览](https://www.80srz.com/usr/uploads/Cactus%E4%BB%99%E4%BA%BA%E6%8E%8Cv1.6.jpg)
+![仙人掌 CactusPlus 主题预览](https://www.80srz.com/usr/themes/cactus/screenshot.png)
 
 主题详情：https://www.80srz.com/306.html
 
